@@ -1,0 +1,300 @@
+fileFormatVersion: 2
+guid: 75547feb194d9f14e95b416c60cd7a1c
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftUpperArm' not found\n"
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: Chef(Clone)
+      parentName: 
+      position: {x: 0.2532, y: 0.0001, z: 0.07}
+      rotation: {x: -6.1232336e-17, y: 1, z: 6.1232336e-17, w: -0.00000004371139}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chef
+      parentName: Chef(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mesh
+      parentName: Chef
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Body
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chef_Beard
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chef_BlackCat
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chef_Boof
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chef_Box
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chef_Gertie
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chef_GingerCat
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chef_Mel
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chef_Mel_Head
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chef_Mike
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chef_Ogre
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chef_Red
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chef_Specs
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cleaver
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0.00048173874}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hand_Grip_L
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hand_Grip_R
+      parentName: Mesh
+      position: {x: -0.00014393083, y: 0, z: 0.00048576653}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hand_Open_L1
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hand_Open_R
+      parentName: Mesh
+      position: {x: -0.00014393083, y: 0, z: 0.00048576653}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hat_Cap
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hat_Fancy
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hat_Tall
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knife
+      parentName: Mesh
+      position: {x: -0, y: 0, z: 0.00048173874}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skeleton
+      parentName: Chef
+      position: {x: 0.2532103, y: 0.0008045346, z: 0.069689386}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine_Base
+      parentName: Skeleton
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.55395883, y: -0.43946517, z: -0.55395883, w: 0.43946517}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Left_Arm_Wrist
+      parentName: Spine_Base
+      position: {x: -0.002875218, y: -0.0005496543, z: 0.0060000555}
+      rotation: {x: -0.050441295, y: 0.17142867, z: -0.9719155, w: 0.15312824}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Left_Arm_Hand
+      parentName: Left_Arm_Wrist
+      position: {x: -0.0019230961, y: -0.00014837937, z: -0.000074569354}
+      rotation: {x: -0.4756545, y: -0.010000137, z: -0.018488063, w: 0.879381}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Left_Arm_Fingers
+      parentName: Left_Arm_Hand
+      position: {x: -0.0015709482, y: 0.0004143826, z: 0.000028707835}
+      rotation: {x: 0.6218841, y: -0.39416203, z: 0.47973228, w: -0.47723517}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine_Stomach
+      parentName: Spine_Base
+      position: {x: -0.0040946775, y: -0.00033484306, z: -0.0000015200811}
+      rotation: {x: 0.98237354, y: 0.18676092, z: -0.00042638497, w: 0.007905029}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Attach
+      parentName: Spine_Stomach
+      position: {x: 0.00040075032, y: -0.006113417, z: 0.000050328843}
+      rotation: {x: 0.5417956, y: -0.45437047, z: 0.5288869, w: 0.46934384}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine_Neck
+      parentName: Spine_Stomach
+      position: {x: -0.002253192, y: -0.00046806803, z: -0.000009677763}
+      rotation: {x: 0.99315375, y: 0.115362346, z: 0.017689403, w: 0.0049240594}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine_Top
+      parentName: Spine_Neck
+      position: {x: -0.004578619, y: 0.000050754992, z: -0.00016704085}
+      rotation: {x: -0.1908634, y: -0.25587505, z: -0.71818423, w: 0.61831266}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine_Hat
+      parentName: Spine_Top
+      position: {x: 0.0028543775, y: -0.0049730847, z: -0.0016469277}
+      rotation: {x: -0.44828877, y: -0.009020506, z: 0.8925781, w: -0.047541283}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Right_Arm_Wrist
+      parentName: Spine_Base
+      position: {x: -0.0029380799, y: -0.00017036947, z: -0.00597944}
+      rotation: {x: 0.08074498, y: -0.35966933, z: -0.9204006, w: 0.1303114}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Right_Arm_Hand
+      parentName: Right_Arm_Wrist
+      position: {x: -0.0018458151, y: -0.00015516349, z: 0.000121046556}
+      rotation: {x: -0.27611983, y: -0.050384592, z: -0.14102525, w: 0.9493846}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Right_Arm_Fingers
+      parentName: Right_Arm_Hand
+      position: {x: -0.0014832908, y: -0.00035863958, z: 0.00052113825}
+      rotation: {x: -0.6524045, y: 0.013403412, z: 0.7435078, w: -0.14623623}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
