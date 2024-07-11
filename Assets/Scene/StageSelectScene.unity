@@ -447,7 +447,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &139204841
 RectTransform:
   m_ObjectHideFlags: 0
@@ -563,6 +563,7 @@ GameObject:
   - component: {fileID: 230644606}
   - component: {fileID: 230644605}
   - component: {fileID: 230644609}
+  - component: {fileID: 230644610}
   m_Layer: 0
   m_Name: Stage
   m_TagString: Untagged
@@ -672,6 +673,22 @@ MonoBehaviour:
   pivotObjTr: {fileID: 0}
   smallUIObject: {fileID: 0}
   largeUIObject: {fileID: 0}
+--- !u!114 &230644610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230644604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c77c0ece590b4c044872d3557b745d9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageLevel: Level 1-1
+  starCount: 0
+  starCondition: 140000001e00000028000000
+  stageImg: {fileID: 21300000, guid: 100c52b01dc83084cadbf1c453dd5206, type: 3}
 --- !u!1 &278836606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1432,6 +1449,7 @@ GameObject:
   - component: {fileID: 704788526}
   - component: {fileID: 704788531}
   - component: {fileID: 704788532}
+  - component: {fileID: 704788533}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1566,6 +1584,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+--- !u!114 &704788533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704788525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd6c4bcbf9f5bb4494931cc3b8b91d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &708211462
 GameObject:
   m_ObjectHideFlags: 0
