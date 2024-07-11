@@ -26,6 +26,6 @@ public class MoveScript : MonoBehaviour
             Input.GetAxis("Vertical") * speed * Time.deltaTime
             );
 
-
+        
     }
 }
