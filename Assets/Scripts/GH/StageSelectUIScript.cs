@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class StageSelectUIScript : MonoBehaviour
 {
-    public Transform pivotObjTr;
-    public GameObject smallUIObject;
-    public GameObject largeUIObject;
-
+    private Transform pivotObjTr;
+    private GameObject smallUIObject;
+    private GameObject largeUIObject;
     private Coroutine scaleCoroutine;
     private Vector3 targetVector = new Vector3(0.0f, 6.0f, 1.0f);
     private Vector3 originVector;
