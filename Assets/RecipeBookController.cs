@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,15 +30,13 @@ public class RecipeBookController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) &&
-            this.GetComponent<BookCoverScript>().GetIsOpening())
+        if (Input.GetKeyDown(KeyCode.Escape) &&
+            this.GetComponent<BookCoverScript>().GetIsOpening() &&
+            islookCloser == false)
         {
             this.GetComponent<BookCoverScript>().CloseCover();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
             isMoveing = true;
+            islookCloser = true;
         }
 
         if(isMoveing)
@@ -61,5 +60,19 @@ public class RecipeBookController : MonoBehaviour
                 currentTime = 0;
             }
         }
+    }
+
+    public bool GetIsLookCloser(){ return islookCloser; }
+
+    public void MovingCamera()
+    {
+        isMoveing = true;
+        islookCloser = false;
+    }
+
+    public void ResetCamera()
+    {
+        isMoveing = true;
+        islookCloser = true;
     }
 }
