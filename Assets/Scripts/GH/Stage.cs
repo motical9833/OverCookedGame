@@ -7,12 +7,21 @@ public class Stage : MonoBehaviour
 {
 
     private StageInfo stageInfo;
-
+    
     private string filePath;
+
+    public Sprite stageImg;
+
+    private int[] stageGoals = { 10, 20, 30 };
 
     private void Awake()
     {
         filePath = Path.Combine(Application.persistentDataPath, gameObject.name + "_stagedata.json");
+    }
+
+    private void Start()
+    {
+        stageImg = Resources.Load<Sprite>("2D/Map_Img/" + gameObject.name);
     }
 
 
@@ -26,7 +35,7 @@ public class Stage : MonoBehaviour
     public void LoadStageData()
     {
         if (File.Exists(filePath))
-        {
+        {   
             string json = File.ReadAllText(filePath);
             stageInfo = JsonUtility.FromJson<StageInfo>(json);
             Debug.Log("Stage data loaded from " + filePath);
@@ -37,11 +46,11 @@ public class Stage : MonoBehaviour
 
             if(gameObject.name == "Level 1-1")
             {
-                stageInfo = new StageInfo(gameObject.name, 0, false, true);
+                stageInfo = new StageInfo(gameObject.name, 0, false, true, stageGoals);
             }
             else
             {
-                stageInfo = new StageInfo(gameObject.name, 0, false, false); // 기본 값 설정
+                stageInfo = new StageInfo(gameObject.name, 0, false, false, stageGoals); // 기본 값 설정
             }
             SaveStageData(); // 기본 값을 저장
         }
@@ -60,5 +69,15 @@ public class Stage : MonoBehaviour
         {
             this.gameObject.gameObject.SetActive(false);
         }
+    }
+
+    public Sprite GetStageImg()
+    {
+        return stageImg;
+    }
+
+    public StageInfo GetStageInfo()
+    {
+        return stageInfo;
     }
 }
