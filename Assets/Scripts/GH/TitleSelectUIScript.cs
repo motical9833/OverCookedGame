@@ -20,6 +20,7 @@ public class TitleSelectUIScript : MonoBehaviour
 
     GameObject mySelectArrow;
     private bool isSelectMenu = false;
+    public float moveDistance = 0.004f;
 
 
     void Start()
@@ -31,26 +32,39 @@ public class TitleSelectUIScript : MonoBehaviour
     {
         if(isSelectMenu)
         {
-            if (Input.GetKeyDown(KeyCode.DownArrow) && state != State.QUIT)
-            {
-                state++;
-                mySelectArrow.transform.localPosition += new Vector3(0.0f, -0.004f, 0.0f);
+            HandleInput();
+            HandleSelection();
+        }
 
-            }
-            else if (Input.GetKeyDown(KeyCode.UpArrow) && state != State.CAMPAIGN)
-            {
-                state--;
-                mySelectArrow.transform.localPosition += new Vector3(0.0f, 0.004f, 0.0f);
-            }
+    }
 
+    private void HandleInput()
+    {
+        if(Input.GetKeyDown(KeyCode.DownArrow) && state != State.QUIT)
+        {
+            ChangeState(1);
+        }
+        else if(Input.GetKeyDown(KeyCode.UpArrow) && state != State.CAMPAIGN)
+        {
+            ChangeState(-1);
+        }
+    }
+
+    private void ChangeState(int direction)
+    {
+        state += direction;
+        float moveY = direction * -moveDistance;
+        mySelectArrow.transform.localPosition += new Vector3(0.0f, moveY, 0.0f);
+    }
+
+    private void HandleSelection()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
             switch (state)
             {
                 case State.CAMPAIGN:
-                    if(Input.GetKeyDown(KeyCode.Space))
-                    {
-                        SceneManager.LoadScene("StageSelectScene");
-                        isSelectMenu = false;
-                    }
+                    LoadScene("StageSelectScene");
                     break;
                 case State.VERSUS:
                     break;
@@ -70,13 +84,14 @@ public class TitleSelectUIScript : MonoBehaviour
         }
     }
 
+    private void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+        isSelectMenu = false;
+    }
+
     public void ActivateUIArrow()
     {
         isSelectMenu = true;
-    }
-
-    public void DeactivateUIArrow()
-    {
-        isSelectMenu = false;
     }
 }

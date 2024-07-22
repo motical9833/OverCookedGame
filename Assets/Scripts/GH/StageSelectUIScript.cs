@@ -2,79 +2,67 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEditor;
+using TMPro;
 
 public class StageSelectUIScript : MonoBehaviour
 {
-    private Transform pivotObjTr;
-    private GameObject smallUIObject;
-    private GameObject largeUIObject;
-    private Coroutine scaleCoroutine;
-    private Vector3 targetVector = new Vector3(0.0f, 6.0f, 1.0f);
-    private Vector3 originVector;
+    private GameObject myStateUI;
+    public GameObject[] startTexts = new GameObject[3];
+    private GameObject player;
+    private bool isSelect = false;
 
-    void Start()
+    private void Start()
     {
-        pivotObjTr = this.gameObject.transform.GetChild(0).GetChild(0);
-        smallUIObject = pivotObjTr.GetChild(0).gameObject;
-        largeUIObject = pivotObjTr.GetChild(1).gameObject;
-        originVector = pivotObjTr.localScale;
-    }
+        myStateUI = gameObject.transform.GetChild(0).gameObject;
 
-    void Update()
-    {
-
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
+        for (int i = 0; i < startTexts.Length; i++)
         {
-            if(scaleCoroutine != null)
-            {
-                StopCoroutine(scaleCoroutine);
-            }
-
-            scaleCoroutine =  StartCoroutine(ScaleUI(pivotObjTr, originVector, targetVector, 0.2f,false,true));
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            if (scaleCoroutine != null)
-            {
-                StopCoroutine(scaleCoroutine);
-            }
-
-            scaleCoroutine = StartCoroutine(ScaleUI(pivotObjTr, originVector, targetVector, 0.2f, true, false));
-        }
-    }
-
-    //UI의 크기를 시간에 흐름에 따라 변경하는 코루틴
-    private IEnumerator LerpCoroutine(Transform uiObj, Vector3 fromScale, Vector3 toScale, float duration)
-    {
-        float currentTime = 0f;
-
-        while (currentTime < duration)
-        {
-            uiObj.localScale = Vector3.Lerp(fromScale, toScale, currentTime / duration);
-            currentTime += Time.deltaTime;
-            yield return null;
+            startTexts[i] = myStateUI.transform.GetChild(i + 3).GetChild(2).gameObject;
         }
 
-        uiObj.localScale = toScale;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    private IEnumerator ScaleUI(Transform uiObj, Vector3 fromScale, Vector3 toScale, float duration, bool activeSmallUI, bool activeLargeUI)
+    private void Update()
     {
-        // UI확대 코루틴
-        yield return LerpCoroutine(uiObj, fromScale, toScale, duration);
 
-        smallUIObject.SetActive(activeSmallUI);
-        largeUIObject.SetActive(activeLargeUI);
+    }
 
-        //UI 축소 코루틴
-        yield return LerpCoroutine(uiObj, toScale, fromScale, duration);
+    public void SelectStage(Sprite img, StageInfo stageData)
+    {
+        if (isSelect)
+            return;
+
+        myStateUI.SetActive(true);
+        myStateUI.transform.GetChild(1).GetComponent<Image>().sprite = img;
+
+        for (int i = 0; i < startTexts.Length; i++)
+        {
+            startTexts[i].GetComponent<TextMeshProUGUI>().text = stageData.goals[i].ToString();
+        }
+
+        isSelect = true;
+    }
+
+    public void ExitStageSelect()
+    {
+        if (!isSelect)
+            return;
+
+        myStateUI.SetActive(false);
+        isSelect = false;
+        player.GetComponent<MoveScript>().enabled = true;
+    }
+
+    public void CancelStage()
+    {
+        myStateUI.SetActive(false);
+    }
+
+    public void StartStage(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
