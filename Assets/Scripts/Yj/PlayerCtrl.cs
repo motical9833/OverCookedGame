@@ -3,46 +3,79 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using System.Globalization;
+using System.Runtime.InteropServices;
 public class PlayerCtrl : NetworkBehaviour
 {
-    public float mMoveSpeed;
+    public float moveSpeed;
+
+    [SerializeField]
+    private GameObject model;
+
+    [SerializeField]
+    private GameObject handGrip_L, handGrip_R;
+    [SerializeField]
+    private GameObject handOpen_L, handOpen_R;
+    [SerializeField]
+    private GameObject knife;
+    [SerializeField]
+    private GameObject cleaver;
+
+    private Animator animator;
+
+
+    enum State
+    {
+        Choping,
+        Death,
+        Idle,
+        Holding,
+        HoldNWalk,
+        Wash
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(!IsOwner)
+        {
+            /*return;*/
+        }
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!IsOwner)
+         /*  if(!IsOwner)
         {
             return;
-        }
+        }*/
         Move();
     }
 
     private void Move()
     {
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
+        Vector2 hv = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        transform.Translate(h * moveSpeed * Time.deltaTime, 0.0f,
+                         v * moveSpeed * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.A))
+        if (h != 0 || v != 0)
         {
-            transform.Translate(Vector3.left.normalized * mMoveSpeed * Time.deltaTime);
+            Vector3 dir = new Vector3(h, 0, v).normalized;
+            model.transform.eulerAngles = new Vector3(0, Mathf.Atan2(dir.x, dir.z) * Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg, 0);
         }
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.Translate(Vector3.forward.normalized * mMoveSpeed * Time.deltaTime);
 
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(Vector3.back.normalized * mMoveSpeed * Time.deltaTime);
 
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Translate(Vector3.right.normalized * mMoveSpeed * Time.deltaTime);
-        }
-   
     }
+
+    public void Grab() { animator.SetTrigger("Grab"); }
+    public void Release() { animator.SetTrigger("Release"); }
+
+    public void Chop() { animator.SetTrigger("Chop"); }
+
+   
+
+
 }
