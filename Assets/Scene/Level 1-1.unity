@@ -1384,9 +1384,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1121612975}
+  - component: {fileID: 1121612976}
   m_Layer: 0
   m_Name: StageManager
-  m_TagString: Untagged
+  m_TagString: StageManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1406,6 +1407,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1121612976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121612974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7e82d91e79b2446813b7e391e6e427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  csvFilePath: Assets/Resources/IngredientData/IngredientData.csv
 --- !u!1001 &1122397888
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1974,7 +1988,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 893809113225269621, guid: be18518716cae8440872e1c00ee5ed6a, type: 3}
       propertyPath: m_Name
-      value: Crate
+      value: Onion
       objectReference: {fileID: 0}
     - target: {fileID: 3155489977097408578, guid: be18518716cae8440872e1c00ee5ed6a, type: 3}
       propertyPath: m_IsActive
@@ -2026,7 +2040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163380042872992276, guid: be18518716cae8440872e1c00ee5ed6a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9163380042872992276, guid: be18518716cae8440872e1c00ee5ed6a, type: 3}
       propertyPath: m_LocalRotation.y
@@ -2034,7 +2048,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163380042872992276, guid: be18518716cae8440872e1c00ee5ed6a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9163380042872992276, guid: be18518716cae8440872e1c00ee5ed6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2078,6 +2092,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed63008969e2fb54a971267123d384ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0}
+  skinnedMeshRenderer: {fileID: 0}
 --- !u!1001 &1654885006
 PrefabInstance:
   m_ObjectHideFlags: 0
