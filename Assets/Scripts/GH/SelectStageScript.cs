@@ -36,7 +36,7 @@ public class SelectStageScript : MonoBehaviour
     private void StageSelect(Sprite img, StageInfo stageData)
     {
         stageSelectUIScript.SelectStage(img, stageData);
-        this.gameObject.GetComponent<MoveScript>().enabled = false;
+      /*  this.gameObject.GetComponent<MoveScript>().enabled = false;*/
     }
 
     private void SelectStage()

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - StageObject
   - StageManager
+  - IngredientBox
   layers:
   - Default
   - TransparentFX

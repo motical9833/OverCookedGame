@@ -53,7 +53,7 @@ public class StageSelectUIScript : MonoBehaviour
 
         myStateUI.SetActive(false);
         isSelect = false;
-        player.GetComponent<MoveScript>().enabled = true;
+        /*player.GetComponent<MoveScript>().enabled = true;*/
     }
 
     public void CancelStage()

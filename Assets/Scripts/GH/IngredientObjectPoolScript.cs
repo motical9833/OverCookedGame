@@ -22,8 +22,17 @@ public class IngredientObjectPoolScript : MonoBehaviour
             GameObject obj = Instantiate(prefab);
             obj.transform.parent = this.gameObject.transform;
             obj.transform.localPosition = Vector3.zero;
+            obj.transform.parent = null;
             obj.SetActive(false);
             pool.Enqueue(obj);
+        }
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            GetIngredientPoolObject();
         }
     }
 
