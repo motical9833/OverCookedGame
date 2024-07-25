@@ -5,6 +5,7 @@ using Unity.Netcode;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using Unity.VisualScripting;
+using Enummrous;
 public class PlayerCtrlScript : NetworkBehaviour
 {
     [SerializeField]
@@ -29,21 +30,16 @@ public class PlayerCtrlScript : NetworkBehaviour
     private GameObject knife;
     [SerializeField]
     private GameObject cleaver;
-    #endregion
+
     [SerializeField]
     private BoxCollider frontCol;
 
-    public enum State
-    {
-        Choping,
-        Death,
-        Idle,
-        Holding,
-        Walk,
-        HoldNWalk,
-        Wash
-    }
-    public State state;
+    [SerializeField]
+    private GameObject hand;
+
+    #endregion
+
+    Enummrous.PlayerState pState;
 
     // Start is called before the first frame update
     void Start()
@@ -59,10 +55,11 @@ public class PlayerCtrlScript : NetworkBehaviour
         moveScript.SetInitial(model,moveSpeed, rotSpeed);
 
         pActionScript = transform.GetComponent<ActionScript>();
+        pActionScript.InitialSet(frontCol,hand);
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if(!IsOwner)
         {
@@ -75,9 +72,22 @@ public class PlayerCtrlScript : NetworkBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            pActionScript.BarAction();
+            if( pActionScript.BarAction() == (PlayerState.Hold, true))
+            {
+                if (pState == PlayerState.Idle)
+                {
+                    pAnimScript.TriggerAnimation(PlayerState.Hold);
+                    pState = PlayerState.Hold;
+                }
+                if (pState == PlayerState.Walk)
+                {
+                    pState = PlayerState.HoldWalk;
+                    pAnimScript.TriggerAnimation(PlayerState.HoldWalk);
+                }
+            }
         }
     }
+
 
     private void FixedUpdate()
     {
@@ -89,17 +99,41 @@ public class PlayerCtrlScript : NetworkBehaviour
         float v = Input.GetAxisRaw("Vertical");
         if (h != 0 || v != 0)
         {
-            if (state == State.Idle)
+            moveScript.Move(h, v);
+            switch (pState)
             {
-                state = State.Walk;
+                case PlayerState.Idle:
+                    pState = PlayerState.Walk;
+                    pAnimScript.TriggerAnimation(PlayerState.Walk);
+                    break;
+                case PlayerState.Hold:
+                    pState = PlayerState.HoldWalk;
+                    pAnimScript.TriggerAnimation(PlayerState.HoldWalk);
+                    break;
+                case PlayerState.HoldWalk:
+                    pState = PlayerState.HoldWalk;
+                    pAnimScript.TriggerAnimation(PlayerState.HoldWalk);
+                    break;
             }
-            moveScript.Move(h,v);
-            pAnimScript.TriggerAnimation("Walk");
         }
         else
         {
-            state = State.Idle;
-            pAnimScript.TriggerAnimation("Idle");
+            switch (pState)
+            {
+                case PlayerState.HoldWalk:
+                    pState = PlayerState.Hold;
+                    pAnimScript.TriggerAnimation(PlayerState.Hold);
+                    break;
+                case PlayerState.Hold:
+                    pState = PlayerState.Hold;
+                    pAnimScript.TriggerAnimation(PlayerState.Hold);
+                    break;
+                case PlayerState.Walk:
+                    pState = PlayerState.Idle;
+                    pAnimScript.TriggerAnimation(PlayerState.Idle);
+                    break;
+
+            }
         }
     }
 }

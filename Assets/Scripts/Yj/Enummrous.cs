@@ -1,25 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Unity.Netcode;
-
-namespace yj
+namespace Enummrous
 {
-    public class Enummrous : MonoBehaviour
+    public enum PlayerState
     {
-        private NetworkVariable<int> mGamescore = new NetworkVariable<int>();
-
-
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        Idle,
+        Walk,
+        Hold,
+        HoldWalk,
+        Dead,
+        Wash,
+        End
     }
 }
