@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using Enummrous;
 
 public class ActionScript : MonoBehaviour
 {
     Vector3 grabPos;
-    GameObject frontCol;
+    BoxCollider frontCol;
+    GameObject hand;
     GameObject currGrabObj;
-
 
     //grab과 release는 space로 작동
     //Action은 leftCtrl로 작동
-    private void CheckFrontObj()
+
+    public void InitialSet(BoxCollider _frontCol,GameObject _hand)
     {
-        if (frontCol.gameObject.tag == "IngredientBox")
-        {
-            frontCol.gameObject.GetComponent<IngredientObjectPoolScript>();
-        }
+        frontCol = _frontCol;
+        hand = _hand;
     }
 
     public void CtrlAction()
@@ -24,28 +25,31 @@ public class ActionScript : MonoBehaviour
 
     }
 
-    public void BarAction()
+    public (PlayerState pState, bool isAct) BarAction()
     {
         Debug.Log("Barpress");
-        switch (frontCol.gameObject.tag)
+
+        Bounds fColBound = frontCol.bounds;
+        Collider[] hitColliders = Physics.OverlapBox(fColBound.center, fColBound.extents, Quaternion.identity);
+        
+        foreach (Collider collider in hitColliders)
         {
-            case "IngredientBox":
-                Debug.Log("ingredientbox col");
-                
-                frontCol.gameObject.GetComponent<IngredientObjectPoolScript>().GetIngredientPoolObject();
-                
-                
-                break;
-            case "Dish":
+            if (collider != frontCol)
+            {
+                switch (collider.gameObject.tag)
+                {
+                    case "IngredientBox":
+                        Debug.Log("ingredientbox col");
+                        GameObject grabObj = collider.gameObject.GetComponent<IngredientObjectPoolScript>().GetIngredientPoolObject();
+                        Grab(grabObj);
+                        return (PlayerState.Hold, true);
+                    case "Dish":
 
-                break;
-            case "Table":
-
-                break;
-            case "Ingredient":
-
-                break;
+                        return (PlayerState.Hold, true);
+                }
+            }
         }
+        return (PlayerState.End, false);
 
 
         //식재박스 위일때// 식재가 올라가 있는 블록일때 -> 우선순위//접시가 앞에 있을때// 냄비가 앞에 있을때
@@ -56,9 +60,7 @@ public class ActionScript : MonoBehaviour
     public void Grab(GameObject grabObj) 
     {
         currGrabObj = grabObj;
-        currGrabObj.transform.position = grabPos;
-        //grab위치에 있는 obj를 parent로 설정
-      /*  currGrabObj.transform.SetParent();*/
+        grabObj.transform.SetParent(hand.transform);
     }
 
     public void Release()
@@ -76,4 +78,5 @@ public class ActionScript : MonoBehaviour
 
     }
 
+  
 }

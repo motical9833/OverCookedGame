@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enummrous;
 
 public class PlayerAnimationScript : MonoBehaviour
 {
@@ -11,15 +12,21 @@ public class PlayerAnimationScript : MonoBehaviour
         animator = _animator;
     }
 
-    public void TriggerAnimation(string _triggerName)
+    public void TriggerAnimation(PlayerState _pState)
     {
-        switch(_triggerName)
+        switch(_pState)
         {
-            case "Idle":
+            case PlayerState.Idle:
                 animator.SetTrigger("Idle");
                 return;
-            case "Walk":
+            case PlayerState.Walk:
                 animator.SetTrigger("Walk");
+                return;
+            case PlayerState.Hold:
+                animator.SetTrigger("Hold");
+                return;
+            case PlayerState.HoldWalk:
+                animator.SetTrigger("HoldWalk");
                 return;
         }
        

@@ -42,12 +42,22 @@ public class IngredientObjectPoolScript : MonoBehaviour
         {
             GameObject obj = pool.Dequeue();
             obj.SetActive(true);
+            if(obj == null)
+            {
+                Debug.LogError("obj로 Null이 반환되었습니다");
+                return null;
+            }
             return obj;
         }
         else
         {
             GameObject obj = Instantiate(prefab);
             obj.SetActive(true);
+            if (obj == null)
+            {
+                Debug.LogError("obj로 Null이 반환되었습니다");
+                return null;
+            }
             return obj;
         }
     }
