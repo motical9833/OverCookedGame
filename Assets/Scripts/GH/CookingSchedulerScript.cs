@@ -51,6 +51,7 @@ public class CookingSchedulerScript : MonoBehaviour
         }
         else
         {
+            Debug.Log("데이터가 존재하지 않음");
             return null;
         }
     }

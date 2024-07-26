@@ -23,7 +23,6 @@ public class Stage : MonoBehaviour
         stageImg = Resources.Load<Sprite>("2D/Map_Img/" + gameObject.name);
     }
 
-
     public void SaveStageData()
     {
         string json = JsonUtility.ToJson(stageInfo, true);
@@ -43,7 +42,7 @@ public class Stage : MonoBehaviour
         {
             Debug.LogWarning("Stage data file not found for " + gameObject.name);
 
-            if(gameObject.name == "Level 1-1")
+            if(gameObject.name == "Level_1-1")
             {
                 stageInfo = new StageInfo(gameObject.name, 0, false, true, stageGoals);
             }
