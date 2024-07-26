@@ -2485,7 +2485,7 @@ PrefabInstance:
       addedObject: {fileID: 1927134342}
     - targetCorrespondingSourceObject: {fileID: 3807932880157660012, guid: 51c240350be98004088e13ef0888f776, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1927134343}
+      addedObject: {fileID: 1927134347}
     - targetCorrespondingSourceObject: {fileID: 1353786722246601511, guid: 51c240350be98004088e13ef0888f776, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1169115047}
@@ -2819,7 +2819,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1927134335}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2833,12 +2833,12 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
+  m_UseGravity: 1
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
---- !u!136 &1927134343
+  m_Constraints: 112
+  m_CollisionDetection: 2
+--- !u!136 &1927134347
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

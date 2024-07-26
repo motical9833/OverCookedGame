@@ -106,7 +106,6 @@ public class PlayerCtrlScript : NetworkBehaviour
         }
     }
 
-
     private void FixedUpdate()
     {
         /*  if(!IsOwner)

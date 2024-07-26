@@ -17,4 +17,13 @@ namespace Enummrous
         Grab,
         End
     }
+
+    public enum IngredientSort
+    {
+        Onion,
+        Beef,
+        Mushroom,
+    }
+
+
 }
