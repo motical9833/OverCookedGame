@@ -1,6 +1,6 @@
 namespace Enummrous
 {
-    public enum PlayerState
+    public enum PlayerAnimState
     {
         Idle,
         Walk,
@@ -8,6 +8,13 @@ namespace Enummrous
         HoldWalk,
         Dead,
         Wash,
+        End
+    }
+
+    public enum GrabState
+    {
+        Release,
+        Grab,
         End
     }
 }

@@ -6,30 +6,43 @@ using Enummrous;
 public class PlayerAnimationScript : MonoBehaviour
 {
     Animator animator;
+    Enummrous.PlayerAnimState pAnimState;
 
+    private void Start()
+    {
+        pAnimState = PlayerAnimState.Idle;
+    }
+
+    private void Update()
+    {
+        switch (pAnimState)
+        {
+            case PlayerAnimState.Idle:
+                animator.SetTrigger("Idle");
+                break;
+            case PlayerAnimState.Walk:
+                animator.SetTrigger("Walk");
+                break;
+            case PlayerAnimState.Hold:
+                animator.SetTrigger("Hold");
+                break;
+            case PlayerAnimState.HoldWalk:
+                animator.SetTrigger("HoldWalk");
+                break;
+        }
+    }
     public void SetAnimator(Animator _animator)
     {
         animator = _animator;
     }
 
-    public void TriggerAnimation(PlayerState _pState)
+    public void TriggerAnimation(PlayerAnimState _pState)
     {
-        switch(_pState)
-        {
-            case PlayerState.Idle:
-                animator.SetTrigger("Idle");
-                return;
-            case PlayerState.Walk:
-                animator.SetTrigger("Walk");
-                return;
-            case PlayerState.Hold:
-                animator.SetTrigger("Hold");
-                return;
-            case PlayerState.HoldWalk:
-                animator.SetTrigger("HoldWalk");
-                return;
-        }
-       
-        Debug.LogError("전달된 애니메이션 트리거의 이름이 올바르지 않습니다");
+        pAnimState = _pState;
+    }
+
+    public Enummrous.PlayerAnimState GetAnimState()
+    {
+        return pAnimState;
     }
 }

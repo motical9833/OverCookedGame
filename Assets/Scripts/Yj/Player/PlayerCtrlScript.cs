@@ -6,6 +6,8 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using Enummrous;
+using System.Security.Cryptography;
+using UnityEngine.Playables;
 public class PlayerCtrlScript : NetworkBehaviour
 {
     [SerializeField]
@@ -39,7 +41,7 @@ public class PlayerCtrlScript : NetworkBehaviour
 
     #endregion
 
-    Enummrous.PlayerState pState;
+    Enummrous.GrabState pGrabState;
 
     // Start is called before the first frame update
     void Start()
@@ -72,17 +74,33 @@ public class PlayerCtrlScript : NetworkBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if( pActionScript.BarAction() == (PlayerState.Hold, true))
+            if( pActionScript.BarAction() == true)
             {
-                if (pState == PlayerState.Idle)
+                if (pGrabState == GrabState.Release)
                 {
-                    pAnimScript.TriggerAnimation(PlayerState.Hold);
-                    pState = PlayerState.Hold;
+                    switch( pAnimScript.GetAnimState())
+                    {
+                        case PlayerAnimState.Idle:
+                            pAnimScript.TriggerAnimation(PlayerAnimState.Hold);
+                            break;
+                        case PlayerAnimState.Walk:
+                            pAnimScript.TriggerAnimation(PlayerAnimState.HoldWalk);
+                            break;
+                    }
+                    pGrabState = GrabState.Grab;
                 }
-                if (pState == PlayerState.Walk)
+                else if(pGrabState == GrabState.Grab)
                 {
-                    pState = PlayerState.HoldWalk;
-                    pAnimScript.TriggerAnimation(PlayerState.HoldWalk);
+                    switch (pAnimScript.GetAnimState())
+                    {
+                        case PlayerAnimState.Hold:
+                            pAnimScript.TriggerAnimation(PlayerAnimState.Idle);
+                            break;
+                        case PlayerAnimState.HoldWalk:
+                            pAnimScript.TriggerAnimation(PlayerAnimState.Walk);
+                            break;
+                    }
+                    pGrabState = GrabState.Release;
                 }
             }
         }
@@ -100,39 +118,35 @@ public class PlayerCtrlScript : NetworkBehaviour
         if (h != 0 || v != 0)
         {
             moveScript.Move(h, v);
-            switch (pState)
+            switch (pAnimScript.GetAnimState())
             {
-                case PlayerState.Idle:
-                    pState = PlayerState.Walk;
-                    pAnimScript.TriggerAnimation(PlayerState.Walk);
+                case PlayerAnimState.Idle:
+                    pAnimScript.TriggerAnimation(PlayerAnimState.Walk);
                     break;
-                case PlayerState.Hold:
-                    pState = PlayerState.HoldWalk;
-                    pAnimScript.TriggerAnimation(PlayerState.HoldWalk);
+                case PlayerAnimState.Hold:
+                    pAnimScript.TriggerAnimation(PlayerAnimState.HoldWalk);
                     break;
-                case PlayerState.HoldWalk:
-                    pState = PlayerState.HoldWalk;
-                    pAnimScript.TriggerAnimation(PlayerState.HoldWalk);
+                case PlayerAnimState.Walk:
+                    pAnimScript.TriggerAnimation(PlayerAnimState.Walk);
+                    break;
+                case PlayerAnimState.HoldWalk:
+                    pAnimScript.TriggerAnimation(PlayerAnimState.HoldWalk);
                     break;
             }
         }
         else
         {
-            switch (pState)
+            switch (pAnimScript.GetAnimState())
             {
-                case PlayerState.HoldWalk:
-                    pState = PlayerState.Hold;
-                    pAnimScript.TriggerAnimation(PlayerState.Hold);
+                case PlayerAnimState.HoldWalk:
+                    pAnimScript.TriggerAnimation(PlayerAnimState.Hold);
                     break;
-                case PlayerState.Hold:
-                    pState = PlayerState.Hold;
-                    pAnimScript.TriggerAnimation(PlayerState.Hold);
+                case PlayerAnimState.Hold:
+                    pAnimScript.TriggerAnimation(PlayerAnimState.Hold);
                     break;
-                case PlayerState.Walk:
-                    pState = PlayerState.Idle;
-                    pAnimScript.TriggerAnimation(PlayerState.Idle);
+                case PlayerAnimState.Walk:
+                    pAnimScript.TriggerAnimation(PlayerAnimState.Idle);
                     break;
-
             }
         }
     }

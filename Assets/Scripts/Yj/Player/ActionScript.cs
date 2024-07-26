@@ -25,33 +25,39 @@ public class ActionScript : MonoBehaviour
 
     }
 
-    public (PlayerState pState, bool isAct) BarAction()
+    public bool BarAction()
     {
         Debug.Log("Barpress");
 
-        Bounds fColBound = frontCol.bounds;
-        Collider[] hitColliders = Physics.OverlapBox(fColBound.center, fColBound.extents, Quaternion.identity);
-        
-        foreach (Collider collider in hitColliders)
+        if (currGrabObj == null)
         {
-            if (collider != frontCol)
-            {
-                switch (collider.gameObject.tag)
-                {
-                    case "IngredientBox":
-                        Debug.Log("ingredientbox col");
-                        GameObject grabObj = collider.gameObject.GetComponent<IngredientObjectPoolScript>().GetIngredientPoolObject();
-                        Grab(grabObj);
-                        return (PlayerState.Hold, true);
-                    case "Dish":
+            Bounds fColBound = frontCol.bounds;
+            Collider[] hitColliders = Physics.OverlapBox(fColBound.center, fColBound.extents, Quaternion.identity);
 
-                        return (PlayerState.Hold, true);
+            foreach (Collider collider in hitColliders)
+            {
+                if (collider != frontCol)
+                {
+                    switch (collider.gameObject.tag)
+                    {
+                        case "IngredientBox":
+                            Debug.Log("ingredientbox col");
+                            GameObject grabObj = collider.gameObject.GetComponent<IngredientObjectPoolScript>().GetIngredientPoolObject();
+                            Grab(grabObj);
+                            return (true);
+                        case "Dish":
+
+                            return (true);
+                    }
                 }
             }
         }
-        return (PlayerState.End, false);
-
-
+        else
+        {
+            Release();
+            return (true);
+        }
+        return (false);
         //식재박스 위일때// 식재가 올라가 있는 블록일때 -> 우선순위//접시가 앞에 있을때// 냄비가 앞에 있을때
         //냄비를 들었을때 앞에 접시가 있다->우선순위
         //이미 타일에 물건이 올라갔을때->우선순위
@@ -65,7 +71,8 @@ public class ActionScript : MonoBehaviour
 
     public void Release()
     {
-
+        currGrabObj.transform.parent = null;
+        currGrabObj = null;
     }
 
     public void Chop()
