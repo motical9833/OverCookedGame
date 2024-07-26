@@ -2117,7 +2117,6 @@ GameObject:
   - component: {fileID: 704788527}
   - component: {fileID: 704788526}
   - component: {fileID: 704788531}
-  - component: {fileID: 704788532}
   - component: {fileID: 704788533}
   m_Layer: 0
   m_Name: Player
@@ -2206,7 +2205,7 @@ Transform:
   m_GameObject: {fileID: 704788525}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.33, y: 0.82, z: 9.71}
+  m_LocalPosition: {x: 3.94, y: 0.82, z: 17.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2240,19 +2239,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &704788532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 704788525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a3627c6cc68234a9f3627a6e42aa73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
 --- !u!114 &704788533
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,28 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Order
-{
-    public string orderName { get; set; }
-    public float timeLimit { get;set; }
-
-    public Order(string name ,float time)
-    {
-        orderName = name;
-        timeLimit = time;
-    }
-
-}
-
 public class CookingSchedulerScript : MonoBehaviour
 {
     public List<Order> order = new List<Order>();
-
-
-    void Start()
-    {
-
-    }
 
     void Update()
     {
@@ -32,15 +13,14 @@ public class CookingSchedulerScript : MonoBehaviour
         {
             for (int i = order.Count-1; i >= 0; i--)
             {
-                order[i].timeLimit -= Time.deltaTime;
+                order[i].TimeLimit -= Time.deltaTime;
 
-                if (order[i].timeLimit <= 0)
+                if (order[i].TimeLimit <= 0)
                 {
                     order.RemoveAt(i);
                 }
             }
         }
-
     }
 
     public void SetOrder(Order orderData)
@@ -54,7 +34,7 @@ public class CookingSchedulerScript : MonoBehaviour
         {
             for (int i = 0; i < order.Count; i++)
             {
-                if (order[i].orderName == str)
+                if (order[i].OrderName == str)
                 {
                     return order[i];
                 }
@@ -70,14 +50,13 @@ public class CookingSchedulerScript : MonoBehaviour
         {
             for (int i = 0; i < order.Count; i++)
             {
-                if (order[i].orderName == dishName)
+                if (order[i].OrderName == dishName)
                 {
                     //Á¡¼ö È¹µæ ·ÎÁ÷ ÀÛ¼º
                     break;
                 }
             }
         }
-
         return;
     }
 }

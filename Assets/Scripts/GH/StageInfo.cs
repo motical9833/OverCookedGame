@@ -10,6 +10,7 @@ public class StageInfo
     public bool isCleared;
     public bool isAble;
     public int[] goals = new int[3];
+    public Order[] orders;
 
     public StageInfo(string stageName, int score, bool isCleared, bool isAble, int[] goals)
     {

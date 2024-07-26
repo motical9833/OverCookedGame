@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Stage : MonoBehaviour
 {
-
     private StageInfo stageInfo;
     
     private string filePath;

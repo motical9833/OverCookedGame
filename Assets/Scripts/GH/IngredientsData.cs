@@ -16,11 +16,6 @@ public class IngredientsData : MonoBehaviour
         Debug.Log($"Onion Offset: {onionOffset}");
     }
 
-    private void Start()
-    {
-
-    }
-
     private void LoadCSVData()
     {
         ingredientOffsets = new Dictionary<string, Vector2>();
