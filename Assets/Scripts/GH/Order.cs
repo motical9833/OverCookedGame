@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class Order
 {
-    private string orderName;
-    
-    public string OrderName
-    {
-        get { return orderName; }
+    private string stageLevel;
 
-        set { orderName = OrderName; } 
+    public string StageLevel
+    {
+        get { return stageLevel; }
+
+        set { stageLevel = value; }
     }
-    private float timeLimit;
 
-    public float TimeLimit
+    public List<string> orders;
+
+    public List<string> Orders
     {
-        get { return timeLimit; }
+        get { return orders; }
 
-        set { timeLimit = TimeLimit; }
+        set { orders = value; }
     }
     
-    public Order(string name, float time)
+    public Order(string level ,List<string> orderList)
     {
-        orderName = name;
-        timeLimit = time;
+        stageLevel = level;
+        orders = orderList;
     }
 }

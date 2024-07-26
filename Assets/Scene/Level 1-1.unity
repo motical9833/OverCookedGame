@@ -1433,6 +1433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b8e7c637046a88408436aa084696ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  csvFilePath: Assets/Resources/StageData/StageOrderData.csv
 --- !u!1001 &1122397888
 PrefabInstance:
   m_ObjectHideFlags: 0

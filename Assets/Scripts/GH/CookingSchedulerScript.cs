@@ -5,58 +5,53 @@ using UnityEngine;
 
 public class CookingSchedulerScript : MonoBehaviour
 {
-    public List<Order> order = new List<Order>();
+    public string csvFilePath = "Assets/Resources/StageData/StageOrderData.csv";
+    private Dictionary<string, List<string>> order;
 
-    void Update()
+
+    private void Awake()
     {
-        if (order.Count > 0)
-        {
-            for (int i = order.Count-1; i >= 0; i--)
-            {
-                order[i].TimeLimit -= Time.deltaTime;
+        LoadCSVData();
+    }
 
-                if (order[i].TimeLimit <= 0)
-                {
-                    order.RemoveAt(i);
-                }
-            }
+    private void LoadCSVData()
+    {
+        order = new Dictionary<string, List<string>>();
+
+        var orderDataList = CSVLoader.LoadCSV<StageOrderData>(csvFilePath, ConvertToOrderData);
+
+        foreach (var data in orderDataList)
+        {
+            order[data.stageLevel] = data.Orders;
         }
     }
 
-    public void SetOrder(Order orderData)
+    private StageOrderData ConvertToOrderData(string[] values)
     {
-        order.Add(orderData);
+        if (values.Length == 4)
+        {
+            return new StageOrderData
+            {
+                stageLevel = values[0],
+                Orders = new List<string> { values[1], values[2], values[3] }
+            };
+        }
+        else
+        {
+            Debug.LogError("유효하지 않은 데이터");
+            return null;
+        }
     }
 
-    Order GetOrder(string str)
+    public List<string> GetOrdersData(string level)
     {
-        if(order.Count > 0)
+        if(order.TryGetValue(level, out List<string> orders))
         {
-            for (int i = 0; i < order.Count; i++)
-            {
-                if (order[i].OrderName == str)
-                {
-                    return order[i];
-                }
-            }
+            return orders;
         }
-
-        return null;
-    }
-
-    public void MakeDish(string dishName)
-    {
-        if (order.Count > 0)
+        else
         {
-            for (int i = 0; i < order.Count; i++)
-            {
-                if (order[i].OrderName == dishName)
-                {
-                    //점수 획득 로직 작성
-                    break;
-                }
-            }
+            return null;
         }
-        return;
     }
 }

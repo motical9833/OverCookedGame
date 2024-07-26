@@ -7,12 +7,12 @@ public class CreateScript : MonoBehaviour
 {
     public Vector2 offset = Vector2.zero;
     public Renderer skinnedMeshRenderer;
-    IngredientsData ingredientsData;
+    IngredientsDataScript ingredientsData;
     private MaterialPropertyBlock propertyBlock;
 
     void Start()
     {
-        ingredientsData = GameObject.FindWithTag("StageManager").GetComponent<IngredientsData>();
+        ingredientsData = GameObject.FindWithTag("StageManager").GetComponent<IngredientsDataScript>();
         offset = ingredientsData.GetIngredientOffset(this.name);
 
         skinnedMeshRenderer = gameObject.GetComponent<Transform>().GetChild(2).GetComponent<Renderer>();

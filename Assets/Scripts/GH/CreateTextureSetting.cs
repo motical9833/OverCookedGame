@@ -7,12 +7,12 @@ public class CreateTextureSetting : MonoBehaviour
 
     private Vector2 offset = Vector2.zero;
     private Renderer skinnedMeshRenderer;
-    private IngredientsData ingredientsData;
+    private IngredientsDataScript ingredientsData;
     private MaterialPropertyBlock propertyBlock;
 
     void Start()
     {
-        ingredientsData = GameObject.FindWithTag("StageManager").GetComponent<IngredientsData>();
+        ingredientsData = GameObject.FindWithTag("StageManager").GetComponent<IngredientsDataScript>();
         offset = ingredientsData.GetIngredientOffset(this.name);
         skinnedMeshRenderer = gameObject.GetComponent<Transform>().GetChild(2).GetComponent<Renderer>();
         propertyBlock = new MaterialPropertyBlock();
