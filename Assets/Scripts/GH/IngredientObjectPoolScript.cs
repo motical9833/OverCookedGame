@@ -21,12 +21,15 @@ public class IngredientObjectPoolScript : MonoBehaviour
         for (int i = 0; i < poolSize; i++)
         {
             GameObject obj = Instantiate(prefab);
-            BoxCollider col = obj.AddComponent<BoxCollider>();
-            obj.tag = "Ingridient";
-            col.size = new Vector3(0.007f, 0.007f, 0.007f);
+            
+            SphereCollider col = obj.AddComponent<SphereCollider>();
+            col.radius = 0.004f;
             col.center = new Vector3(0.0f, 0.004f,0.0f);
             col.isTrigger = false;
-            
+
+            Rigidbody rigid = obj.AddComponent<Rigidbody>();
+
+            obj.tag = "Ingredient";
             obj.transform.parent = this.gameObject.transform;
             obj.transform.localPosition = Vector3.zero;
             obj.transform.parent = null;
