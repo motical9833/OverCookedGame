@@ -15,10 +15,14 @@ public class RecipeOrderControllerScript : MonoBehaviour
         gameManager = GameObject.FindWithTag("GameManager");
 
         string name = SceneManager.GetActiveScene().name;
+        
+        if(gameManager == null)
+        {
+            return;
+        }
 
         List<string> recipes = gameManager.GetComponent<CookingSchedulerScript>().GetOrdersData(name);
-
-
+        
     }
 
     void Update()
