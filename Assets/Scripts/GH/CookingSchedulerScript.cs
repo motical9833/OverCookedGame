@@ -7,7 +7,7 @@ public class CookingSchedulerScript : MonoBehaviour
 {
     public string csvFilePath = "Assets/Resources/StageData/StageOrderData.csv";
     private Dictionary<string, List<string>> order;
-
+    GameObject gameManager;
 
     private void Awake()
     {

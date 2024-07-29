@@ -7,7 +7,8 @@ TagManager:
   - StageObject
   - StageManager
   - IngredientBox
-  - Ingridient
+  - Ingredient
+  - GameManager
   layers:
   - Default
   - TransparentFX
