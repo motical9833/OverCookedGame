@@ -1573,7 +1573,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
-  prefabs: []
+  recipeList: []
+  maxOrderCnt: 5
 --- !u!1001 &1110883525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1646,6 +1647,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1121612975}
   - component: {fileID: 1121612976}
+  - component: {fileID: 1121612977}
   m_Layer: 0
   m_Name: StageManager
   m_TagString: StageManager
@@ -1681,6 +1683,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   csvFilePath: Assets/Resources/IngredientData/IngredientData.csv
+--- !u!114 &1121612977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121612974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7153345dff4c76a469472d2ce97196db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1122397888
 PrefabInstance:
   m_ObjectHideFlags: 0

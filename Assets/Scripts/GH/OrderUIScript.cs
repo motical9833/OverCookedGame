@@ -26,13 +26,18 @@ public class OrderUIScript : MonoBehaviour
 
         if(currentTimer < 0)
         {
-            currentTimer = 80.0f;
-            slider.value = 1;
+            ResetTimer();
         }
     }
 
     public float GetCurrentTime()
     {
         return currentTimer;
+    }
+
+    public void ResetTimer()
+    {
+        currentTimer = 80.0f;
+        slider.value = 1;
     }
 }
