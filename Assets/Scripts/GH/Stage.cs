@@ -36,7 +36,7 @@ public class Stage : MonoBehaviour
         {   
             string json = File.ReadAllText(filePath);
             stageInfo = JsonUtility.FromJson<StageInfo>(json);
-            Debug.Log("Stage data loaded from " + filePath);
+            //Debug.Log("Stage data loaded from " + filePath);
         }
         else
         {
@@ -58,7 +58,7 @@ public class Stage : MonoBehaviour
     // 스테이지 정보 출력
     public void PrintStageInfo()
     {
-        Debug.Log("Stage: " + stageInfo.stageName + ", score: " + stageInfo.score + ", Cleared: " + stageInfo.isCleared);
+        //Debug.Log("Stage: " + stageInfo.stageName + ", score: " + stageInfo.score + ", Cleared: " + stageInfo.isCleared);
     }
 
     public void StartStageSetting()

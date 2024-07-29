@@ -23,5 +23,16 @@ public class OrderUIScript : MonoBehaviour
         float ratio = currentTimer / initialTimer;
 
         slider.value = ratio;
+
+        if(currentTimer < 0)
+        {
+            currentTimer = 80.0f;
+            slider.value = 1;
+        }
+    }
+
+    public float GetCurrentTime()
+    {
+        return currentTimer;
     }
 }
