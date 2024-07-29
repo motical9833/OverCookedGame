@@ -28,9 +28,13 @@ public class IngredientObjectPoolScript : MonoBehaviour
             col.isTrigger = false;
 
             Rigidbody rigid = obj.AddComponent<Rigidbody>();
+            rigid.drag = 0.5f;
+            rigid.angularDrag = 0.1f;
 
             obj.tag = "Ingredient";
             obj.transform.parent = this.gameObject.transform;
+            IngredientScript ingredientScript = obj.AddComponent<IngredientScript>();
+            ingredientScript.Initialize();
             obj.transform.localPosition = Vector3.zero;
             obj.transform.parent = null;
             obj.SetActive(false);

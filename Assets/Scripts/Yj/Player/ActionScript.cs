@@ -38,16 +38,22 @@ public class ActionScript : MonoBehaviour
             {
                 if (collider != frontCol)
                 {
+                    GameObject grabObj;
                     switch (collider.gameObject.tag)
                     {
+                        case "Ingredient":
+                            Debug.Log("ingredientbox");
+                            grabObj = collider.gameObject;
+                            Grab(grabObj);
+                            return true;
                         case "IngredientBox":
                             Debug.Log("ingredientbox col");
-                            GameObject grabObj = collider.gameObject.GetComponent<IngredientObjectPoolScript>().GetIngredientPoolObject();
+                            grabObj = collider.gameObject.GetComponent<IngredientObjectPoolScript>().GetIngredientPoolObject();
                             Grab(grabObj);
-                            return (true);
-                        case "Dish":
+                            return true;
+                        case "Plate":
 
-                            return (true);
+                            return true;
                     }
                 }
             }
@@ -66,11 +72,14 @@ public class ActionScript : MonoBehaviour
     public void Grab(GameObject grabObj) 
     {
         currGrabObj = grabObj;
+        currGrabObj.transform.position = hand.transform.position;
         grabObj.transform.SetParent(hand.transform);
-    }
+        grabObj.GetComponent<IngredientScript>().Grabbed();
+    }   
 
     public void Release()
     {
+        currGrabObj.GetComponent<IngredientScript>().Release();
         currGrabObj.transform.parent = null;
         currGrabObj = null;
     }
