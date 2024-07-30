@@ -11,6 +11,7 @@ public class RecipeOrderControllerScript : MonoBehaviour
 
     public int maxOrderCnt = 5;
     int orderCnt = 0;
+    bool isFull = false;
 
     void Start()
     {
@@ -69,7 +70,7 @@ public class RecipeOrderControllerScript : MonoBehaviour
 
     public void FoodOrderComesIn(Vector3 targetPos)
     {
-        if (orderCnt >= maxOrderCnt)
+        if (isFull)
         {
             return;
         }
@@ -87,6 +88,12 @@ public class RecipeOrderControllerScript : MonoBehaviour
         }
 
         orderCnt++;
+
+        if (orderCnt >= maxOrderCnt)
+        {
+            isFull = true;
+        }
+
     }
 
     public void ServeFood(string name)
@@ -121,5 +128,12 @@ public class RecipeOrderControllerScript : MonoBehaviour
         servefood.SetActive(false);
 
         orderCnt--;
+        isFull = false;
+    }
+
+
+    public bool IsFull()
+    {
+        return isFull;
     }
 }

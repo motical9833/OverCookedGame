@@ -9,6 +9,7 @@ TagManager:
   - IngredientBox
   - Ingredient
   - GameManager
+  - MainCanvas
   layers:
   - Default
   - TransparentFX
