@@ -35,7 +35,7 @@ public class RecipeOrderControllerScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.V))
         {
-            FoodOrderComesIn(new Vector3(100.0f, 86.0f, 0));
+            FoodOrderComesIn(new Vector3(90.0f, 1030.0f, 0));
         }
 
         if(Input.GetKeyDown(KeyCode.B))
@@ -74,7 +74,7 @@ public class RecipeOrderControllerScript : MonoBehaviour
             return;
         }
 
-        orderCnt++;
+        targetPos.x += 210 * orderCnt;
 
         for (int i = 0; i < recipeList.Count; i++)
         {
@@ -85,6 +85,8 @@ public class RecipeOrderControllerScript : MonoBehaviour
                 break;
             }
         }
+
+        orderCnt++;
     }
 
     public void ServeFood(string name)

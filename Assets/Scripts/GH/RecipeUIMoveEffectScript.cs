@@ -2,28 +2,42 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class RecipeUIMoveEffectScript : MonoBehaviour
 {
-    float moveSpeed = 2000.0f;
+    public float moveSpeed = 3000.0f;
     bool isMove = false;
+
 
     public void UiMoveEvent(Vector3 targetPos)
     {
-        StartCoroutine(UILeftMove(targetPos));
+        StartCoroutine(UIMoveToTargetWithRotation(targetPos));
     }
 
-    private IEnumerator UILeftMove(Vector3 targetPos)
+    private IEnumerator UIMoveToTargetWithRotation(Vector3 targetPos)
     {
-        isMove = true;
+        RectTransform mRectTr = this.GetComponent<RectTransform>();
+        mRectTr.rotation = Quaternion.Euler(0, 0, 10.0f);
 
-        while (Vector3.Distance(transform.position,targetPos) > 0.01f)
+        float totalDistance = Vector3.Distance(transform.position, targetPos);
+
+        while(Vector3.Distance(mRectTr.position,targetPos) > 0.01f)
         {
-            this.gameObject.transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+            float distance = Vector3.Distance(mRectTr.position, targetPos);
+
+            float distanceTraveled = totalDistance - distance;
+
+            mRectTr.position = Vector3.MoveTowards(mRectTr.position, targetPos, moveSpeed * Time.deltaTime);
+
+            float rotationZ = Mathf.Lerp(10.0f, 0.0f, (distanceTraveled / totalDistance));
+
+            mRectTr.rotation = Quaternion.Euler(0, 0, rotationZ);
+
             yield return null;
         }
 
-        transform.position = targetPos;
-        isMove = false;
+        mRectTr.position = targetPos;
+        mRectTr.rotation = Quaternion.Euler(0, 0, 0);
     }
 }
