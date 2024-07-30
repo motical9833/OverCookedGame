@@ -4,24 +4,21 @@ using UnityEngine;
 
 public class RecipeOpenScript : MonoBehaviour
 {
-    public void OpenRecipeEvent()
-    {
-        StartCoroutine(OpenRecipeCoroutine());
-    }
+    float moveSpeed = 1000.0f;
 
-    private void Start()
+    public IEnumerator OpenRecipeCoroutine()
     {
         RectTransform mRectTr = this.gameObject.GetComponent<RectTransform>();
 
-        Debug.Log(mRectTr.localPosition);
-    }
+        Vector3 targetPos = new Vector3(mRectTr.localPosition.x, -70, mRectTr.localPosition.z);
 
+        while (Vector3.Distance(mRectTr.localPosition, targetPos) > 0.01f)
+        {
+            mRectTr.localPosition = Vector3.MoveTowards(mRectTr.localPosition, targetPos, moveSpeed * Time.deltaTime);
 
-    IEnumerator OpenRecipeCoroutine()
-    {
-        RectTransform mRectTr = this.gameObject.GetComponent<RectTransform>();
+            yield return null;
+        }
 
-
-        yield return null;
+        mRectTr.localPosition = targetPos;
     }
 }

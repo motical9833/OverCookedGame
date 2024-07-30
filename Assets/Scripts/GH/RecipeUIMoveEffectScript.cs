@@ -39,5 +39,7 @@ public class RecipeUIMoveEffectScript : MonoBehaviour
 
         mRectTr.position = targetPos;
         mRectTr.rotation = Quaternion.Euler(0, 0, 0);
+
+        yield return StartCoroutine(gameObject.transform.GetChild(0).GetComponent<RecipeOpenScript>().OpenRecipeCoroutine());
     }
 }
