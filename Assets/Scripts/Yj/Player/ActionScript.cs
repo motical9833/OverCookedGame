@@ -29,11 +29,11 @@ public class ActionScript : MonoBehaviour
     {
         Debug.Log("Barpress");
 
+        Bounds fColBound = frontCol.bounds;
+        Collider[] hitColliders = Physics.OverlapBox(fColBound.center, fColBound.extents, Quaternion.identity);
+
         if (currGrabObj == null)
         {
-            Bounds fColBound = frontCol.bounds;
-            Collider[] hitColliders = Physics.OverlapBox(fColBound.center, fColBound.extents, Quaternion.identity);
-
             foreach (Collider collider in hitColliders)
             {
                 if (collider != frontCol)
@@ -41,6 +41,20 @@ public class ActionScript : MonoBehaviour
                     GameObject grabObj;
                     switch (collider.gameObject.tag)
                     {
+                        case "Table":   
+                            Debug.Log("Table");
+                            TableScript tableScr =  collider.gameObject.GetComponent<TableScript>();
+                            if (tableScr.IsRaised())
+                            {
+                                grabObj = tableScr.GetRaisedObject();
+                                Grab(grabObj);
+                                tableScr.Release();
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
                         case "Ingredient":
                             Debug.Log("ingredient");
                             grabObj = collider.gameObject;
@@ -67,6 +81,33 @@ public class ActionScript : MonoBehaviour
         }
         else
         {
+            foreach (Collider collider in hitColliders)
+            {
+                if (collider != frontCol)
+                {
+                    switch (collider.tag)
+                    {
+                        case "Table":
+                            Debug.Log("Table");
+                            TableScript tableScr = collider.gameObject.GetComponent<TableScript>();
+                            if (tableScr.IsRaised())
+                            {
+                                return false;
+                            }
+                            else
+                            {
+                                tableScr.RaisObject(currGrabObj);
+                                Release();
+                                return true;
+                            }
+                    }
+
+                        //처리 순위
+                        //plate, pot,
+
+                        //내가 잘린 재료를 들고 있는게 아니라면 pot에 상호작용시 아무것도 업음
+                    }
+            }
             Release();
             return (true);
         }

@@ -125,9 +125,10 @@ GameObject:
   - component: {fileID: 5604165278986751182}
   - component: {fileID: 7710925534625519262}
   - component: {fileID: 3311302040984868995}
+  - component: {fileID: 6698024197265923374}
   m_Layer: 0
   m_Name: TableTop_Side
-  m_TagString: Untagged
+  m_TagString: Table
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -198,6 +199,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6698024197265923374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5036542444918225101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67c51458e197eb34782da7fed8cc5353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raisedObj: {fileID: 0}
 --- !u!1 &7078446726498921489
 GameObject:
   m_ObjectHideFlags: 0
