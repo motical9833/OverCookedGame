@@ -13,7 +13,7 @@ public class OrderUIScript : MonoBehaviour
     void Start()
     {
         initialTimer = currentTimer;
-        slider = this.gameObject.GetComponent<Transform>().GetChild(3).GetComponent<Slider>();
+        slider = this.gameObject.GetComponent<Transform>().GetChild(2).GetComponent<Slider>();
     }
 
     void Update()

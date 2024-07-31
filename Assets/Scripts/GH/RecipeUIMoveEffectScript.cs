@@ -8,7 +8,13 @@ public class RecipeUIMoveEffectScript : MonoBehaviour
 {
     public float moveSpeed = 3000.0f;
     bool isMove = false;
+    RectTransform mRectTr;
 
+    public void Start()
+    {
+        this.gameObject.SetActive(false);
+        mRectTr = this.GetComponent<RectTransform>();
+    }
 
     public void UiMoveEvent(Vector3 targetPos)
     {
@@ -17,7 +23,6 @@ public class RecipeUIMoveEffectScript : MonoBehaviour
 
     private IEnumerator UIMoveToTargetWithRotation(Vector3 targetPos)
     {
-        RectTransform mRectTr = this.GetComponent<RectTransform>();
         mRectTr.rotation = Quaternion.Euler(0, 0, 10.0f);
 
         float totalDistance = Vector3.Distance(transform.position, targetPos);
@@ -41,5 +46,20 @@ public class RecipeUIMoveEffectScript : MonoBehaviour
         mRectTr.rotation = Quaternion.Euler(0, 0, 0);
 
         yield return StartCoroutine(gameObject.transform.GetChild(0).GetComponent<RecipeOpenScript>().OpenRecipeCoroutine());
+    }
+
+    public void ResetUIPos()
+    {
+        gameObject.transform.GetChild(0).GetComponent<RecipeOpenScript>().ResetRecipePos();
+        gameObject.transform.position = this.transform.parent.position;
+    }
+
+    public void PositionUIElements(Vector3 pos,int orderCnt)
+    {
+        Vector3 position = mRectTr.position;
+
+        position.x = pos.x + 210 * orderCnt;
+
+        mRectTr.position = position;
     }
 }

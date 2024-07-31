@@ -5,12 +5,18 @@ using UnityEngine;
 public class RecipeOpenScript : MonoBehaviour
 {
     float moveSpeed = 1000.0f;
+    Vector3 originPos;
+    RectTransform mRectTr;
+
+    private void Awake()
+    {
+        mRectTr = this.gameObject.GetComponent<RectTransform>();
+        originPos = mRectTr.localPosition;
+    }
 
     public IEnumerator OpenRecipeCoroutine()
     {
-        RectTransform mRectTr = this.gameObject.GetComponent<RectTransform>();
-
-        Vector3 targetPos = new Vector3(mRectTr.localPosition.x, -70, mRectTr.localPosition.z);
+        Vector3 targetPos = new Vector3(mRectTr.localPosition.x,  -120.0f, mRectTr.localPosition.z);
 
         while (Vector3.Distance(mRectTr.localPosition, targetPos) > 0.01f)
         {
@@ -20,5 +26,10 @@ public class RecipeOpenScript : MonoBehaviour
         }
 
         mRectTr.localPosition = targetPos;
+    }
+
+    public void ResetRecipePos()
+    {
+        mRectTr.localPosition = originPos;
     }
 }

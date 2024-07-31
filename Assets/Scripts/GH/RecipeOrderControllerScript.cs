@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -6,8 +7,42 @@ using UnityEngine.SceneManagement;
 
 public class RecipeOrderControllerScript : MonoBehaviour
 {
+    public class Recipe
+    {
+        GameObject recipeUIObject;
+        public GameObject RecipeUIObject
+        {
+            get { return recipeUIObject; }
+            private set { recipeUIObject = value; } 
+        }
+
+        int orderNumber;
+        public int OrderNumber
+        {
+            get { return orderNumber; }
+            set { orderNumber = value; }
+        }
+
+        public Recipe(GameObject recipe, int number)
+        {
+            recipeUIObject = recipe;
+            orderNumber = number;
+        }
+
+        public Recipe(Recipe recipe)
+        {
+            recipeUIObject = recipe.recipeUIObject;
+            orderNumber = recipe.orderNumber;
+        }
+    }
+
+
+
     public GameObject gameManager;
-    public List<GameObject> recipeList;
+
+    public List<Recipe> recipeClass = new List<Recipe>();
+
+    public Queue<Recipe> recipeQueue = new Queue<Recipe>();
 
     public int maxOrderCnt = 5;
     int orderCnt = 0;
@@ -42,6 +77,7 @@ public class RecipeOrderControllerScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.B))
         {
             ServeFood("Soup_Onion");
+            OrderUIRelocation();
         }
     }
 
@@ -61,8 +97,9 @@ public class RecipeOrderControllerScript : MonoBehaviour
                 {
                     GameObject ob = Instantiate(prefab, parentTr.position, Quaternion.identity, parentTr);
                     ob.name = recipeName;
-                    ob.SetActive(false);
-                    recipeList.Add(ob);
+
+                    Recipe recipe = new Recipe(ob, 0);
+                    recipeQueue.Enqueue(recipe);
                 }
             }
         }
@@ -77,15 +114,12 @@ public class RecipeOrderControllerScript : MonoBehaviour
 
         targetPos.x += 210 * orderCnt;
 
-        for (int i = 0; i < recipeList.Count; i++)
-        {
-            if (recipeList[i].activeSelf == false)
-            {
-                recipeList[i].SetActive(true);
-                recipeList[i].GetComponent<RecipeUIMoveEffectScript>().UiMoveEvent(targetPos);
-                break;
-            }
-        }
+        Recipe recipe = recipeQueue.Dequeue();
+
+        recipeClass.Add(recipe);
+        recipe.RecipeUIObject.SetActive(true);
+        recipe.RecipeUIObject.GetComponent<RecipeUIMoveEffectScript>().UiMoveEvent(targetPos);
+        recipe.OrderNumber = recipeClass.Count;
 
         orderCnt++;
 
@@ -101,31 +135,32 @@ public class RecipeOrderControllerScript : MonoBehaviour
         if (orderCnt <= 0)
             return;
 
-        GameObject servefood = null;
+        Recipe servefood = null;
 
-        for (int i = 0; i < recipeList.Count; i++)
+        for (int i = 0; i < recipeClass.Count; i++)
         {
-            if (recipeList[i].activeSelf == false)
+            if (recipeClass[i].RecipeUIObject.name != name)
                 continue;
 
-            if (recipeList[i].name != name)
-                continue;
-
-            if (servefood == null)
+            if (servefood == null || servefood.RecipeUIObject.GetComponent<OrderUIScript>().GetCurrentTime() > recipeClass[i].RecipeUIObject.GetComponent<OrderUIScript>().GetCurrentTime())
             {
-                servefood = recipeList[i];
-                continue;
-            }
-
-            if (servefood.GetComponent<OrderUIScript>().GetCurrentTime() > recipeList[i].GetComponent<OrderUIScript>().GetCurrentTime())
-            {
-                servefood = recipeList[i];
+                servefood = recipeClass[i];
             }
         }
 
-        servefood.GetComponent<OrderUIScript>().ResetTimer();
-        servefood.GetComponent<Transform>().position = servefood.GetComponent<Transform>().parent.position;
-        servefood.SetActive(false);
+        if(servefood == null)
+        {
+            Debug.Log("해당 음식이 없음!");
+            return;
+        }
+
+        servefood.OrderNumber = 0;
+        servefood.RecipeUIObject.GetComponent<OrderUIScript>().ResetTimer();
+        servefood.RecipeUIObject.GetComponent<RecipeUIMoveEffectScript>().ResetUIPos();
+        servefood.RecipeUIObject.SetActive(false);
+
+        recipeQueue.Enqueue(servefood);
+        recipeClass.Remove(servefood);
 
         orderCnt--;
         isFull = false;
@@ -140,5 +175,24 @@ public class RecipeOrderControllerScript : MonoBehaviour
     public int GetOrderCount()
     {
         return orderCnt;
+    }
+
+
+    private void OrderUIRelocation()
+    {
+        int count = 0;
+
+        for (int i = 0; i < recipeClass.Count; i++)
+        {
+            if (recipeClass[i].RecipeUIObject.activeSelf)
+            {
+                count++;
+
+                recipeClass[i].RecipeUIObject.GetComponent<RecipeUIMoveEffectScript>().PositionUIElements(new Vector3(90.0f, 1030.0f, 0), i);
+
+                if(count == orderCnt)
+                    break;
+            }
+        }
     }
 }

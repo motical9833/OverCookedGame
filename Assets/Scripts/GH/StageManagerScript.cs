@@ -8,7 +8,7 @@ public class StageManagerScript : MonoBehaviour
 
     bool isStart = false;
 
-    GameObject orderPanal;
+    public GameObject orderPanal;
 
     void Start()
     {
@@ -30,10 +30,16 @@ public class StageManagerScript : MonoBehaviour
 
         currentTime += Time.deltaTime;
 
-        if(currentTime >= 20.0f || orderPanal.GetComponent<RecipeOrderControllerScript>().GetOrderCount() == 0)
+        if(currentTime >= 20.0f || orderPanal.transform.GetChild(0).GetComponent<RecipeOrderControllerScript>().GetOrderCount() == 0)
         {
             orderPanal.transform.GetChild(0).GetComponent<RecipeOrderControllerScript>().FoodOrderComesIn(new Vector3(90.0f, 1030.0f, 0));
             currentTime = 0.0f;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+             ServingDishes("Soup_Onion");
         }
     }
 
@@ -48,6 +54,6 @@ public class StageManagerScript : MonoBehaviour
 
     public void ServingDishes(string orderName)
     {
-
+        orderPanal.transform.GetChild(0).GetComponent<RecipeOrderControllerScript>().ServeFood(orderName);
     }
 }
