@@ -136,4 +136,9 @@ public class RecipeOrderControllerScript : MonoBehaviour
     {
         return isFull;
     }
+
+    public int GetOrderCount()
+    {
+        return orderCnt;
+    }
 }
