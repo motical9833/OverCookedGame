@@ -30,7 +30,7 @@ public class StageManagerScript : MonoBehaviour
 
         currentTime += Time.deltaTime;
 
-        if(currentTime >= 3.0f && )
+        if(currentTime >= 3.0f  )
         {
             orderPanal.transform.GetChild(0).GetComponent<RecipeOrderControllerScript>().FoodOrderComesIn(new Vector3(90.0f, 1030.0f, 0));
             currentTime = 0.0f;
