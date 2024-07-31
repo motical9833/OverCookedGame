@@ -24,6 +24,4 @@ namespace Enummrous
         Beef,
         Mushroom,
     }
-
-
 }

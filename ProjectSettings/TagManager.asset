@@ -10,6 +10,9 @@ TagManager:
   - Ingredient
   - GameManager
   - MainCanvas
+  - Pot
+  - Plate
+  - Table
   layers:
   - Default
   - TransparentFX
