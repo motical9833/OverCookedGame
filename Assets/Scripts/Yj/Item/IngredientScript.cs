@@ -15,4 +15,9 @@ public class IngredientScript : GrabAbleObjScript
     {
         
     }
+
+    public bool GetIsChopped()
+    {
+        return isChopped;
+    }
 }
