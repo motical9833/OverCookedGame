@@ -14,16 +14,20 @@ public class StagePointScript : MonoBehaviour
         textMeshProGUI = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
     }
 
-
-    public void GetPoint(int value)
+    public void SetPoint(int value)
     {
         point = value;
 
         textMeshProGUI.text = point.ToString();
     }
 
-    int FinalScore()
+    public int GetPoint()
     {
         return point;
+    }
+
+    public void ResetPoint()
+    {
+        point = 0;
     }
 }

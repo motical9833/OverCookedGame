@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,9 +7,11 @@ using UnityEngine;
 
 public class StageTimerScript : MonoBehaviour
 {
-    public float stageTimeLimit = 240.0f;
+    float stageTimeLimit = 6.0f;
     TextMeshProUGUI textMeshGUI = null;
     bool isStart = false;
+
+    public event Action EndTimeLimeted;
 
     void Start()
     {
@@ -24,10 +27,21 @@ public class StageTimerScript : MonoBehaviour
         stageTimeLimit -= Time.deltaTime;
 
         textMeshGUI.text = ((int)(stageTimeLimit / 60) + ":" + (int)(stageTimeLimit % 60)).ToString();
+
+        if(stageTimeLimit < 0)
+        {
+            EndTimeLimeted();
+        }
     }
 
     public void StartTimer()
     {
         isStart = true;
+    }
+
+    public void ResetTimer()
+    {
+        isStart = false;
+        stageTimeLimit = 240.0f;
     }
 }

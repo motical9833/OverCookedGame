@@ -11,7 +11,7 @@ public class Stage : MonoBehaviour
 
     public Sprite stageImg;
 
-    private int[] stageGoals = { 10, 20, 30 };
+    private int[] stageGoals = { 20, 40, 60 };
 
     private void Awake()
     {
@@ -28,6 +28,12 @@ public class Stage : MonoBehaviour
         string json = JsonUtility.ToJson(stageInfo, true);
         File.WriteAllText(filePath, json);
         Debug.Log("Stage data saved to " + filePath);
+    }
+
+    public void SaveStageData(StageInfo data)
+    {
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(filePath, json);
     }
 
     public void LoadStageData()

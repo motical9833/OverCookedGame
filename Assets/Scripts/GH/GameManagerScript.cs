@@ -5,5 +5,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    StageInfo currentStageData;
 
+
+    private void Start()
+    {
+        currentStageData = new StageInfo();
+    }
+
+
+    public void SaveStageData(StageInfo data)
+    {
+        currentStageData = data;
+    }
 }

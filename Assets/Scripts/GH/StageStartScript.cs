@@ -19,8 +19,24 @@ public class StageStartScript : MonoBehaviour
         }
     }
 
-    void Update()
+
+    IEnumerator StartUICoroutine()
     {
-        
+        readyGoUIObjects[0].SetActive(true);
+
+        yield return new WaitForSeconds(3);
+
+        readyGoUIObjects[0].SetActive(false);
+        readyGoUIObjects[1].SetActive(true);
+
+        yield return new WaitForSeconds(1);
+
+        readyGoUIObjects[0].SetActive(false);
+        readyGoUIObjects[1].SetActive(false);
+    }
+
+    public void ReadyGoUIOn()
+    {
+        StartCoroutine(StartUICoroutine());
     }
 }

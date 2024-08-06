@@ -38,7 +38,7 @@ public class RecipeOrderControllerScript : MonoBehaviour
 
 
 
-    public GameObject gameManager;
+    //public GameObject gameManager;
 
     public List<Recipe> recipeClass = new List<Recipe>();
 
@@ -50,7 +50,7 @@ public class RecipeOrderControllerScript : MonoBehaviour
 
     void Start()
     {
-        gameManager = GameObject.FindWithTag("GameManager");
+        GameObject gameManager = GameObject.FindWithTag("GameManager");
 
         string name = SceneManager.GetActiveScene().name;
 
