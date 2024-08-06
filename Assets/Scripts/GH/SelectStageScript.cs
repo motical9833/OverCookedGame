@@ -6,7 +6,7 @@ public class SelectStageScript : MonoBehaviour
 {
     public StageSelectUIScript stageSelectUIScript;
     private GameObject stageObject;
-    bool isSelectStage = false;
+    public bool isSelectStage = false;
     private float delayTime = 0.0f;
 
     void Start()
@@ -33,33 +33,40 @@ public class SelectStageScript : MonoBehaviour
         stageObject = other.gameObject;
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        stageObject = null;
+    }
+
     private void StageSelect(Sprite img, StageInfo stageData)
     {
         stageSelectUIScript.SelectStage(img, stageData);
-      /*  this.gameObject.GetComponent<MoveScript>().enabled = false;*/
     }
 
     private void SelectStage()
     {
-        if (!isSelectStage && Input.GetKeyDown(KeyCode.Space))
+        if (!isSelectStage && Input.GetKeyDown(KeyCode.Space) && stageObject != null)
         {
             StageSelect(stageObject.GetComponent<Stage>().GetStageImg(), stageObject.GetComponent<Stage>().GetStageInfo());
+            this.GetComponent<GHMoveScript>().IsMove(false);
             isSelectStage = true;
+
         }
     }
 
     private void ExitSelectStage()
     {
-        if (isSelectStage && Input.GetKeyDown(KeyCode.Escape))
+        if (isSelectStage && Input.GetKeyDown(KeyCode.Escape) && stageObject != null)
         {
             stageSelectUIScript.ExitStageSelect();
+            this.GetComponent<GHMoveScript>().IsMove(true);
             isSelectStage = false;
         }
     }
 
     private void StartStage()
     {
-        if(isSelectStage && Input.GetKeyDown(KeyCode.Space))
+        if(isSelectStage && Input.GetKeyDown(KeyCode.Space) && stageObject != null)
         {
             stageSelectUIScript.ExitStageSelect();
             isSelectStage = false;

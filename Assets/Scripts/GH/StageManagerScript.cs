@@ -1,59 +1,85 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageManagerScript : MonoBehaviour
 {
-    public float currentTime = 0.0f;
 
-    bool isStart = false;
+    OrderUIControllerScript orderUIControllerScript;
+    StageTimerScript stageTimerScript;
+    StagePointScript stagePointScript;
+    StageStartScript stageStartScript;
 
-    public GameObject orderPanal;
+    GameManager gameManager;
+    StageSaveLoadScript stageSaveLoadScript;
 
     void Start()
     {
-        orderPanal = GameObject.FindWithTag("MainCanvas");
+        GameObject mainCanvas = GameObject.FindGameObjectWithTag("MainCanvas");
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        stageSaveLoadScript = gameManager.GetComponent<StageSaveLoadScript>();
 
-        if(orderPanal == null)
-        {
-            Debug.LogError("orderPanal이 비어있음!! 태그 확인필요...");
-            return;
-        }
+        stagePointScript = mainCanvas.transform.GetChild(1).GetComponent<StagePointScript>();
+        stageTimerScript = mainCanvas.transform.GetChild(2).GetComponent<StageTimerScript>();
+        stageStartScript = mainCanvas.transform.GetChild(3).GetComponent<StageStartScript>();
 
-        StartCoroutine(GameStart());
+        orderUIControllerScript = this.GetComponent<OrderUIControllerScript>();
+
+        StartCoroutine(GameStartCoroutine());
     }
 
-    void Update()
+    public void GameClear()
     {
-        if(!isStart)
-            return;
+        string name = SceneManager.GetActiveScene().name;
+        int score = 10; /*stagePointScript.GetPoint();*/
 
-        currentTime += Time.deltaTime;
+        //StageInfo stageinfo = new StageInfo(name, score, false, true);
 
-        if(currentTime >= 20.0f || orderPanal.transform.GetChild(0).GetComponent<RecipeOrderControllerScript>().GetOrderCount() == 0)
-        {
-            orderPanal.transform.GetChild(0).GetComponent<RecipeOrderControllerScript>().FoodOrderComesIn(new Vector3(90.0f, 1030.0f, 0));
-            currentTime = 0.0f;
-        }
+        StageInfo info = stageSaveLoadScript.GetPrevStageInfo();
 
+        info.stageName = name;
+        info.score = score;
+        info.isCleared = true;
+        info.isAble = true;
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-             ServingDishes("Soup_Onion");
-        }
+        stageSaveLoadScript.SavePrevStageInfo(info);
+
+        stagePointScript.ResetPoint();
+        stageTimerScript.ResetTimer();
+
+        SceneManager.LoadSceneAsync("StageSelectScene");
+
+        SceneManager.sceneLoaded += SceneLoad;
     }
 
-    IEnumerator GameStart()
+    void StageInfoDeliver(string name,StageInfo info)
     {
-        yield return new WaitForSeconds(3);
-
-        orderPanal.transform.GetChild(0).GetComponent<RecipeOrderControllerScript>().FoodOrderComesIn(new Vector3(90.0f, 1030.0f, 0));
-
-        isStart = true;
+        GameObject.Find(name).GetComponent<Stage>().SaveStageData(info);
     }
 
-    public void ServingDishes(string orderName)
+
+    public void SceneLoad(Scene scene, LoadSceneMode mode)
     {
-        orderPanal.transform.GetChild(0).GetComponent<RecipeOrderControllerScript>().ServeFood(orderName);
+        StageInfo info = stageSaveLoadScript.GetPrevStageInfo();
+
+        string name = info.stageName;
+
+        GameObject.Find(name).GetComponent<Stage>().SaveStageData(info);
+
+        SceneManager.sceneLoaded -= SceneLoad;
+    }
+
+    IEnumerator GameStartCoroutine()
+    {
+        stageStartScript.ReadyGoUIOn();
+
+        yield return new WaitForSeconds(4);
+
+        orderUIControllerScript.OrderStart();
+        stageTimerScript.StartTimer();
+        stageTimerScript.EndTimeLimeted += GameClear;
     }
 }

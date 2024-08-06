@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 using TMPro;
+using UnityEditor.PackageManager.Requests;
 
 public class StageSelectUIScript : MonoBehaviour
 {
@@ -23,11 +24,6 @@ public class StageSelectUIScript : MonoBehaviour
         }
 
         player = GameObject.FindGameObjectWithTag("Player");
-    }
-
-    private void Update()
-    {
-
     }
 
     public void SelectStage(Sprite img, StageInfo stageData)
@@ -53,7 +49,6 @@ public class StageSelectUIScript : MonoBehaviour
 
         myStateUI.SetActive(false);
         isSelect = false;
-        /*player.GetComponent<MoveScript>().enabled = true;*/
     }
 
     public void CancelStage()
