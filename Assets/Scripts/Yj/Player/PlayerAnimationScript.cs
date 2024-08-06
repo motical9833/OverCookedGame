@@ -29,6 +29,9 @@ public class PlayerAnimationScript : MonoBehaviour
             case PlayerAnimState.HoldWalk:
                 animator.SetTrigger("HoldWalk");
                 break;
+            case PlayerAnimState.Chop:
+                animator.SetTrigger("Chop");
+                break;
         }
     }
     public void SetAnimator(Animator _animator)
