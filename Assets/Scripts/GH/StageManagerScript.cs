@@ -13,14 +13,12 @@ public class StageManagerScript : MonoBehaviour
     StagePointScript stagePointScript;
     StageStartScript stageStartScript;
 
-    GameManager gameManager;
     StageSaveLoadScript stageSaveLoadScript;
 
     void Start()
     {
         GameObject mainCanvas = GameObject.FindGameObjectWithTag("MainCanvas");
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        stageSaveLoadScript = gameManager.GetComponent<StageSaveLoadScript>();
+        stageSaveLoadScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<StageSaveLoadScript>();
 
         stagePointScript = mainCanvas.transform.GetChild(1).GetComponent<StagePointScript>();
         stageTimerScript = mainCanvas.transform.GetChild(2).GetComponent<StageTimerScript>();
@@ -35,8 +33,6 @@ public class StageManagerScript : MonoBehaviour
     {
         string name = SceneManager.GetActiveScene().name;
         int score = 10; /*stagePointScript.GetPoint();*/
-
-        //StageInfo stageinfo = new StageInfo(name, score, false, true);
 
         StageInfo info = stageSaveLoadScript.GetPrevStageInfo();
 
@@ -53,6 +49,7 @@ public class StageManagerScript : MonoBehaviour
         SceneManager.LoadSceneAsync("StageSelectScene");
 
         SceneManager.sceneLoaded += SceneLoad;
+        stageSaveLoadScript.StageToSceneLoad();
     }
 
     void StageInfoDeliver(string name,StageInfo info)
@@ -68,6 +65,8 @@ public class StageManagerScript : MonoBehaviour
         string name = info.stageName;
 
         GameObject.Find(name).GetComponent<Stage>().SaveStageData(info);
+
+        GameObject.FindWithTag("StageObject").GetComponent<StageObjectsControllerScript>().OpenStage();
 
         SceneManager.sceneLoaded -= SceneLoad;
     }

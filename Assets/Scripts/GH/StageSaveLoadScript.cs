@@ -8,8 +8,6 @@ using System.Xml;
 
 public class StageSaveLoadScript : MonoBehaviour
 {
-    //public List<Stage> stages;
-
     public Dictionary<string, Stage> stageDictionary;
 
     StageInfo prevStageInfo;
@@ -28,23 +26,15 @@ public class StageSaveLoadScript : MonoBehaviour
 
     public void SceneLoad(Scene scene, LoadSceneMode mode)
     {
-       // stages.Clear();
-
         stageDictionary.Clear();
 
-        GameObject objs = GameObject.Find("StageObjects");
+        GameObject objs = GameObject.FindGameObjectWithTag("StageObject");
 
         for (int i = 0; i < objs.transform.childCount; i++)
         {
-            //stages.Add(objs.transform.GetChild(i).GetComponent<Stage>());
 
             stageDictionary.Add(objs.transform.GetChild(i).name, objs.transform.GetChild(i).GetComponent<Stage>());
         }
-
-/*        foreach (Stage stage in stages)
-        {
-            stage.LoadStageData();
-        }*/
 
         foreach (Stage value in stageDictionary.Values)
         {
@@ -56,11 +46,6 @@ public class StageSaveLoadScript : MonoBehaviour
 
     public void SaveAllStages()
     {
-/*        foreach (Stage stage in stages)
-        {
-            stage.SaveStageData();
-        }*/
-
 
         foreach (Stage value in stageDictionary.Values)
         {
@@ -71,11 +56,6 @@ public class StageSaveLoadScript : MonoBehaviour
 
     public void LoadAllStages()
     {
-/*        foreach (Stage stage in stages)
-        {
-            stage.LoadStageData();
-        }*/
-
 
         foreach (Stage value in stageDictionary.Values)
         {

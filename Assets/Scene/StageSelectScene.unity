@@ -655,7 +655,7 @@ GameObject:
   - component: {fileID: 230644611}
   m_Layer: 0
   m_Name: Level_1-1
-  m_TagString: StageObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1224,7 +1224,7 @@ GameObject:
   - component: {fileID: 351049760}
   m_Layer: 0
   m_Name: Level_1-3
-  m_TagString: StageObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1774,7 +1774,7 @@ GameObject:
   - component: {fileID: 621583148}
   m_Layer: 0
   m_Name: Level_1-2
-  m_TagString: StageObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1978,7 +1978,7 @@ GameObject:
   - component: {fileID: 674550727}
   m_Layer: 0
   m_Name: StageObjects
-  m_TagString: Untagged
+  m_TagString: StageObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3797,7 +3797,7 @@ GameObject:
   - component: {fileID: 1085407371}
   m_Layer: 0
   m_Name: Level_3-1
-  m_TagString: StageObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7566,7 +7566,7 @@ GameObject:
   - component: {fileID: 2052495565}
   m_Layer: 0
   m_Name: Level_2-1
-  m_TagString: StageObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -21,6 +21,7 @@ public class Stage : MonoBehaviour
     private void Start()
     {
         stageImg = Resources.Load<Sprite>("2D/Map_Img/" + gameObject.name);
+        StartStageSetting();
     }
 
     public void SaveStageData()
@@ -34,9 +35,10 @@ public class Stage : MonoBehaviour
     {
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(filePath, json);
+        Debug.Log("Stage data saved to " + filePath);
     }
 
-    public void LoadStageData()
+    public void LoadStageData()     
     {
         if (File.Exists(filePath))
         {   
@@ -58,13 +60,13 @@ public class Stage : MonoBehaviour
             }
             SaveStageData(); // 기본 값을 저장
         }
-        StartStageSetting();
+        //tartStageSetting();
     }
 
     // 스테이지 정보 출력
     public void PrintStageInfo()
     {
-        //Debug.Log("Stage: " + stageInfo.stageName + ", score: " + stageInfo.score + ", Cleared: " + stageInfo.isCleared);
+        Debug.Log("Stage: " + stageInfo.stageName + ", score: " + stageInfo.score + ", Cleared: " + stageInfo.isCleared);
     }
 
     public void StartStageSetting()
