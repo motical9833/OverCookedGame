@@ -71,6 +71,12 @@ public class PlayerCtrlScript : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             pActionScript.CtrlAction();
+            //¸¸¾à
+            if (pActionScript.CtrlAction() == PlayerAnimState.Chop)
+            {
+                pAnimScript.TriggerAnimation(PlayerAnimState.Chop);
+                knife.SetActive(true);
+            }
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {

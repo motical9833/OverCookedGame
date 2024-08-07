@@ -2,12 +2,14 @@ namespace Enummrous
 {
     public enum PlayerAnimState
     {
+        None,
         Idle,
         Walk,
         Hold,
         HoldWalk,
         Dead,
         Wash,
+        Chop,
         End
     }
 

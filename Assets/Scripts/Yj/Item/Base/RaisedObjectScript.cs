@@ -38,9 +38,13 @@ public class RaisedObjectScript : MonoBehaviour
         GameObject current = raisedObj;
         while (current != null)
         {
+            if(!current.GetComponent<RaisedObjectScript>())
+            {
+                return current;
+            }
             if (current.GetComponent<RaisedObjectScript>().GetRaisedObject() == null)
             {
-                return current.GetComponent<RaisedObjectScript>().GetRaisedObject(); //가장 위에 있는 오브젝트는 올려둔게 없으므로 null임을 사용
+                return current;  //가장 위에 있는 오브젝트는 올려둔게 없으므로 null임을 사용
             }
             current = current.GetComponent<RaisedObjectScript>().GetRaisedObject();
         }

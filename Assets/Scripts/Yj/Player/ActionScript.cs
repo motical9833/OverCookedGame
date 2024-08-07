@@ -23,23 +23,24 @@ public class ActionScript : MonoBehaviour
         isGrab = false;
     }
 
-    public void CtrlAction()
+    public PlayerAnimState CtrlAction()
     {
         if (isGrab)
         {
             if (currGrabObj.tag == "Extinguisher")
             {
                 //extinguishd애니메이션 재생 및 extinguisher에 작동 스크립트 적용
+                return PlayerAnimState.Hold;
             }
             else
             {
-                return;
+                return PlayerAnimState.None;
             }
         }
 
         Bounds fColBound = frontCol.bounds;
         Collider[] hitColliders = Physics.OverlapBox(fColBound.center, fColBound.extents, Quaternion.identity);
-       
+
         string[] tags = { "Table", "IngredientBox", "Pot", "Ingredient", "Plate" };
 
         foreach (string tag in tags)
@@ -48,20 +49,23 @@ public class ActionScript : MonoBehaviour
             {
                 if (collider.CompareTag(tag))
                 {
-                    switch(collider.tag)
+                    switch (collider.tag)
                     {
-                     case "Table":
+                        case "Table":
                             TableScript tableScr = collider.GetComponent<TableScript>();
                             if (tableScr.GetRaisedObject().tag == "CuttingBoard")
                             {
                                 if (tableScr.GetTopRaisedObj().tag == "Ingredient")
                                 {
-                                    if(tableScr.GetTopRaisedObj().GetComponent<IngredientScript>().GetIsChopped())
+                                    if (tableScr.GetTopRaisedObj().GetComponent<IngredientScript>().GetIsChopped())
                                     {
-                                        return;
+                                        return PlayerAnimState.None;
                                     }
                                     else
                                     {
+                                        Debug.Log("썰려있지 않는 재료 썰기 시작");
+                                        tableScr.GetRaisedObject().GetComponent<CuttingBoardScript>().SetCutting(true);
+                                        return PlayerAnimState.Chop;
                                         //상태를 Chopping으로 돌려주기
                                         //음식물에 Chop 넣어주기
                                         //chop
@@ -72,8 +76,8 @@ public class ActionScript : MonoBehaviour
                     }
                 }
             }
-                        
         }
+        return PlayerAnimState.None;
     }
 
     public bool BarAction()
