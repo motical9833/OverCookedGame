@@ -181,7 +181,43 @@ AnimatorController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Tomato
   serializedVersion: 5
-  m_AnimatorParameters: []
+  m_AnimatorParameters:
+  - m_Name: Progress
+    m_Type: 1
+    m_DefaultFloat: 16
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: New Float
+    m_Type: 1
+    m_DefaultFloat: 32
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: New Float 0
+    m_Type: 1
+    m_DefaultFloat: 48
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: New Float 1
+    m_Type: 1
+    m_DefaultFloat: 64
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: New Float 2
+    m_Type: 1
+    m_DefaultFloat: 80
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: New Float 3
+    m_Type: 1
+    m_DefaultFloat: 100
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
