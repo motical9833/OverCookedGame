@@ -365,6 +365,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: -0.0740309
       objectReference: {fileID: 0}
+    - target: {fileID: 600582583024027740, guid: 362194a4a60301341aaea66e5be99b10, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 362194a4a60301341aaea66e5be99b10, type: 3}
       propertyPath: m_Name
       value: Tomato
@@ -402,25 +406,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 362194a4a60301341aaea66e5be99b10, type: 3}
   m_PrefabInstance: {fileID: 140239902}
   m_PrefabAsset: {fileID: 0}
---- !u!111 &140239904
-Animation:
+--- !u!95 &140239904
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 140239903}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: -3012704541259940917, guid: 63536a6aafe713e4b922fe7632f77d1e, type: 3}
-  - {fileID: 2998590108452778155, guid: 63536a6aafe713e4b922fe7632f77d1e, type: 3}
-  - {fileID: -8545516540745038991, guid: 63536a6aafe713e4b922fe7632f77d1e, type: 3}
-  - {fileID: 1470802984951297394, guid: 362194a4a60301341aaea66e5be99b10, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0c36d4c64e6c1f1489e76fb7425a6664, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &207268902
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,6 +803,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 312608845}
   m_CullTransparentMesh: 1
+--- !u!1 &442111810 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8883017540961434671, guid: f3bdba432a6cd6141ab5a7092f3578b2, type: 3}
+  m_PrefabInstance: {fileID: 1721215642}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &442111813
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442111810}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2be8b8b4c90612d4bb1cb9c238476083, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &629346704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1504,7 +1536,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8883017540961434671, guid: f3bdba432a6cd6141ab5a7092f3578b2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f3bdba432a6cd6141ab5a7092f3578b2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1561,6 +1593,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f3bdba432a6cd6141ab5a7092f3578b2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1710327052}
+    - targetCorrespondingSourceObject: {fileID: -8883017540961434671, guid: f3bdba432a6cd6141ab5a7092f3578b2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 442111813}
   m_SourcePrefab: {fileID: 100100000, guid: f3bdba432a6cd6141ab5a7092f3578b2, type: 3}
 --- !u!1 &1751141288
 GameObject:

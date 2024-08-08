@@ -7,7 +7,7 @@ public class AnimationPathEditor : EditorWindow
 {
     private AnimationClip[] animationClips;
     private string oldPath = "Onion";
-    private string newPath = "Tomato";
+    public string newPath = "Tomato";
 
     [MenuItem("Tools/Animation Path Editor")]
     public static void ShowWindow()
