@@ -24,6 +24,7 @@ public class CookGaugeUIScript : MonoBehaviour
 
 
         if (!isSlice)
+
             return;
 
         currentTime += Time.deltaTime;

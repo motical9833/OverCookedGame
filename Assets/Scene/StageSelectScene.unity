@@ -2015,6 +2015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bbc927043615df4e99d9e415612f7cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageObject: []
 --- !u!1 &680715059
 GameObject:
   m_ObjectHideFlags: 0
