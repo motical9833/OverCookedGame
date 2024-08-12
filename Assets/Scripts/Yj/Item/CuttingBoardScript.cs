@@ -6,13 +6,41 @@ public class CuttingBoardScript : RaisedObjectScript
 {
     public GameObject knife;
     bool isCutting = false;
+
+    int cutters = 0;
+
     private void Update()
     {
-        if (isCutting)
+        if (cutters <= 0)
         {
-            GetRaisedObject().GetComponent<IngredientScript>().Chop();
+            SetCutting(false);
+            return;
+        }
+        if (GetRaisedObject() != null && GetRaisedObject().GetComponent<IngredientScript>().GetIsChopped())
+        {
+            SetCutting(false);
+            return;
+        }
+        if (cutters > 0)
+        {
+            SetCutting(true);
+            GetRaisedObject().GetComponent<IngredientScript>().Chopping();
         }
     }
+
+    public void AddCutter()
+    {
+        cutters += 1;
+        Debug.Log(cutters);
+    }
+
+
+    public void RemoveCutter()
+    {
+        cutters -= 1;
+        Debug.Log(cutters);
+    }
+
 
     public void SetCutting(bool cutOnOff)
     {
@@ -28,6 +56,11 @@ public class CuttingBoardScript : RaisedObjectScript
         }
     }
 
+    public bool GetChoppingIsDone()
+    {
+        return false;
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
@@ -39,5 +72,4 @@ public class CuttingBoardScript : RaisedObjectScript
             }
         }
     }
-
 }

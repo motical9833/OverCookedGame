@@ -60,6 +60,23 @@ public class PlayerCtrlScript : NetworkBehaviour
         pActionScript.InitialSet(frontCol,hand);
     }
 
+    private void Update()
+    {
+        if (!IsOwner)
+        {
+
+        }
+
+        if (pAnimScript.GetAnimState() == PlayerAnimState.Chop)
+        {
+            if(pActionScript.GetChopIsDone())
+            {
+                pAnimScript.TriggerAnimation(PlayerAnimState.Idle);
+                knife.SetActive(false);
+            }
+        }
+    }
+
     // Update is called once per frame
     void LateUpdate()
     {
@@ -70,7 +87,7 @@ public class PlayerCtrlScript : NetworkBehaviour
         //정면의 콜라이더를 체크하고 각각에 맞는 태그면 넘어가자
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            pActionScript.CtrlAction();
+            /*pActionScript.CtrlAction();*/
             //만약
             if (pActionScript.CtrlAction() == PlayerAnimState.Chop)
             {
@@ -112,7 +129,7 @@ public class PlayerCtrlScript : NetworkBehaviour
         }
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         /*  if(!IsOwner)
         {
@@ -155,4 +172,6 @@ public class PlayerCtrlScript : NetworkBehaviour
             }
         }
     }
+
+  
 }

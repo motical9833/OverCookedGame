@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Enummrous
 {
     public enum PlayerAnimState
@@ -26,4 +28,22 @@ namespace Enummrous
         Beef,
         Mushroom,
     }
+
+    public static class CollisionCheck
+    {
+        public static bool Check(Bounds bounds, GameObject other)
+        {
+            Collider[] hitColliders = Physics.OverlapBox(bounds.center, bounds.extents, Quaternion.identity);
+
+            foreach (Collider collider in hitColliders)
+            {
+                if (collider.transform.gameObject == other)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
 }

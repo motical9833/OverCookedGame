@@ -7,22 +7,30 @@ using Enummrous;
 public class ActionScript : MonoBehaviour
 {
     Vector3 grabPos;
-    BoxCollider frontCol;
-    GameObject hand;
-    GameObject currGrabObj;
 
-    bool isGrab;
+    BoxCollider frontCol = null;
+
+    GameObject hand = null; 
+    
+    GameObject currGrabObj = null; // 현재 내가 집어들고 있는 오브젝트
+    GameObject currCuttingBoard = null; // 현재 내가 사용하고 있는 보드
+
+    bool isGrab = false;
+    bool isChop = false;
 
     //grab과 release는 space로 작동
     //Action은 leftCtrl로 작동
+
+    PlayerAnimationScript pAnimScript;
 
     public void InitialSet(BoxCollider _frontCol,GameObject _hand)
     {
         frontCol = _frontCol;
         hand = _hand;
-        isGrab = false;
+        pAnimScript = GetComponent<PlayerAnimationScript>();
     }
 
+  
     public PlayerAnimState CtrlAction()
     {
         if (isGrab)
@@ -53,8 +61,11 @@ public class ActionScript : MonoBehaviour
                     {
                         case "Table":
                             TableScript tableScr = collider.GetComponent<TableScript>();
+                            GameObject cuttingBoard = null;
+
                             if (tableScr.GetRaisedObject().tag == "CuttingBoard")
                             {
+                                cuttingBoard = tableScr.GetRaisedObject();
                                 if (tableScr.GetTopRaisedObj().tag == "Ingredient")
                                 {
                                     if (tableScr.GetTopRaisedObj().GetComponent<IngredientScript>().GetIsChopped())
@@ -63,8 +74,10 @@ public class ActionScript : MonoBehaviour
                                     }
                                     else
                                     {
-                                        Debug.Log("썰려있지 않는 재료 썰기 시작");
                                         tableScr.GetRaisedObject().GetComponent<CuttingBoardScript>().SetCutting(true);
+                                        currCuttingBoard = cuttingBoard;
+                                        currCuttingBoard.GetComponent<CuttingBoardScript>().AddCutter();
+                                        isChop = true;
                                         return PlayerAnimState.Chop;
                                         //상태를 Chopping으로 돌려주기
                                         //음식물에 Chop 넣어주기
@@ -212,6 +225,38 @@ public class ActionScript : MonoBehaviour
         #endregion
     }
 
+    public bool GetChopIsDone()
+    {
+        if (isChop) // 썰고 있는 중이라면
+        {
+            if (currCuttingBoard == null)
+                Debug.LogError("썰고 있음에도 불구하고 cuttingboard가 null입니다");
+
+            var boardScr = currCuttingBoard.GetComponent<CuttingBoardScript>();
+
+            if (!CollisionCheck.Check(frontCol.bounds, currCuttingBoard))
+            {
+                boardScr.RemoveCutter();
+                currCuttingBoard = null;
+                isChop = false;
+                return true;
+                //이곳을 작성해야함
+            }
+            if (boardScr.GetRaisedObject().GetComponent<IngredientScript>().GetIsChopped())
+            {
+                boardScr.RemoveCutter();
+                currCuttingBoard = null;
+                isChop = false;
+                return true;
+            }
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    
     public void Grab(GameObject grabObj) 
     {
         currGrabObj = grabObj;
@@ -221,8 +266,6 @@ public class ActionScript : MonoBehaviour
         isGrab = true;
     }   
 
-
-
     public void Release()
     {
         currGrabObj.SendMessage("Release");
@@ -231,15 +274,4 @@ public class ActionScript : MonoBehaviour
         isGrab = false;
     }
 
-    public void Chop()
-    {
-
-    }
-
-    public void WashDish()
-    {
-
-    }
-
-  
 }
