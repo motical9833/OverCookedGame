@@ -1344,6 +1344,7 @@ GameObject:
   - component: {fileID: 1018395890}
   - component: {fileID: 1018395891}
   - component: {fileID: 1018395892}
+  - component: {fileID: 1018395893}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -1402,7 +1403,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d05d325739739e84091224ee9fc75c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stages: []
 --- !u!114 &1018395892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1416,6 +1416,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   csvFilePath: Assets/Resources/StageData/StageOrderData.csv
+--- !u!114 &1018395893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018395887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9edd4b14df9e3cf40b9146f90d00a2c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1044417660
 GameObject:
   m_ObjectHideFlags: 0

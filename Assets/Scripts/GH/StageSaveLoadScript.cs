@@ -75,4 +75,16 @@ public class StageSaveLoadScript : MonoBehaviour
     {
         return prevStageInfo;
     }
+
+    public List<bool> GetAllisAble()
+    {
+        List<bool> bools = new List<bool>();
+
+        foreach (Stage value in stageDictionary.Values)
+        {
+            bools.Add(value.GetStageInfo().isAble);
+        }
+
+        return bools;
+    }
 }
