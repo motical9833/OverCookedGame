@@ -73,8 +73,41 @@ public class MapGridController : MonoBehaviour
         }
     }
 
-    public void OpenStage()
+    public void TileFlipping()
     {
+        StartCoroutine(SelectTile(objectGrop[0].objects));
+    }
 
+    IEnumerator SelectTile(List<GameObject> objects)
+    {
+        for (int i = 0; i < objects.Count; i++)
+        {
+            StartCoroutine(TileFlippingEnumerator(objects[i]));
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        yield return null;
+    }
+
+    IEnumerator TileFlippingEnumerator(GameObject obj)
+    {
+        Quaternion startRotation = obj.transform.localRotation;
+        Quaternion endRotation = Quaternion.Euler(obj.transform.eulerAngles + new Vector3(180.0f, 0, 0));
+
+        float elapsedTime = 0f;
+        float duration = 1.0f;
+
+        while(elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+
+            float t = Mathf.Clamp01(elapsedTime / duration);
+
+            obj.transform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
+
+            yield return null;
+        }
+
+        obj.transform.rotation = endRotation;
     }
 }
