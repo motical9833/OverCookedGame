@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -34,6 +35,7 @@ public class IngredientObjectPoolScript : MonoBehaviour
             obj.tag = "Ingredient";
             obj.transform.parent = this.gameObject.transform;
             IngredientScript ingredientScript = obj.AddComponent<IngredientScript>();
+
             ingredientScript.Initialize();
             obj.transform.localPosition = Vector3.zero;
             obj.transform.parent = null;
@@ -58,7 +60,7 @@ public class IngredientObjectPoolScript : MonoBehaviour
             obj.SetActive(true);
             if(obj == null)
             {
-                Debug.LogError("obj로 Null이 반환되었습니다");
+                UnityEngine.Debug.LogError("obj로 Null이 반환되었습니다");
                 return null;
             }
             return obj;
@@ -69,7 +71,7 @@ public class IngredientObjectPoolScript : MonoBehaviour
             obj.SetActive(true);
             if (obj == null)
             {
-                Debug.LogError("obj로 Null이 반환되었습니다");
+                UnityEngine.Debug.LogError("obj로 Null이 반환되었습니다");
                 return null;
             }
             return obj;

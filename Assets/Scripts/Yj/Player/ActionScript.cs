@@ -123,7 +123,11 @@ public class ActionScript : MonoBehaviour
                                         case "Pot":
                                             if (currGrabObj.tag == "Ingredient")
                                             {
-                                                Debug.Log("재료를 솥에 넣음");
+                                                if(currGrabObj.GetComponent<IngredientScript>().GetIsChopped())
+                                                {
+                                                    /*tableScr.GetRaisedObject().GetComponent<PotScript>().PutIngredient();*/
+                                                    Debug.Log("재료를 솥에 넣음");
+                                                }
                                             }
                                             return false;
                                         case "Plate":

@@ -2,28 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Enummrous;
 
 public class IngredientScript : GrabAbleObjScript
 {
     bool isChopped = false;
-    bool isChoppingProgress = false;
-    float cutting_time;
 
     Animator animator;
     public string controllerPath = "AnimatorController";  // Resources 폴더 안의 경로 (확장자 제외)
+    
     float sliceGuage;
 
     private GameObject wholeObj;
     private GameObject sliceObj;
     bool isFirstSlice = false;
 
+    IngredientSort ingredientSort = IngredientSort.None;
+    BoiledAbleIngredientSort boiledIngredientSort = BoiledAbleIngredientSort.None;
+
     public override void Initialize()
     {
         base.Initialize();
         SetAnimator();
-        wholeObj = transform.GetChild(0).Find("Onion_Mesh").transform.Find("Onion_Whole").gameObject;
-        sliceObj = transform.GetChild(0).Find("Onion_Mesh").transform.Find("Onion_Sliced").gameObject;
-        sliceObj.SetActive(false);
+
+        switch(gameObject.name)
+        {
+            case "Onion":
+                wholeObj = transform.GetChild(0).Find("Onion_Mesh").transform.Find("Onion_Whole").gameObject;
+                sliceObj = transform.GetChild(0).Find("Onion_Mesh").transform.Find("Onion_Sliced").gameObject;
+                boiledIngredientSort = BoiledAbleIngredientSort.Onion;
+                ingredientSort = IngredientSort.Onion;
+                sliceObj.SetActive(false);
+                break;
+            case "Mushroom":
+                wholeObj = transform.GetChild(0).Find("MushRoom_Mesh").transform.Find("MushRoom_Whole").gameObject;
+                sliceObj = transform.GetChild(0).Find("MushRoom_Mesh").transform.Find("MushRoom_Sliced").gameObject;
+                boiledIngredientSort = BoiledAbleIngredientSort.Mushroom;
+                ingredientSort = IngredientSort.Mushroom;
+                sliceObj.SetActive(false);
+                break;
+            case "Beef":
+                ingredientSort = IngredientSort.Beef;
+                wholeObj = null;
+                sliceObj = null;
+                break;
+        }
     }
   
     private void SetAnimator()
