@@ -24,8 +24,9 @@ public class IngredientScript : GrabAbleObjScript
     {
         base.Initialize();
         SetAnimator();
-
         switch(gameObject.name)
+        string originName = gameObject.name.Replace("(Clone)", "");
+        switch (originName)
         {
             case "Onion":
                 wholeObj = transform.GetChild(0).Find("Onion_Mesh").transform.Find("Onion_Whole").gameObject;
@@ -57,6 +58,11 @@ public class IngredientScript : GrabAbleObjScript
         RuntimeAnimatorController controller = Resources.Load<RuntimeAnimatorController>(controllerPath + "/" + path);
         animator.runtimeAnimatorController = controller;
     }
+
+    public BoiledAbleIngredientSort GetBoiledIngredientSort()
+    {
+        return boiledIngredientSort;
+    }
     public void Gather()
     {
         if (!isChopped)
@@ -84,6 +90,7 @@ public class IngredientScript : GrabAbleObjScript
             if (sliceGuage >= 100)
             {
                 isChopped = true;
+                Debug.Log("��� �Ϸ�");
             }
         }
     }

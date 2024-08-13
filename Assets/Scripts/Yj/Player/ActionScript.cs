@@ -100,7 +100,7 @@ public class ActionScript : MonoBehaviour
         Bounds fColBound = frontCol.bounds;
         Collider[] hitColliders = Physics.OverlapBox(fColBound.center, fColBound.extents, Quaternion.identity);
        
-        string[] tags = { "Table", "IngredientBox", "Pot", "Ingredient", "Plate" };
+        string[] tags = { "Table", "IngredientBox", "Pot", "Ingredient", "Plate" ,"CookingStation"};
 
         if (isGrab)
         {
@@ -121,12 +121,25 @@ public class ActionScript : MonoBehaviour
                                     switch(tableScr.GetRaisedObject().tag)
                                     {
                                         case "Pot":
+                                            Debug.Log("Pot에 접근중");
                                             if (currGrabObj.tag == "Ingredient")
                                             {
-                                                if(currGrabObj.GetComponent<IngredientScript>().GetIsChopped())
+                                                var ingredientScr = currGrabObj.GetComponent<IngredientScript>();
+                                                var potScr = tableScr.GetRaisedObject().GetComponent<PotScript>();
+
+                                                if (ingredientScr.GetIsChopped())
                                                 {
-                                                    /*tableScr.GetRaisedObject().GetComponent<PotScript>().PutIngredient();*/
-                                                    Debug.Log("재료를 솥에 넣음");
+                                                    if (potScr.PutIngredient(ingredientScr.GetBoiledIngredientSort()))
+                                                    {
+                                                        Release();
+                                                        ingredientScr.gameObject.SetActive(false);
+                                                        Debug.Log("재료를 솥에 넣음");
+                                                        return true;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    Debug.Log("썰리지 않은 재료를 투입하려고자 함");
                                                 }
                                             }
                                             return false;
@@ -195,6 +208,11 @@ public class ActionScript : MonoBehaviour
                                                 return false;
                                             }
                                         case "Ingredient":
+                                            currGrabObj = tableScr.GetRaisedObject();
+                                            Grab(currGrabObj);
+                                            tableScr.Release();
+                                            return true;
+                                        case "Pot":
                                             currGrabObj = tableScr.GetRaisedObject();
                                             Grab(currGrabObj);
                                             tableScr.Release();

@@ -28,6 +28,10 @@ public class PotScript : GrabAbleObjScript
 
     public bool PutIngredient(BoiledAbleIngredientSort addIngredient)
     {
+        if(addIngredient == BoiledAbleIngredientSort.None)
+        {
+            return false;
+        }
         if (firstAddedIngredient == BoiledAbleIngredientSort.None)
         {
             firstAddedIngredient = addIngredient;
