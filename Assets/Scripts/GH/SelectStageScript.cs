@@ -48,7 +48,8 @@ public class SelectStageScript : MonoBehaviour
         if (!isSelectStage && Input.GetKeyDown(KeyCode.Space) && stageObject != null)
         {
             StageSelect(stageObject.GetComponent<Stage>().GetStageImg(), stageObject.GetComponent<Stage>().GetStageInfo());
-            this.GetComponent<GHMoveScript>().IsMove(false);
+            //this.GetComponent<GHMoveScript>().IsMove(false);
+            this.transform.parent.GetComponent<GHMoveScript>().IsMove(false);
             isSelectStage = true;
 
         }
@@ -59,7 +60,8 @@ public class SelectStageScript : MonoBehaviour
         if (isSelectStage && Input.GetKeyDown(KeyCode.Escape) && stageObject != null)
         {
             stageSelectUIScript.ExitStageSelect();
-            this.GetComponent<GHMoveScript>().IsMove(true);
+            //this.GetComponent<GHMoveScript>().IsMove(true);
+            this.transform.parent.GetComponent<GHMoveScript>().IsMove(false);
             isSelectStage = false;
         }
     }
