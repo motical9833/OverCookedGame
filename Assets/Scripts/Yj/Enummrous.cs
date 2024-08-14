@@ -24,9 +24,26 @@ namespace Enummrous
 
     public enum IngredientSort
     {
+        None,
         Onion,
         Beef,
         Mushroom,
+        End
+    }
+
+    public enum BoiledAbleIngredientSort
+    {
+        None,
+        Onion,
+        Mushroom,
+        End
+    }
+    
+    public enum FriedAbleIngredientSort
+    {
+        None,
+        Beef,
+        End
     }
 
     public static class CollisionCheck

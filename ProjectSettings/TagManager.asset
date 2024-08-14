@@ -15,6 +15,7 @@ TagManager:
   - Table
   - CuttingBoard
   - MapObject
+  - CookingStation
   layers:
   - Default
   - TransparentFX

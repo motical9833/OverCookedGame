@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class RaisedObjectScript : NetworkBehaviour
+public class RaisedObjectScript : MonoBehaviour
 {
     public GameObject raisedObj;
     public void RaisObject(GameObject _raisedObj)
