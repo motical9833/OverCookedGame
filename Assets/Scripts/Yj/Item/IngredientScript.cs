@@ -25,6 +25,9 @@ public class IngredientScript : GrabAbleObjScript
         base.Initialize();
         SetAnimator();
         switch(gameObject.name)
+        {
+
+        }
         string originName = gameObject.name.Replace("(Clone)", "");
         switch (originName)
         {
@@ -90,7 +93,7 @@ public class IngredientScript : GrabAbleObjScript
             if (sliceGuage >= 100)
             {
                 isChopped = true;
-                Debug.Log("��� �Ϸ�");
+                Debug.Log("���?�Ϸ�");
             }
         }
     }
