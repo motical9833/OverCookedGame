@@ -29,4 +29,23 @@ public class StageInfo
 
         this.goals = goals ?? new int[] { 20, 40, 60 };
     }
+
+    public int GetStarCount()
+    {
+        int count = 0;
+
+        foreach (int goal in goals)
+        {
+            if(score > goal)
+            {
+                count++;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return count;
+    }
 }
