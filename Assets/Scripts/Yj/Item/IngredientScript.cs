@@ -24,10 +24,7 @@ public class IngredientScript : GrabAbleObjScript
     {
         base.Initialize();
         SetAnimator();
-        switch(gameObject.name)
-        {
 
-        }
         string originName = gameObject.name.Replace("(Clone)", "");
         switch (originName)
         {
