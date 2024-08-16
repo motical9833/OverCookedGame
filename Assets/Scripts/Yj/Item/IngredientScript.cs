@@ -94,6 +94,11 @@ public class IngredientScript : GrabAbleObjScript
             }
         }
     }
+    public float GetSliceGuage()
+    {
+        return sliceGuage;
+    }
+
     public bool GetIsFisrtSlice()
     {
         return isFirstSlice;

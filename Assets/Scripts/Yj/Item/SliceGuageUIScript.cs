@@ -8,7 +8,7 @@ public class SliceGuageUIScript : MonoBehaviour
     private Transform targetCamTr;
 
     private Canvas canvas;
-    private Slider sliderUi;
+    public Slider sliderUi;
 
 
     private void Start()
@@ -22,21 +22,21 @@ public class SliceGuageUIScript : MonoBehaviour
     void RookCamera()
     {
         //x축만 바뀌어야함
-        Vector3 directionToCamera = targetCamTr.position - transform.position;
+      /*  Vector3 directionToCamera = targetCamTr.position - transform.position;
         directionToCamera.y = 0;
         Quaternion targetRotation = Quaternion.LookRotation(directionToCamera);
-        transform.rotation = targetRotation;
+        transform.rotation = targetRotation;*/
     }
 
-    void ShowSliceUI(float guage)
+    public void ShowSliceUI(float guage)
     {
-        sliderUi.enabled = true;
+        sliderUi.gameObject.SetActive(true);
         sliderUi.value = guage;
     }
 
-    void DisableSliceUI()
+    public void DisableSliceUI()
     {
-        sliderUi.enabled = false;
+        sliderUi.gameObject.SetActive(false);
     }
 
     // 카메라에 맞게 각도 맞춰주기..
