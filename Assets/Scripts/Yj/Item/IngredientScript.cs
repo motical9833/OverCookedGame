@@ -24,10 +24,7 @@ public class IngredientScript : GrabAbleObjScript
     {
         base.Initialize();
         SetAnimator();
-        switch(gameObject.name)
-        {
 
-        }
         string originName = gameObject.name.Replace("(Clone)", "");
         switch (originName)
         {
@@ -97,7 +94,15 @@ public class IngredientScript : GrabAbleObjScript
             }
         }
     }
+    public float GetSliceGuage()
+    {
+        return sliceGuage;
+    }
 
+    public bool GetIsFisrtSlice()
+    {
+        return isFirstSlice;
+    }
     public bool GetIsChopped()
     {
         return isChopped;

@@ -99,13 +99,13 @@ public class ActionScript : MonoBehaviour
 
         Bounds fColBound = frontCol.bounds;
         Collider[] hitColliders = Physics.OverlapBox(fColBound.center, fColBound.extents, Quaternion.identity);
-       
-        string[] tags = { "Table", "IngredientBox", "Pot", "Ingredient", "Plate" ,"CookingStation"};
+
+        string[] tags = { "Table", "IngredientBox", "Pot", "Ingredient", "Plate", "CookingStation" };
 
         if (isGrab)
         {
             #region"TryingRelease"
-          
+
             foreach (string tag in tags)
             {
                 foreach (Collider collider in hitColliders)
@@ -118,7 +118,7 @@ public class ActionScript : MonoBehaviour
                                 TableScript tableScr = collider.GetComponent<TableScript>();
                                 if (tableScr.IsRaised())
                                 {
-                                    switch(tableScr.GetRaisedObject().tag)
+                                    switch (tableScr.GetTopRaisedObj().tag)
                                     {
                                         case "Pot":
                                             Debug.Log("Pot에 접근중");
@@ -157,19 +157,33 @@ public class ActionScript : MonoBehaviour
                                             }
                                             Debug.Log("재료를 도마에 넣음");
                                             return false;
+
                                     }
                                     //만약 테이블에 올려진것이 Pot이나 Plate라면 true 리턴하고 계속 작성
                                     return false;
                                 }
                                 else
                                 {
-                                    collider.GetComponent<TableScript>().RaisObject(currGrabObj);
+                                    tableScr.RaisObject(currGrabObj);
                                     Release();
                                     return true;
                                 }
-/*                            case "Plate":
-                                if(collider.GetComponent<PlateScript>().g)*/
-
+                            case "CookingStation":
+                                if (currGrabObj.tag == "Pot")
+                                {
+                                    tableScr = collider.GetComponent<TableScript>();
+                                    tableScr.RaisObject(currGrabObj);
+                                    Release();
+                                    return true;
+                                }
+                                if (currGrabObj.tag == "Flyingpan")
+                                {
+                                    tableScr = collider.GetComponent<TableScript>();
+                                    tableScr.RaisObject(currGrabObj);
+                                    Release();
+                                    return true;
+                                }
+                                return false;
                         }
                     }
                 }
@@ -184,67 +198,74 @@ public class ActionScript : MonoBehaviour
             {
                 foreach (Collider collider in hitColliders)
                 {
-                    if (collider.CompareTag(tag))
+                    switch (collider.transform.gameObject.tag)
                     {
-                        switch (tag)
-                        {
-                            case "Table":
-                                TableScript tableScr = collider.GetComponent<TableScript>();
+                        case "Table":
+                            TableScript tableScr = collider.GetComponent<TableScript>();
 
-                                if (tableScr.IsRaised())
+                            if (tableScr.IsRaised())
+                            {
+                                switch (tableScr.GetTopRaisedObj().tag)
                                 {
-                                    switch (tableScr.GetRaisedObject().tag)
-                                    {
-                                        case "CuttingBoard":
-                                            if (tableScr.GetRaisedObject().GetComponent<RaisedObjectScript>().GetRaisedObject().tag == "Ingredient")
-                                            {
-                                                currGrabObj = tableScr.GetRaisedObject().GetComponent<RaisedObjectScript>().GetRaisedObject();
-                                                tableScr.GetRaisedObject().GetComponent<RaisedObjectScript>().Release();
-                                                Grab(currGrabObj);
-                                                return true;
-                                            }
-                                            else
-                                            {
-                                                return false;
-                                            }
-                                        case "Ingredient":
-                                            currGrabObj = tableScr.GetRaisedObject();
-                                            Grab(currGrabObj);
-                                            tableScr.Release();
-                                            return true;
-                                        case "Pot":
-                                            currGrabObj = tableScr.GetRaisedObject();
-                                            Grab(currGrabObj);
-                                            tableScr.Release();
-                                            return true;
-                                    }
+                                    case "Pot":
+                                        currGrabObj = tableScr.GetTopRaisedObj();
+                                        Grab(currGrabObj);
+                                        tableScr.GetTopRaisedScr().Release();
+                                        return true;
+                                    case "Ingredient":
+                                        currGrabObj = tableScr.GetTopRaisedObj();
+                                        Grab(currGrabObj);
+                                        tableScr.GetTopRaisedScr().Release();
+                                        return true;
+                                }
+                            }
+                            return false;
+                        case "CuttingBoard":
+                            CuttingBoardScript cuttingBoardScr = collider.GetComponent<CuttingBoardScript>();
+
+                            if (cuttingBoardScr.raisedObj == null)
+                            {
+                                return false;
+                            }
+                            else
+                            {
+                                if (cuttingBoardScr.raisedObj.GetComponent<IngredientScript>().GetIsFisrtSlice())
+                                {
                                     return false;
                                 }
                                 else
                                 {
-                                    return false;
+                                    currGrabObj = cuttingBoardScr.GetRaisedObject();
+                                    Grab(currGrabObj);
+                                    cuttingBoardScr.Release();
+                                    return true;
                                 }
-                            case "Pot":
-                                currGrabObj = collider.GameObject();
+                            }
+                        case "CookingStation":
+                            tableScr = collider.GetComponent<TableScript>();
+                            if (tableScr.GetRaisedObject() == null)
+                            {
+                                return false;
+                            }
+                            else
+                            {
+                                currGrabObj = tableScr.GetRaisedObject();
                                 Grab(currGrabObj);
+                                tableScr.Release();
                                 return true;
-                            case "IngredientBox":
-                                IngredientObjectPoolScript ingObjPoolSrc;
-                                ingObjPoolSrc = collider.GetComponent<IngredientObjectPoolScript>();
-                                currGrabObj = ingObjPoolSrc.GetIngredientPoolObject();
-                                Grab(currGrabObj);
-                                return true;
-                            case "Ingredient":
-                                currGrabObj = collider.GameObject();
-                                Grab(currGrabObj);
-                                return true;
-                        }
+                            }
+                        case "IngredientBox":
+                            IngredientObjectPoolScript ingObjPoolSrc;
+                            ingObjPoolSrc = collider.GetComponent<IngredientObjectPoolScript>();
+                            currGrabObj = ingObjPoolSrc.GetIngredientPoolObject();
+                            Grab(currGrabObj);
+                            return true;
                     }
                 }
             }
-            return false;
+            #endregion
         }
-        #endregion
+        return false;
     }
 
     public bool GetChopIsDone()

@@ -9,22 +9,34 @@ public class CuttingBoardScript : RaisedObjectScript
 
     int cutters = 0;
 
+    SliceGuageUIScript sliceGuageScr;
+
+    private void Start()
+    {
+        sliceGuageScr = GetComponent<SliceGuageUIScript>();
+    }
+
     private void Update()
     {
         if (cutters <= 0)
         {
             SetCutting(false);
+            sliceGuageScr.DisableSliceUI();
             return;
         }
         if (GetRaisedObject() != null && GetRaisedObject().GetComponent<IngredientScript>().GetIsChopped())
         {
             SetCutting(false);
+            sliceGuageScr.DisableSliceUI();
             return;
         }
         if (cutters > 0)
         {
             SetCutting(true);
-            GetRaisedObject().GetComponent<IngredientScript>().Chopping();
+            IngredientScript ingredientScr = GetRaisedObject().GetComponent<IngredientScript>();
+            ingredientScr.Chopping();
+            float guage = ingredientScr.GetSliceGuage();
+            sliceGuageScr.ShowSliceUI(guage);
         }
     }
 
