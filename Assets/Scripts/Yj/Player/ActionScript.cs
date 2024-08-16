@@ -214,6 +214,11 @@ public class ActionScript : MonoBehaviour
                                         return true;
                                     case "Ingredient":
                                         currGrabObj = tableScr.GetTopRaisedObj();
+                                        IngredientScript ingredientScr = currGrabObj.GetComponent<IngredientScript>();
+                                        if (ingredientScr.GetIsChopped())
+                                        {
+                                            ingredientScr.Gather();
+                                        }
                                         Grab(currGrabObj);
                                         tableScr.GetTopRaisedScr().Release();
                                         return true;

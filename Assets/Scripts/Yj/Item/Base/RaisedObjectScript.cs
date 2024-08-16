@@ -53,21 +53,15 @@ public class RaisedObjectScript : MonoBehaviour
     }
     public RaisedObjectScript GetTopRaisedScr()
     {
-        GameObject current = raisedObj;
         RaisedObjectScript raisedObjScr = this;
-        while (current != null)
+        while (raisedObjScr != null)
         {
-            if (!current.GetComponent<RaisedObjectScript>())
+            if (!raisedObjScr.GetRaisedObject().GetComponent<TableScript>())
             {
                 return raisedObjScr;
             }
-            if (current.GetComponent<RaisedObjectScript>().GetRaisedObject() == null)
-            {
-                return raisedObjScr;  //가장 위에 있는 오브젝트는 올려둔게 없으므로 null임을 사용
-            }
-            current = current.GetComponent<RaisedObjectScript>().GetRaisedObject();
-            raisedObjScr = current.GetComponent<RaisedObjectScript>();
+            raisedObjScr = raisedObjScr.GetComponent<RaisedObjectScript>();
         }
-        return (raisedObjScr); // 위에 있는 것이 없음
+        return raisedObjScr; // 위에 있는 것이 없음
     }
 }
