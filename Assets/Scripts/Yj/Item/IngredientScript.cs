@@ -94,7 +94,10 @@ public class IngredientScript : GrabAbleObjScript
             }
         }
     }
-
+    public bool GetIsFisrtSlice()
+    {
+        return isFirstSlice;
+    }
     public bool GetIsChopped()
     {
         return isChopped;
