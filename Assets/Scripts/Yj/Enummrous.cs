@@ -38,9 +38,9 @@ namespace Enummrous
 
         static IngredientInfo()
         {
-            Ingredients.Add(new IngredientElements("Onion", true, false, "2D/Food/Food_Icon/Onion_Icon","3D/Food_Objects/Onion"));
-            Ingredients.Add(new IngredientElements("Meat_Raw", false, true ,"2D/Food/Food_Icon/Meat_Icon", "3D/Food_Objects/Meat_Raw"));
-            Ingredients.Add(new IngredientElements("Mushroom", true, false, "2D/Food/Food_Icon/Mushroom_Icon", "3D/Food_Objects/Mushroom"));
+            Ingredients.Add(new IngredientElements("Onion", true, false, "2D/Food/Food_Icon/Onion_Icon","3D/Food_Objects/Onion/Onion"));
+            Ingredients.Add(new IngredientElements("Meat_Raw", false, true ,"2D/Food/Food_Icon/Meat_Icon", "3D/Food_Objects/Meat_Raw/Meat_Raw"));
+            Ingredients.Add(new IngredientElements("Mushroom", true, false, "2D/Food/Food_Icon/Mushroom_Icon", "3D/Food_Objects/Mushroom/Mushroom"));
         }
 
         public struct IngredientElements
