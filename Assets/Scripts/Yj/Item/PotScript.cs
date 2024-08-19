@@ -21,6 +21,7 @@ public class PotScript : GrabAbleObjScript
     Image alertImage;
     Image dangerImage;
 
+
     void Start()
     {
         base.Initialize();
