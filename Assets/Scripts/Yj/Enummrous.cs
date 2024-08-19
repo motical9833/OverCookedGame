@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Enummrous
@@ -30,6 +31,37 @@ namespace Enummrous
         Mushroom,
         End
     }
+
+    public static class IngredientInfo
+    {
+        public static List<IngredientElements> Ingredients = new List<IngredientElements>();
+
+        static IngredientInfo()
+        {
+            Ingredients.Add(new IngredientElements("Onion", true, false, "2D/Food/Food_Icon/Onion_Icon","3D/Food_Objects/Onion"));
+            Ingredients.Add(new IngredientElements("Meat_Raw", false, true ,"2D/Food/Food_Icon/Meat_Icon", "3D/Food_Objects/Meat_Raw"));
+            Ingredients.Add(new IngredientElements("Mushroom", true, false, "2D/Food/Food_Icon/Mushroom_Icon", "3D/Food_Objects/Mushroom"));
+        }
+
+        public struct IngredientElements
+        {
+            public string name;
+            public bool isBoiledAble;
+            public bool isFriedAble;
+            public string reousrce2DPath;
+            public string reousrce3DPath;
+            public IngredientElements(string _name, bool _isBoiledAble, bool _isFriedAble, string _reousrce2DPath ,string _reousrce3DPath)
+            {
+                name = _name;
+                isBoiledAble = _isBoiledAble;
+                isFriedAble = _isFriedAble;
+                reousrce2DPath = _reousrce2DPath;
+                reousrce3DPath = _reousrce3DPath;
+            }
+        }
+
+    }
+
 
     public enum BoiledAbleIngredientSort
     {
