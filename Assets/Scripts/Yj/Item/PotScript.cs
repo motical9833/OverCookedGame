@@ -21,10 +21,12 @@ public class PotScript : GrabAbleObjScript
     Image alertImage;
     Image dangerImage;
 
+    private PotUIControllerScript potUICtrlScr;
 
     void Start()
     {
         base.Initialize();
+        potUICtrlScr = GetComponent<PotUIControllerScript>();
     }
 
     public bool PutIngredient(BoiledAbleIngredientSort addIngredient)
