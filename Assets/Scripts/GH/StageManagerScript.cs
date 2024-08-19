@@ -32,7 +32,7 @@ public class StageManagerScript : MonoBehaviour
     public void GameClear()
     {
         string name = SceneManager.GetActiveScene().name;
-        int score = 10; /*stagePointScript.GetPoint();*/
+        int score = 80; /*stagePointScript.GetPoint();*/
 
         StageInfo info = stageSaveLoadScript.GetPrevStageInfo();
 
@@ -64,7 +64,13 @@ public class StageManagerScript : MonoBehaviour
 
         string name = info.stageName;
 
-        GameObject.Find(name).GetComponent<Stage>().SaveStageData(info);
+        GameObject stage = GameObject.Find(name);
+
+        stage.GetComponent<Stage>().SaveStageData(info);
+
+        int count = info.GetStarCount();
+
+        stage.GetComponent<StarLevelUIControllerScript>().SetStarImageBasedOnCount(count);
 
         GameObject.FindWithTag("StageObject").GetComponent<StageObjectsControllerScript>().OpenStage();
 

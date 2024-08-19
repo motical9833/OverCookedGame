@@ -8,6 +8,7 @@ public class StarLevelUIControllerScript : MonoBehaviour
     GameObject smallStarsParent;
     GameObject largeStarsParent;
 
+
     private void OnEnable()
     {
         smallStarsParent = this.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
@@ -25,11 +26,11 @@ public class StarLevelUIControllerScript : MonoBehaviour
 
         for (int i = 0; i < maxCount; i++)
         {
-            smallStarsParent.GetComponent<Transform>().GetChild(i).gameObject.SetActive(false);
-            largeStarsParent.GetComponent<Transform>().GetChild(i).gameObject.SetActive(false);
+            smallStarsParent.GetComponent<Transform>().GetChild(0).GetChild(i).gameObject.SetActive(false);
+            largeStarsParent.GetComponent<Transform>().GetChild(0).GetChild(i).gameObject.SetActive(false);
         }
 
-        smallStarsParent.GetComponent<Transform>().GetChild(count).gameObject.SetActive(true);
-        largeStarsParent.GetComponent<Transform>().GetChild(count).gameObject.SetActive(true);
+        smallStarsParent.GetComponent<Transform>().GetChild(0).GetChild(count).gameObject.SetActive(true);
+        largeStarsParent.GetComponent<Transform>().GetChild(0).GetChild(count).gameObject.SetActive(true);
     }
 }
