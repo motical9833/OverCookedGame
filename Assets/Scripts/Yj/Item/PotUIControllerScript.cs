@@ -52,8 +52,9 @@ public class PotUIControllerScript : MonoBehaviour
                 addedImages[1].gameObject.SetActive(false);
                 break;
         }
-
     }
+
+
 
     public void ResetAll()
     {
