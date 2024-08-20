@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Rendering.VirtualTexturing;
 
 public class Stage : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Stage : MonoBehaviour
     public Sprite stageImg;
 
     private int[] stageGoals = { 20, 40, 60 };
+
+    public int procedure;
 
     private void Awake()
     {
@@ -40,11 +43,12 @@ public class Stage : MonoBehaviour
 
     public void LoadStageData()     
     {
+        procedure = this.transform.GetSiblingIndex();
+
         if (File.Exists(filePath))
         {   
             string json = File.ReadAllText(filePath);
             stageInfo = JsonUtility.FromJson<StageInfo>(json);
-            //Debug.Log("Stage data loaded from " + filePath);
         }
         else
         {
@@ -52,15 +56,14 @@ public class Stage : MonoBehaviour
 
             if(gameObject.name == "Level_1-1")
             {
-                stageInfo = new StageInfo(gameObject.name, 0, false, true, stageGoals);
+                stageInfo = new StageInfo(gameObject.name, 0, false, procedure, true, stageGoals);
             }
             else
             {
-                stageInfo = new StageInfo(gameObject.name, 0, false, false, stageGoals); // 기본 값 설정
+                stageInfo = new StageInfo(gameObject.name, 0, false, procedure, false, stageGoals); // 기본 값 설정
             }
             SaveStageData(); // 기본 값을 저장
         }
-        //tartStageSetting();
     }
 
     // 스테이지 정보 출력

@@ -10,6 +10,7 @@ public class StageInfo
     public bool isCleared;
     public bool isAble;
     public int[] goals = new int[3];
+    public int procedure;
 
     public StageInfo()
     {
@@ -18,14 +19,16 @@ public class StageInfo
         this.isCleared = false;
         this.isAble = false;
         this.goals = new int[] { 20, 40, 60 };
+        this.procedure = 0;
     }
 
-    public StageInfo(string stageName, int score, bool isCleared, bool isAble = false, int[] goals = null)
+    public StageInfo(string stageName, int score, bool isCleared,int procedure, bool isAble = false, int[] goals = null)
     {
         this.stageName = stageName;
         this.score = score;
         this.isCleared = isCleared;
         this.isAble = isAble;
+        this.procedure = procedure;
 
         this.goals = goals ?? new int[] { 20, 40, 60 };
     }
@@ -47,5 +50,10 @@ public class StageInfo
         }
 
         return count;
+    }
+
+    public int GetProcedure()
+    {
+        return procedure;
     }
 }

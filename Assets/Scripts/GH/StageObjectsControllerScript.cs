@@ -34,8 +34,6 @@ public class StageObjectsControllerScript : MonoBehaviour
 
             bool isbool = previouseStage.GetStageInfo().isCleared;
 
-            int a = 0;
-
             if (previouseStage != null && currentStage != null && previouseStage.GetStageInfo().isCleared)
             {
                 currentStage.GetStageInfo().isAble = true;

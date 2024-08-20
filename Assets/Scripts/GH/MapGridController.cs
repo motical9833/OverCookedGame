@@ -7,6 +7,7 @@ public class MapGridController : MonoBehaviour
     bool isInitialize = false;
 
     [System.Serializable]
+
     public class MapObjects
     {
         public List<GameObject> objects = new List<GameObject>();
@@ -73,9 +74,9 @@ public class MapGridController : MonoBehaviour
         }
     }
 
-    public void TileFlipping()
+    public void TileFlipping(int level)
     {
-        StartCoroutine(SelectTile(objectGrop[0].objects));
+        StartCoroutine(SelectTile(objectGrop[level].objects));
     }
 
     IEnumerator SelectTile(List<GameObject> objects)

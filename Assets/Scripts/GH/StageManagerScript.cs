@@ -74,6 +74,10 @@ public class StageManagerScript : MonoBehaviour
 
         GameObject.FindWithTag("StageObject").GetComponent<StageObjectsControllerScript>().OpenStage();
 
+        int procedure = stage.GetComponent<Stage>().GetStageInfo().procedure + 1;
+
+        GameObject.FindWithTag("MapObject").GetComponent<MapGridController>().TileFlipping(procedure);
+
         SceneManager.sceneLoaded -= SceneLoad;
     }
 

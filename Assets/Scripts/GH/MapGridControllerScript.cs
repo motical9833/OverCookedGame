@@ -25,6 +25,5 @@ public class MapGridControllerScript : MonoBehaviour
         }
 
         mapObject.GetComponent<MapGridController>().InitializeObjectGroups();
-        //mapObject.GetComponent<MapGridController>().TileFlipping();
     }
 }
