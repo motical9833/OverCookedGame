@@ -38,6 +38,7 @@ namespace Enummrous
 
         static IngredientInfo()
         {
+            Ingredients.Add(new IngredientElements("None", false, false, "", ""));
             Ingredients.Add(new IngredientElements("Onion", true, false, "2D/Food/Food_Icon/Onion_Icon","3D/Food_Objects/Onion/Onion"));
             Ingredients.Add(new IngredientElements("Meat_Raw", false, true ,"2D/Food/Food_Icon/Meat_Icon", "3D/Food_Objects/Meat_Raw/Meat_Raw"));
             Ingredients.Add(new IngredientElements("Mushroom", true, false, "2D/Food/Food_Icon/Mushroom_Icon", "3D/Food_Objects/Mushroom/Mushroom"));
@@ -46,7 +47,7 @@ namespace Enummrous
         public struct IngredientElements
         {
             public string name;
-            public bool isBoiledAble;
+            private bool isBoiledAble;
             public bool isFriedAble;
             public string reousrce2DPath;
             public string reousrce3DPath;
@@ -58,6 +59,28 @@ namespace Enummrous
                 reousrce2DPath = _reousrce2DPath;
                 reousrce3DPath = _reousrce3DPath;
             }
+
+            public void SetBoiledAble(bool able)
+            {
+                if (able)
+                    isBoiledAble = true;
+                else
+                    isBoiledAble = false;
+            }
+
+            public void SetFriedAble(bool able)
+            {
+                if (able)
+                    isFriedAble = true;
+                else
+                    isFriedAble = false;
+            }
+
+            public bool GetIsBoiled()
+            {
+                return isBoiledAble;
+            }
+
         }
 
     }

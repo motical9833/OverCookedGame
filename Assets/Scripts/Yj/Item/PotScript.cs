@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PotScript : GrabAbleObjScript
 {
-    BoiledAbleIngredientSort firstAddedIngredient = BoiledAbleIngredientSort.None;
+
     private int addCount = 0;
 
     public float currTimeLimit = 0;
@@ -23,54 +23,62 @@ public class PotScript : GrabAbleObjScript
 
     private PotUIControllerScript potUICtrlScr;
 
+    private string firstAddedName = "";
+
     void Start()
     {
         base.Initialize();
         potUICtrlScr = GetComponent<PotUIControllerScript>();
     }
 
-    public bool PutIngredient(BoiledAbleIngredientSort addIngredient)
+    public bool PutIngredient(string ingredientName)
     {
-        if(addIngredient == BoiledAbleIngredientSort.None)
+        foreach (IngredientInfo.IngredientElements ingredient in IngredientInfo.Ingredients)
         {
-            return false;
-        }
-        if (firstAddedIngredient == BoiledAbleIngredientSort.None)
-        {
-            firstAddedIngredient = addIngredient;
-            addCount++;
-            return true;
-        }
-        else
-        {
-            if(addIngredient != firstAddedIngredient)
+            if (ingredientName == ingredient.name)
             {
-                return false;
-            }
-            else
-            {
-                addCount++;
-                return true;
+                if (!ingredient.GetIsBoiled())
+                {
+                    return false;
+                }
+                if (firstAddedName == "")
+                {
+                    firstAddedName = ingredientName;
+                    addCount++;
+                    return true;
+                }
+                if (firstAddedName != ingredientName)
+                {
+                    return false;
+                }
+                else
+                {
+                    addCount++;
+                    return true;
+                }
             }
         }
+        return false;
     }
 
     public void Boiled()
     {
-        if(firstAddedIngredient != BoiledAbleIngredientSort.None)
+        foreach (IngredientInfo.IngredientElements ingredient in IngredientInfo.Ingredients)
         {
-            boilingTime += Time.deltaTime;
+            if(firstAddedName != "")
+            {
+                boilingTime += Time.deltaTime;
+                if (boilingTime >= currTimeLimit)
+                {
+                    isboiledDone = true;
+                }
+                else
+                {
+                    isboiledDone = false;
+                }
+            }
 
-            if (boilingTime >= currTimeLimit)
-            {
-                isboiledDone = true;
-            }
-            else
-            {
-                isboiledDone = false;
-            }
         }
     }
-
 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Enummrous;
+using static Enummrous.IngredientInfo;
 
 public class IngredientScript : GrabAbleObjScript
 {
@@ -17,33 +18,27 @@ public class IngredientScript : GrabAbleObjScript
     private GameObject sliceObj;
     bool isFirstSlice = false;
 
-    IngredientSort ingredientSort = IngredientSort.None;
-    BoiledAbleIngredientSort boiledIngredientSort = BoiledAbleIngredientSort.None;
-
+    private string originName;
+    
     public override void Initialize()
     {
         base.Initialize();
         SetAnimator();
 
-        string originName = gameObject.name.Replace("(Clone)", "");
+        originName = gameObject.name.Replace("(Clone)", "");
         switch (originName)
         {
             case "Onion":
                 wholeObj = transform.GetChild(0).Find("Onion_Mesh").transform.Find("Onion_Whole").gameObject;
                 sliceObj = transform.GetChild(0).Find("Onion_Mesh").transform.Find("Onion_Sliced").gameObject;
-                boiledIngredientSort = BoiledAbleIngredientSort.Onion;
-                ingredientSort = IngredientSort.Onion;
                 sliceObj.SetActive(false);
                 break;
             case "Mushroom":
                 wholeObj = transform.GetChild(0).Find("MushRoom_Mesh").transform.Find("MushRoom_Whole").gameObject;
                 sliceObj = transform.GetChild(0).Find("MushRoom_Mesh").transform.Find("MushRoom_Sliced").gameObject;
-                boiledIngredientSort = BoiledAbleIngredientSort.Mushroom;
-                ingredientSort = IngredientSort.Mushroom;
                 sliceObj.SetActive(false);
                 break;
             case "Beef":
-                ingredientSort = IngredientSort.Beef;
                 wholeObj = null;
                 sliceObj = null;
                 break;
@@ -58,10 +53,18 @@ public class IngredientScript : GrabAbleObjScript
         RuntimeAnimatorController controller = Resources.Load<RuntimeAnimatorController>(controllerPath + "/" + path);
         animator.runtimeAnimatorController = controller;
     }
+    public string GetOriginName() { return originName; }
 
-    public BoiledAbleIngredientSort GetBoiledIngredientSort()
+    public bool GetIsBoiled()
     {
-        return boiledIngredientSort;
+        foreach (IngredientElements element in Ingredients)
+        {
+            if (originName == element.name)
+            {
+               return element.GetIsBoiled();
+            }
+        }
+        return false;
     }
     public void Gather()
     {
@@ -90,7 +93,6 @@ public class IngredientScript : GrabAbleObjScript
             if (sliceGuage >= 100)
             {
                 isChopped = true;
-                Debug.Log("ï¿½ï¿½ï¿?ï¿½Ï·ï¿½");
             }
         }
     }

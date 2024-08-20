@@ -129,7 +129,7 @@ public class ActionScript : MonoBehaviour
 
                                                 if (ingredientScr.GetIsChopped())
                                                 {
-                                                    if (potScr.PutIngredient(ingredientScr.GetBoiledIngredientSort()))
+                                                    if (potScr.PutIngredient(ingredientScr.GetOriginName()))
                                                     {
                                                         Release();
                                                         ingredientScr.gameObject.SetActive(false);
