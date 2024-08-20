@@ -13,7 +13,15 @@ public class PotUIControllerScript : MonoBehaviour
     private Image addedIcon;
     private float blinkTimer;
 
-    private Image[] addedImages = new Image[5];
+    public Image[] addedImages = new Image[5];
+
+    private void Start()
+    {
+        foreach (var image in addedImages)
+        {
+            image.gameObject.SetActive(false);
+        }
+    }
 
     public void ShowAddedImage(int addedAmount ,string addedName)
     {
@@ -53,8 +61,6 @@ public class PotUIControllerScript : MonoBehaviour
                 break;
         }
     }
-
-
 
     public void ResetAll()
     {

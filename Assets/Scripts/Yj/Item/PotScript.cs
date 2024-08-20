@@ -33,6 +33,7 @@ public class PotScript : GrabAbleObjScript
 
     public bool PutIngredient(string ingredientName)
     {
+        Debug.Log("재료를 솥에 넣음");
         foreach (IngredientInfo.IngredientElements ingredient in IngredientInfo.Ingredients)
         {
             if (ingredientName == ingredient.name)
@@ -45,6 +46,8 @@ public class PotScript : GrabAbleObjScript
                 {
                     firstAddedName = ingredientName;
                     addCount++;
+                    potUICtrlScr.ShowAddedImage(1, firstAddedName);
+                    Debug.Log("첫 번째 재료로 " + ingredientName + "을 넣음");
                     return true;
                 }
                 if (firstAddedName != ingredientName)
