@@ -133,7 +133,6 @@ public class ActionScript : MonoBehaviour
                                                     {
                                                         Release();
                                                         ingredientScr.gameObject.SetActive(false);
-                                                        Debug.Log("재료를 솥에 넣음");
                                                         return true;
                                                     }
                                                 }
