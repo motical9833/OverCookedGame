@@ -48,7 +48,18 @@ public class StageManagerScript : MonoBehaviour
 
         SceneManager.LoadSceneAsync("StageSelectScene");
 
-        SceneManager.sceneLoaded += SceneLoad;
+        SceneManager.sceneLoaded += SaveClearDataAndLoadScene;
+        stageSaveLoadScript.StageToSceneLoad();
+    }
+
+    public void GameFailed()
+    {
+        stagePointScript.ResetPoint();
+        stageTimerScript.ResetTimer();
+
+        SceneManager.LoadSceneAsync("StageSelectScene");
+
+        SceneManager.sceneLoaded += SaveClearDataAndLoadScene;
         stageSaveLoadScript.StageToSceneLoad();
     }
 
@@ -58,7 +69,7 @@ public class StageManagerScript : MonoBehaviour
     }
 
 
-    public void SceneLoad(Scene scene, LoadSceneMode mode)
+    public void SaveClearDataAndLoadScene(Scene scene, LoadSceneMode mode)
     {
         StageInfo info = stageSaveLoadScript.GetPrevStageInfo();
 
@@ -78,7 +89,7 @@ public class StageManagerScript : MonoBehaviour
 
         GameObject.FindWithTag("MapObject").GetComponent<MapGridController>().TileFlipping(procedure);
 
-        SceneManager.sceneLoaded -= SceneLoad;
+        SceneManager.sceneLoaded -= SaveClearDataAndLoadScene;
     }
 
     IEnumerator GameStartCoroutine()
