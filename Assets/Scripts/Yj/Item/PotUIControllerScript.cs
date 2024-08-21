@@ -15,8 +15,13 @@ public class PotUIControllerScript : MonoBehaviour
 
     public Image[] addedImages = new Image[5];
 
+    public Slider boilingGuage;
+
     private void Start()
     {
+        boilingGuage.minValue = 0.0f;
+        boilingGuage.maxValue = 100.0f;
+
         foreach (var image in addedImages)
         {
             image.gameObject.SetActive(false);
@@ -62,13 +67,31 @@ public class PotUIControllerScript : MonoBehaviour
         }
     }
 
+    public void HideAddedImage()
+    {
+        foreach (Image addedImage in addedImages)
+        {
+            addedImage.gameObject.SetActive(false);
+        }
+    }
+
+    public void SetMax(float value) { boilingGuage.maxValue = value; }
+    public void ShowBoilingGuage(float _value)
+    {
+        boilingGuage.gameObject.SetActive(true);
+        boilingGuage.value = _value;
+    }
+
+    public void HideBoilingGuage()
+    {
+        boilingGuage.value = 0.0f;
+        boilingGuage.gameObject.SetActive(false);
+    }
+
     public void ResetAll()
     {
 
     }
 
-    public void ShowBoilingTimer()
-    {
-
-    }
+   
 }
