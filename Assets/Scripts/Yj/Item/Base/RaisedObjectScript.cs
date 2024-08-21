@@ -32,6 +32,7 @@ public class RaisedObjectScript : MonoBehaviour
     public void Release()
     {
         raisedObj = null;
+        Debug.Log("올린 물품 제거");
     }
 
     public GameObject GetTopRaisedObj()
@@ -56,11 +57,11 @@ public class RaisedObjectScript : MonoBehaviour
         RaisedObjectScript raisedObjScr = this;
         while (raisedObjScr != null)
         {
-            if (!raisedObjScr.GetRaisedObject().GetComponent<TableScript>())
+            if (!raisedObjScr.GetRaisedObject().GetComponent<RaisedObjectScript>())
             {
                 return raisedObjScr;
             }
-            raisedObjScr = raisedObjScr.GetComponent<RaisedObjectScript>();
+            raisedObjScr = raisedObjScr.GetRaisedObject().GetComponent<RaisedObjectScript>();
         }
         return raisedObjScr; // 위에 있는 것이 없음
     }
