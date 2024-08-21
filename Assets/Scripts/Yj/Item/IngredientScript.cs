@@ -92,6 +92,7 @@ public class IngredientScript : GrabAbleObjScript
             }
             if (sliceGuage >= 100)
             {
+                isFirstSlice = false;
                 isChopped = true;
             }
         }

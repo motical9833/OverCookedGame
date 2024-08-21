@@ -201,7 +201,7 @@ public class ActionScript : MonoBehaviour
                     {
                         case "Table":
                             TableScript tableScr = collider.GetComponent<TableScript>();
-
+                            IngredientScript ingredientScr;
                             if (tableScr.IsRaised())
                             {
                                 switch (tableScr.GetTopRaisedObj().tag)
@@ -211,9 +211,29 @@ public class ActionScript : MonoBehaviour
                                         Grab(currGrabObj);
                                         tableScr.GetTopRaisedScr().Release();
                                         return true;
+                                    case "CuttingBoard":
+                                        var cuttingBoardScr = tableScr.GetRaisedObject().GetComponent<CuttingBoardScript>();
+                                        if (cuttingBoardScr.raisedObj == null)
+                                        {
+                                            return false;
+                                        }
+
+                                        ingredientScr = cuttingBoardScr.raisedObj.GetComponent<IngredientScript>();
+                                        if (!ingredientScr.GetIsChopped())
+                                        {
+                                            if (ingredientScr.GetIsFisrtSlice())
+                                            {
+                                                return false;
+                                            }
+                                        }
+                                        currGrabObj = cuttingBoardScr.GetRaisedObject();
+                                        cuttingBoardScr.Release();
+                                        Debug.Log("¸±¸®½º");
+                                        Grab(currGrabObj);
+                                        return true;
                                     case "Ingredient":
                                         currGrabObj = tableScr.GetTopRaisedObj();
-                                        IngredientScript ingredientScr = currGrabObj.GetComponent<IngredientScript>();
+                                        ingredientScr = currGrabObj.GetComponent<IngredientScript>();
                                         if (ingredientScr.GetIsChopped())
                                         {
                                             ingredientScr.Gather();
@@ -222,29 +242,9 @@ public class ActionScript : MonoBehaviour
                                         tableScr.GetTopRaisedScr().Release();
                                         return true;
                                 }
-                            }
-                            return false;
-                        case "CuttingBoard":
-                            CuttingBoardScript cuttingBoardScr = collider.GetComponent<CuttingBoardScript>();
-
-                            if (cuttingBoardScr.raisedObj == null)
-                            {
                                 return false;
                             }
-                            else
-                            {
-                                if (cuttingBoardScr.raisedObj.GetComponent<IngredientScript>().GetIsFisrtSlice())
-                                {
-                                    return false;
-                                }
-                                else
-                                {
-                                    currGrabObj = cuttingBoardScr.GetRaisedObject();
-                                    Grab(currGrabObj);
-                                    cuttingBoardScr.Release();
-                                    return true;
-                                }
-                            }
+                            return false;
                         case "CookingStation":
                             tableScr = collider.GetComponent<TableScript>();
                             if (tableScr.GetRaisedObject() == null)
