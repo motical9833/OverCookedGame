@@ -37,7 +37,7 @@ public class TitleSelectUIScript : MonoBehaviour
             HandleInput();
             HandleSelection();
 
-            if(Input.GetKeyDown(KeyCode.Escape) && coolTIme >= 1.0f)
+            if(Input.GetKeyDown(KeyCode.Escape))
             {
                 DeActivateUIArrow();
                 coolTIme = 0.0f;
@@ -66,7 +66,7 @@ public class TitleSelectUIScript : MonoBehaviour
 
     private void HandleSelection()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && coolTIme >= 1.0f)
         {
             switch (state)
             {
@@ -93,17 +93,36 @@ public class TitleSelectUIScript : MonoBehaviour
 
     private void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        coolTIme = 0;
         isSelectMenu = false;
+        ResetUIArrow();
+        SceneManager.LoadScene(sceneName);
     }
 
     public void ActivateUIArrow()
     {
+        ResetUIArrow();
         isSelectMenu = true;
     }
 
     public void DeActivateUIArrow()
     {
         isSelectMenu = false;
+    }
+
+    private Transform GetRootParent(Transform child)
+    {
+        while(child.parent != null)
+        {
+            child = child.parent;
+        }
+
+        return child;
+    }
+
+    private void ResetUIArrow()
+    {
+        state = 0;
+        mySelectArrow.transform.localPosition = new Vector3(0.00922966f, 0.008f, -0.002710001f);
     }
 }
