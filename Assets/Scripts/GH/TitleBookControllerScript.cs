@@ -12,7 +12,7 @@ public class TitleBookControllerScript : MonoBehaviour
     }
 
 
-    private void Update()
+/*    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) &&
             myBook.GetComponent<BookCoverScript>().GetIsOpening() &&
@@ -21,7 +21,7 @@ public class TitleBookControllerScript : MonoBehaviour
             myBook.GetComponent<BookCoverScript>().CloseCover();
             myBook.GetComponent<RecipeBookController>().ResetCamera();
         }
-    }
+    }*/
 
     public void ClickTitleEvent()
     {

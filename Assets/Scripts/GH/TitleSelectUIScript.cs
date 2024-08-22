@@ -19,9 +19,9 @@ public class TitleSelectUIScript : MonoBehaviour
     State state = State.CAMPAIGN;
 
     GameObject mySelectArrow;
-    private bool isSelectMenu = false;
+    public bool isSelectMenu = false;
     public float moveDistance = 0.004f;
-
+    public float coolTIme;
 
     void Start()
     {
@@ -32,10 +32,17 @@ public class TitleSelectUIScript : MonoBehaviour
     {
         if(isSelectMenu)
         {
+            coolTIme += Time.deltaTime;
+
             HandleInput();
             HandleSelection();
-        }
 
+            if(Input.GetKeyDown(KeyCode.Escape) && coolTIme >= 1.0f)
+            {
+                DeActivateUIArrow();
+                coolTIme = 0.0f;
+            }
+        }
     }
 
     private void HandleInput()
@@ -93,5 +100,10 @@ public class TitleSelectUIScript : MonoBehaviour
     public void ActivateUIArrow()
     {
         isSelectMenu = true;
+    }
+
+    public void DeActivateUIArrow()
+    {
+        isSelectMenu = false;
     }
 }

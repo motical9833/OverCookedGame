@@ -38,6 +38,9 @@ public class BookCoverScript : MonoBehaviour
             {
                 isTurning = false;
                 currentTime = 0;
+
+                if(!isOpening)
+                    openBookButton.SetActive(true);
             }
         }
     }
@@ -55,7 +58,6 @@ public class BookCoverScript : MonoBehaviour
         isTurning = true;
         currentTime = 0;
         isOpening = false;
-        openBookButton.SetActive(true);
     }
 
     public bool GetIsTurning() { return isTurning; }

@@ -32,7 +32,7 @@ public class RecipeBookController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) &&
             this.GetComponent<BookCoverScript>().GetIsOpening() &&
-            islookCloser == false)
+            islookCloser == false && !isMoveing)
         {
             this.GetComponent<BookCoverScript>().CloseCover();
             isMoveing = true;
