@@ -12,6 +12,7 @@ public class StageSaveLoadScript : MonoBehaviour
     public Dictionary<string, Stage> stageDictionary;
 
     StageInfo prevStageInfo;
+    public GameObject sceneMainCanvas;
 
     int allStarCount = 0;
 
@@ -30,7 +31,7 @@ public class StageSaveLoadScript : MonoBehaviour
     public void SceneLoad(Scene scene, LoadSceneMode mode)
     {
         stageDictionary.Clear();
-
+        sceneMainCanvas = GameObject.FindWithTag("MainCanvas");
         GameObject objs = GameObject.FindGameObjectWithTag("StageObject");
 
         for (int i = 0; i < objs.transform.childCount; i++)
@@ -42,7 +43,10 @@ public class StageSaveLoadScript : MonoBehaviour
         foreach (Stage value in stageDictionary.Values)
         {
             value.LoadStageData();
-        }
+        } 
+
+        if(sceneMainCanvas)
+        SaveStarCount();
 
         SceneManager.sceneLoaded -= SceneLoad;
     }
@@ -91,17 +95,31 @@ public class StageSaveLoadScript : MonoBehaviour
         return bools;
     }
 
-    public void GetAllStarCount()
+    public int GetAllStarCount()
     {
-
+        return allStarCount;
     }
 
     public void SaveStarCount()
     {
-        foreach(Stage value in stageDictionary.Values)
-        {
-            int score = value.GetStageInfo().score;
+        allStarCount = 0;
 
+        foreach (Stage value in stageDictionary.Values)
+        {
+            StageInfo info = value.GetStageInfo();
+
+            int score = info.score;
+            int[] goals = info.goals;
+
+            for (int i = 0; i < goals.Length; i++)
+            {
+                if (score > goals[i])
+                    allStarCount++;
+            }
         }
+
+        sceneMainCanvas.GetComponent<StarCountUIScript>().ApplyStarCountUI(allStarCount);
+
+        Debug.Log("스타 개수" + allStarCount);
     }
 }
