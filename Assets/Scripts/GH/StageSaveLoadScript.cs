@@ -5,12 +5,15 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 using System;
 using System.Xml;
+using Unity.VisualScripting;
 
 public class StageSaveLoadScript : MonoBehaviour
 {
     public Dictionary<string, Stage> stageDictionary;
 
     StageInfo prevStageInfo;
+
+    int allStarCount = 0;
 
     private void Start()
     {
@@ -86,5 +89,19 @@ public class StageSaveLoadScript : MonoBehaviour
         }
 
         return bools;
+    }
+
+    public void GetAllStarCount()
+    {
+
+    }
+
+    public void SaveStarCount()
+    {
+        foreach(Stage value in stageDictionary.Values)
+        {
+            int score = value.GetStageInfo().score;
+
+        }
     }
 }

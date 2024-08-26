@@ -1565,6 +1565,7 @@ GameObject:
   - component: {fileID: 289173631}
   - component: {fileID: 289173630}
   - component: {fileID: 289173629}
+  - component: {fileID: 289173632}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1644,8 +1645,23 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 543450653027562036}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 63.583, y: 0, z: 0}
+--- !u!114 &289173632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289173628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74a79081f841d99418350ab3fb1c5a78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 8255028576164911638}
+  offset: {x: 0, y: 0, z: 0}
+  maintainRotation: 0
 --- !u!1001 &310898361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19411,7 +19427,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8255028576164911638}
-  - {fileID: 289173631}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &543450653069633088
@@ -109114,6 +109129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageImg: {fileID: 0}
+  procedure: 0
 --- !u!65 &6967988236027950720
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -121417,6 +121433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageImg: {fileID: 0}
+  procedure: 0
 --- !u!65 &7799205450585468027
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -136222,6 +136239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageImg: {fileID: 0}
+  procedure: 0
 --- !u!65 &8886928801145734577
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -139182,6 +139200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageImg: {fileID: 0}
+  procedure: 0
 --- !u!65 &9092918960251134053
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -139341,6 +139360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageImg: {fileID: 0}
+  procedure: 0
 --- !u!65 &9093855048910044931
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -141221,6 +141241,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1705961795}
+  - {fileID: 289173631}
   - {fileID: 1933121583}
   - {fileID: 797823189}
   - {fileID: 704788529}
