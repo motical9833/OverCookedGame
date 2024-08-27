@@ -10,19 +10,13 @@ public class PotScript : GrabAbleObjScript
 
     private int addCount = 0;
 
-    public float currTimeLimit = 5.0f;
-    public float initTimeLimit = 0;
+    private float currTimeLimit = 5.0f;
 
-    public float safeTime = 0.0f;
-    public float safeTimer = 0.0f;
+    public float[] alertTimes = new float[4];
+    private float alertTimer = 0.0f;
 
-    public float[] alertTimes = new float[3];
-    public float alertTimer = 0.0f;
-
-    private float boilingTime = 0.0f;
     public float boilingDoneTime = 5.0f;
-    public Image alertImage;
-
+    private float boilingTimer = 0.0f;
 
     bool isboiledDone = false; // 재료 삶기가 끝났음
     bool isCookedDone = false; // 같은 재료 셋을 넣어 삶는것이 끝났음
@@ -35,7 +29,8 @@ public class PotScript : GrabAbleObjScript
     {
         base.Initialize();
         potUICtrlScr = GetComponent<PotUIControllerScript>();
-    }
+        potUICtrlScr.HideBoilingGuage();
+    } 
 
     public bool PutIngredient(string ingredientName)
     {
@@ -75,20 +70,25 @@ public class PotScript : GrabAbleObjScript
         return false;
     }
 
-
     public void Boiled()
     {
         if (firstAddedName != "")
         {
-            potUICtrlScr.ShowBoilingGuage(boilingTime);
-            if (boilingTime >= currTimeLimit)
+            if (boilingTimer >= currTimeLimit)
             {
                 isboiledDone = true;
+                if (addCount >= 3)
+                {
+                    addCount = 3;
+                    isCookedDone = true;
+                }
+                potUICtrlScr.HideBoilingGuage();
                 ShowAlertUI();
             }
             else
             {
-                boilingTime += Time.deltaTime;
+                boilingTimer += Time.deltaTime;
+                potUICtrlScr.ShowBoilingGuage(boilingTimer);
                 isboiledDone = false;
                 Debug.Log("끓이는 중");
             }
@@ -106,15 +106,15 @@ public class PotScript : GrabAbleObjScript
 
         if (alertTimes[0] < alertTimer && alertTimes[1] >= alertTimer)
         {
-            Blink(2);
+            potUICtrlScr.Blink(1);
         }
         if(alertTimes[1] < alertTimer && alertTimes[2] >= alertTimer)
         {
-            Blink(1);
+            potUICtrlScr.Blink(0.5f);
         }
         if (alertTimes[2] < alertTimer && alertTimes[3] >= alertTimer)
         {
-            Blink(0.5f);
+            potUICtrlScr.Blink(0.25f);
         }
         if (alertTimes[3] >= alertTimer)
         {
@@ -122,25 +122,14 @@ public class PotScript : GrabAbleObjScript
         }
     }
 
-    public void Blink(float time)
+    private bool PutInDish(PlateScript targetScr)
     {
-        StartCoroutine(BlinkCoroutine(time));
-    }
-
-    private IEnumerator BlinkCoroutine(float time)
-    {
-        float elapsedTime = 0f;
-
-        while (elapsedTime < time)
-        {
-            alertImage.gameObject.SetActive(true); // 이미지 활성화
-            yield return new WaitForSeconds(0.5f); // 활성화 상태 유지 시간
-            alertImage.gameObject.SetActive(false); // 이미지 비활성화
-            yield return new WaitForSeconds(0.5f); // 비활성화 상태 유지 시간
-
-            elapsedTime += 1f; // 1초(활성화 0.5초 + 비활성화 0.5초) 만큼 경과 시간 증가
-        }
-
-        alertImage.gameObject.SetActive(true); // 점멸이 끝난 후 이미지 활성화 상태 유지
+        if (!isCookedDone)
+            return false;
+        targetScr.PlateSoup(firstAddedName);
+        firstAddedName = "";
+        addCount = 0;
+        isCookedDone = false;
+        return true;
     }
 }

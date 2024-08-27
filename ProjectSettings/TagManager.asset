@@ -17,6 +17,7 @@ TagManager:
   - MapObject
   - CookingStation
   - AudioManager
+  - PlateStation
   layers:
   - Default
   - TransparentFX

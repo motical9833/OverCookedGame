@@ -183,6 +183,22 @@ public class ActionScript : MonoBehaviour
                                     return true;
                                 }
                                 return false;
+                            case "PlateStation":
+                                if (currGrabObj.tag == "Plate")
+                                {
+                                    var plateScr = currGrabObj.GetComponent<PlateScript>();
+                                    string platedFoodName =  plateScr.GetPlateFoodName();
+                                    if (platedFoodName == "")
+                                    {
+                                        Debug.Log("빈 식기를 내려고 시도함");
+                                        return false;
+                                    }
+                                    else
+                                    {
+                                        Debug.Log("음식이 든 식를 제출함");
+                                    }
+                                }
+                                return false;
                         }
                     }
                 }

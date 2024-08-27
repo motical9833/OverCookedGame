@@ -5,17 +5,19 @@ using UnityEngine.UI;
 using Enummrous;
 using System.Net.Http.Headers;
 using Mono.Cecil;
+using System.Threading;
 public class PotUIControllerScript : MonoBehaviour
 {
 
-    private Image alertImage;
-    private Image dangerImage;
-    private Image addedIcon;
-    private float blinkTimer;
-
     public Image[] addedImages = new Image[5];
-
     public Slider boilingGuage;
+
+    public Image finishImage;
+
+    private bool isImageOn = false;
+
+    private float alertTimer;
+    public Image burnWarningUIImage;
 
     private void Start()
     {
@@ -26,6 +28,9 @@ public class PotUIControllerScript : MonoBehaviour
         {
             image.gameObject.SetActive(false);
         }
+
+        burnWarningUIImage.gameObject.SetActive(false);
+
     }
 
     public void ShowAddedImage(int addedAmount ,string addedName)
@@ -76,6 +81,25 @@ public class PotUIControllerScript : MonoBehaviour
     }
 
     public void SetMax(float value) { boilingGuage.maxValue = value; }
+
+    public void ShowFinishUI()
+    {
+        Color fColor = finishImage.color;
+        if (!isImageOn)
+        {
+            fColor.a += 0.5f;
+            if (fColor.a >= 1.0f)
+            {
+                fColor.a = 1.0f;
+                isImageOn = true;
+            }
+        }
+        if (isImageOn)
+        {
+            fColor.a -= 0.5f;
+        }
+    }
+
     public void ShowBoilingGuage(float _value)
     {
         boilingGuage.gameObject.SetActive(true);
@@ -84,7 +108,6 @@ public class PotUIControllerScript : MonoBehaviour
 
     public void HideBoilingGuage()
     {
-        boilingGuage.value = 0.0f;
         boilingGuage.gameObject.SetActive(false);
     }
 
@@ -93,5 +116,22 @@ public class PotUIControllerScript : MonoBehaviour
 
     }
 
-   
+    public void Blink(float time)
+    {
+        Color color = burnWarningUIImage.color;
+        var interval = time;
+        alertTimer += Time.deltaTime;
+        if(alertTimer>=interval)
+        {
+            if (burnWarningUIImage.gameObject.activeInHierarchy)
+            {
+                color.a += 0.5f;
+                burnWarningUIImage.gameObject.SetActive(false);
+            }
+            else
+                burnWarningUIImage.gameObject.SetActive(true);
+
+            alertTimer = 0;
+        }
+    }
 }
