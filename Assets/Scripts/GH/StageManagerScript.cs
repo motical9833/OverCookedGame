@@ -79,6 +79,8 @@ public class StageManagerScript : MonoBehaviour
 
         GameObject mapObject = GameObject.FindWithTag("MapObject");
 
+        GameObject audioManager = GameObject.FindWithTag("AudioManager");
+
         stage.GetComponent<Stage>().SaveStageData(info);
 
         int count = info.GetStarCount();
@@ -91,6 +93,8 @@ public class StageManagerScript : MonoBehaviour
 
         mapObject.GetComponent<MapGridController>().TileFlipping(procedure + 1);
         mapObject.GetComponent<MapPathsControllerScript>().OpenPath(procedure);
+
+        audioManager.GetComponent<BGMScript>().StartBGM("StartScreenMusic");
 
         SceneManager.sceneLoaded -= SaveClearDataAndLoadScene;
     }

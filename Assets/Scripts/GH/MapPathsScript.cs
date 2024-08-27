@@ -8,6 +8,8 @@ public class MapPathsScript : MonoBehaviour
 {
     public float changeDuration = 1.0f;
 
+    //스테이지를 로드할 때 활성화 시키늗 함수
+
     public void ActivePath(int procedure)
     {
         GameObject pathParent = this.transform.GetChild(procedure).gameObject;
@@ -15,6 +17,8 @@ public class MapPathsScript : MonoBehaviour
         pathParent.SetActive(true);
     }
 
+    //procedure(스테이지의 순서) 스테이지를 클리어 한 후 다음 스테이지로 연결하는 Path를 활성화 및
+    //코루틴을 실행하는 함수
     public void UnLockPath(int procedure)
     {
         Transform pathsTr = this.transform.GetChild(procedure);
@@ -26,6 +30,7 @@ public class MapPathsScript : MonoBehaviour
         }
     }
 
+    //Path의 스케일값을 Lerp를 이용하여 조절하는 코루틴
     IEnumerator PathScaleController(Transform pathTr,float duration)
     {
         Vector3 initialScale = pathTr.localScale;
