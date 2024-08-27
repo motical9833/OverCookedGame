@@ -100,7 +100,7 @@ public class ActionScript : MonoBehaviour
         Bounds fColBound = frontCol.bounds;
         Collider[] hitColliders = Physics.OverlapBox(fColBound.center, fColBound.extents, Quaternion.identity);
 
-        string[] tags = { "Table", "IngredientBox", "Pot", "Ingredient", "Plate", "CookingStation" };
+        string[] tags = { "Table", "IngredientBox", "Pot", "Ingredient", "Plate", "CookingStation", "PlateStation" };
 
         if (isGrab)
         {
@@ -143,6 +143,15 @@ public class ActionScript : MonoBehaviour
                                             }
                                             return false;
                                         case "Plate":
+                                            var plateScr = tableScr.GetTopRaisedObj().GetComponent<PlateScript>();
+                                            if(currGrabObj.tag =="Pot")
+                                            {
+                                                var potScr = currGrabObj.GetComponent<PotScript>();
+                                                if (potScr.GetIsCookedDone())
+                                                {
+                                                    potScr.PlatingSoup(plateScr);
+                                                }
+                                            }
                                             Debug.Log("재료를 접시에 넣음");
 
                                             return false;
@@ -254,6 +263,12 @@ public class ActionScript : MonoBehaviour
                                         {
                                             ingredientScr.Gather();
                                         }
+                                        Grab(currGrabObj);
+                                        tableScr.GetTopRaisedScr().Release();
+                                        return true;
+                                    case "Plate":
+                                        Debug.Log("식기를 집으려 함");
+                                        currGrabObj = tableScr.GetTopRaisedObj();
                                         Grab(currGrabObj);
                                         tableScr.GetTopRaisedScr().Release();
                                         return true;

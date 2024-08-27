@@ -15,7 +15,7 @@ public class PotScript : GrabAbleObjScript
     public float[] alertTimes = new float[4];
     private float alertTimer = 0.0f;
 
-    public float boilingDoneTime = 5.0f;
+    private float boilingDoneTime = 5.0f;
     private float boilingTimer = 0.0f;
 
     bool isboiledDone = false; // Àç·á »î±â°¡ ³¡³µÀ½
@@ -122,7 +122,13 @@ public class PotScript : GrabAbleObjScript
         }
     }
 
-    private bool PutInDish(PlateScript targetScr)
+
+    public bool GetIsCookedDone()
+    {
+        return isCookedDone;
+    }
+
+    public bool PlatingSoup(PlateScript targetScr)
     {
         if (!isCookedDone)
             return false;

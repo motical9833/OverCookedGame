@@ -4676,6 +4676,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8846961093896977210, guid: f7e0a623725c67b4da93d90570c89720, type: 3}
   m_PrefabInstance: {fileID: 237995375}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &237995377 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 14019764471149637, guid: f7e0a623725c67b4da93d90570c89720, type: 3}
+  m_PrefabInstance: {fileID: 237995375}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &238497000
 GameObject:
   m_ObjectHideFlags: 0
@@ -25306,6 +25311,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8846961093896977210, guid: f7e0a623725c67b4da93d90570c89720, type: 3}
   m_PrefabInstance: {fileID: 1333908124}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1333908126 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 14019764471149637, guid: f7e0a623725c67b4da93d90570c89720, type: 3}
+  m_PrefabInstance: {fileID: 1333908124}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1341807180
 GameObject:
   m_ObjectHideFlags: 0
@@ -28314,6 +28324,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6698024197265923374, guid: 535c55b2fcc11644aae8582b5506cb86, type: 3}
+      propertyPath: raisedObj
+      value: 
+      objectReference: {fileID: 1333908126}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -37573,6 +37587,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6698024197265923374, guid: 535c55b2fcc11644aae8582b5506cb86, type: 3}
+      propertyPath: raisedObj
+      value: 
+      objectReference: {fileID: 237995377}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -39342,6 +39360,10 @@ PrefabInstance:
     - target: {fileID: 5780441856040528102, guid: 7edb3b352399e4243b3fc4ef2a3e7c57, type: 3}
       propertyPath: m_Name
       value: Plate Station
+      objectReference: {fileID: 0}
+    - target: {fileID: 5780441856040528102, guid: 7edb3b352399e4243b3fc4ef2a3e7c57, type: 3}
+      propertyPath: m_TagString
+      value: PlateStation
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
