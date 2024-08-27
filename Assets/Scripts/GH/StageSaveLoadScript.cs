@@ -95,6 +95,18 @@ public class StageSaveLoadScript : MonoBehaviour
         return bools;
     }
 
+    public List<Stage> GetStageList()
+    {
+        List<Stage> stages = new List<Stage>();
+
+        foreach (Stage value in stageDictionary.Values)
+        {
+            stages.Add(value);
+        }
+
+        return stages;
+    }
+
     public int GetAllStarCount()
     {
         return allStarCount;

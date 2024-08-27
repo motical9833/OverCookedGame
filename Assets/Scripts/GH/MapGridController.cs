@@ -16,7 +16,6 @@ public class MapGridController : MonoBehaviour
     public MapObjects[] objectGrop = new MapObjects[5];
     public List<bool> isOpenHex = new List<bool>();
     GameObject tiles;
-    public GameObject gameManager;
 
     public void InitializeObjectGroups()
     {
@@ -26,7 +25,7 @@ public class MapGridController : MonoBehaviour
             return;
         }
 
-        gameManager = GameObject.FindWithTag("GameManager");
+        GameObject gameManager = GameObject.FindWithTag("GameManager");
 
         if (gameManager == null)
         {
@@ -53,14 +52,14 @@ public class MapGridController : MonoBehaviour
             }
         }
 
-        InitializeStageHex();
+        InitializeStageHex(gameManager);
 
         isInitialize = true;
     }
 
-    void InitializeStageHex()
+    void InitializeStageHex(GameObject manager)
     {
-        isOpenHex = gameManager.GetComponent<StageSaveLoadScript>().GetAllisAble();
+        isOpenHex = manager.GetComponent<StageSaveLoadScript>().GetAllisAble();
 
         for (int i = 0;i < isOpenHex.Count;i++)
         {

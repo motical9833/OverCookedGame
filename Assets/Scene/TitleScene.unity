@@ -1570,6 +1570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d05d325739739e84091224ee9fc75c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneMainCanvas: {fileID: 0}
 --- !u!114 &1018395892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1592,7 +1593,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1018395887}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9edd4b14df9e3cf40b9146f90d00a2c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 260ff3c5c3e09b74bb25115277753e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mapObject: {fileID: 0}

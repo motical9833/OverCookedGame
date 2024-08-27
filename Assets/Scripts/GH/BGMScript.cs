@@ -26,4 +26,9 @@ public class BGMScript : MonoBehaviour
         audioSource.clip = audioManager.GetAudioClip(name);
         audioSource.Play();
     }
+
+    public void StopBGM()
+    {
+        audioSource.Stop();
+    }
 }
