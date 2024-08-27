@@ -61,6 +61,6 @@ public class StageSelectUIScript : MonoBehaviour
         SceneManager.LoadScene(sceneName);
 
         GameObject audioManager = GameObject.FindWithTag("AudioManager");
-        audioManager.GetComponent<BGMScript>().StartBGM("Demo1v2");
+        audioManager.GetComponent<BGMScript>().StopBGM();
     }
 }
