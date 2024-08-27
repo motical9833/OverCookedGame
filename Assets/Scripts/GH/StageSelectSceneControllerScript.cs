@@ -1,11 +1,9 @@
-using Mono.Cecil;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
-public class MapGridControllerScript : MonoBehaviour
+public class StageSelectSceneControllerScript : MonoBehaviour
 {
     public GameObject mapObject;
 
@@ -25,5 +23,6 @@ public class MapGridControllerScript : MonoBehaviour
         }
 
         mapObject.GetComponent<MapGridController>().InitializeObjectGroups();
+        mapObject.GetComponent<MapPathsControllerScript>().InitializePathGrop();
     }
 }

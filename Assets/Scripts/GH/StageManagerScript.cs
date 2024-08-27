@@ -77,6 +77,8 @@ public class StageManagerScript : MonoBehaviour
 
         GameObject stage = GameObject.Find(name);
 
+        GameObject mapObject = GameObject.FindWithTag("MapObject");
+
         stage.GetComponent<Stage>().SaveStageData(info);
 
         int count = info.GetStarCount();
@@ -85,9 +87,10 @@ public class StageManagerScript : MonoBehaviour
 
         GameObject.FindWithTag("StageObject").GetComponent<StageObjectsControllerScript>().OpenStage();
 
-        int procedure = stage.GetComponent<Stage>().GetStageInfo().procedure + 1;
+        int procedure = stage.GetComponent<Stage>().GetStageInfo().procedure;
 
-        GameObject.FindWithTag("MapObject").GetComponent<MapGridController>().TileFlipping(procedure);
+        mapObject.GetComponent<MapGridController>().TileFlipping(procedure + 1);
+        mapObject.GetComponent<MapPathsControllerScript>().OpenPath(procedure);
 
         SceneManager.sceneLoaded -= SaveClearDataAndLoadScene;
     }

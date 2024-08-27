@@ -8,9 +8,17 @@ public class MapPathsScript : MonoBehaviour
 {
     public float changeDuration = 1.0f;
 
+    public void ActivePath(int procedure)
+    {
+        GameObject pathParent = this.transform.GetChild(procedure).gameObject;
+
+        pathParent.SetActive(true);
+    }
+
     public void UnLockPath(int procedure)
     {
         Transform pathsTr = this.transform.GetChild(procedure);
+        pathsTr.gameObject.SetActive(true);
 
         for (int i = 0; i < pathsTr.childCount; i++)
         {
@@ -26,11 +34,11 @@ public class MapPathsScript : MonoBehaviour
 
         while (elapsedTime < changeDuration)
         {
-            pathTr.localScale = Vector3.Lerp(initialScale, Vector3.zero, elapsedTime / duration);
+            pathTr.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        transform.localScale = Vector3.zero;
+        transform.localScale = Vector3.one;
     }
 }
