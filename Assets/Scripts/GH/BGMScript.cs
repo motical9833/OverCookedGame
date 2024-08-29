@@ -21,10 +21,11 @@ public class BGMScript : MonoBehaviour
         audioSource.Play();
     }
 
-    public void StartBGM(string name)
+    public void StartBGM(string name,bool isLoop)
     {
         audioSource.clip = audioManager.GetAudioClip(name);
         audioSource.Play();
+        audioSource.loop = isLoop;
     }
 
     public void StopBGM()

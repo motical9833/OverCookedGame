@@ -7,7 +7,7 @@ using static UnityEngine.GraphicsBuffer;
 public class RecipeUIMoveEffectScript : MonoBehaviour
 {
     public float moveSpeed = 3000.0f;
-    bool isMove = false;
+    //bool isMove = false;
     RectTransform mRectTr;
 
     public void Start()

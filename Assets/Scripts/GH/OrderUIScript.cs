@@ -13,6 +13,10 @@ public class OrderUIScript : MonoBehaviour
     private float initialTimer = 80.0f;
 
     float currentTimer;
+    float timeInterval;
+    bool isDanger;
+
+    AudioSource m_AudioSource;
 
     void Start()
     {
@@ -21,6 +25,9 @@ public class OrderUIScript : MonoBehaviour
         fill = slider.GetComponent<Transform>().GetChild(1).GetChild(0).GetComponent<Image>();
 
         fill.color = greenColor;
+
+        m_AudioSource = this.GetComponent<AudioSource>();
+        m_AudioSource.clip = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>().GetAudioClip("LevelTimerBeep");
     }
 
     void Update()
@@ -34,6 +41,12 @@ public class OrderUIScript : MonoBehaviour
         float t = Mathf.PingPong(currentTimer / initialTimer, 1.0f);
 
         fill.color = Color.Lerp(redColor, greenColor, t);
+
+        if(!isDanger && currentTimer <= 10.0f)
+        {
+            isDanger = true;
+            m_AudioSource.Play();
+        }
 
         if (currentTimer <= 0)
         {
@@ -51,5 +64,6 @@ public class OrderUIScript : MonoBehaviour
         currentTimer = 80.0f;
         slider.value = 1;
         fill.color = greenColor;
+        m_AudioSource.Stop();
     }
 }

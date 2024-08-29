@@ -44,7 +44,6 @@ public class StageManagerScript : MonoBehaviour
         stageSaveLoadScript.SavePrevStageInfo(info);
 
         stagePointScript.ResetPoint();
-        stageTimerScript.ResetTimer();
 
         SceneManager.LoadSceneAsync("StageSelectScene");
 
@@ -55,7 +54,6 @@ public class StageManagerScript : MonoBehaviour
     public void GameFailed()
     {
         stagePointScript.ResetPoint();
-        stageTimerScript.ResetTimer();
 
         SceneManager.LoadSceneAsync("StageSelectScene");
 
@@ -94,7 +92,7 @@ public class StageManagerScript : MonoBehaviour
         mapObject.GetComponent<MapGridController>().TileFlipping(procedure + 1);
         mapObject.GetComponent<MapPathsControllerScript>().OpenPath(procedure);
 
-        audioManager.GetComponent<BGMScript>().StartBGM("StartScreenMusic");
+        audioManager.GetComponent<BGMScript>().StartBGM("StartScreenMusic",true);
 
         SceneManager.sceneLoaded -= SaveClearDataAndLoadScene;
     }

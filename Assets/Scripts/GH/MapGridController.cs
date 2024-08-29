@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapGridController : MonoBehaviour
 {
-    bool isInitialize = false;
+    //bool isInitialize = false;
 
     [System.Serializable]
 
@@ -54,7 +54,7 @@ public class MapGridController : MonoBehaviour
 
         InitializeStageHex(gameManager);
 
-        isInitialize = true;
+        //isInitialize = true;
     }
 
     void InitializeStageHex(GameObject manager)

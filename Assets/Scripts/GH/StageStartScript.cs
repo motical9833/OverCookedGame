@@ -39,7 +39,7 @@ public class StageStartScript : MonoBehaviour
         readyGoUIObjects[0].SetActive(false);
         readyGoUIObjects[1].SetActive(false);
 
-        audioManager.GetComponent<BGMScript>().StartBGM("Demo1v2");
+        audioManager.GetComponent<BGMScript>().StartBGM("Demo1v2", true);
     }
 
     public void ReadyGoUIOn()
