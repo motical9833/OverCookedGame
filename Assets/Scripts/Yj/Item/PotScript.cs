@@ -35,6 +35,13 @@ public class PotScript : GrabAbleObjScript
     public bool PutIngredient(string ingredientName)
     {
         Debug.Log("재료를 솥에 넣음");
+
+        if (addCount >= 3)
+        {
+            Debug.Log("3개 이상의 재료를 넣을려고 시도함");
+            return false;
+        }
+
         foreach (IngredientInfo.IngredientElements ingredient in IngredientInfo.Ingredients)
         {
             if (ingredientName == ingredient.name)
