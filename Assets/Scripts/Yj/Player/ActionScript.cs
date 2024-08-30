@@ -205,6 +205,12 @@ public class ActionScript : MonoBehaviour
                                     else
                                     {
                                         Debug.Log("음식이 든 식를 제출함");
+/*                                        var rec = RecipeOrderControllerScript recipeOrderScr;
+
+                                        if (rec.CompareWithRecipeName(platedFoodName))
+                                        {
+
+                                        }*/
                                     }
                                 }
                                 return false;
