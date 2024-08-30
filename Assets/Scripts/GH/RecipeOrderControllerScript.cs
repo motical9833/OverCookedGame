@@ -213,7 +213,7 @@ public class RecipeOrderControllerScript : MonoBehaviour
         return false;
     }
 
-    public void RequestMatchRemoveQueue(string _name)
+    public void RequestMatchRemoveQueue()
     {
         if (recipeQueue.Count <= 0)
         {
