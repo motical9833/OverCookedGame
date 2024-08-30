@@ -21,16 +21,22 @@ public class PotScript : GrabAbleObjScript
     bool isboiledDone = false; // 재료 삶기가 끝났음
     bool isCookedDone = false; // 같은 재료 셋을 넣어 삶는것이 끝났음
 
+    bool isFire = false; // 불타는중
+
     private PotUIControllerScript potUICtrlScr;
 
     private string firstAddedName = "";
+
+    public GameObject fireEffect;
 
     void Start()
     {
         base.Initialize();
         potUICtrlScr = GetComponent<PotUIControllerScript>();
         potUICtrlScr.HideBoilingGuage();
-    } 
+        fireEffect.SetActive(false);
+    }
+
 
     public bool PutIngredient(string ingredientName)
     {
@@ -79,8 +85,19 @@ public class PotScript : GrabAbleObjScript
 
     public void Boiled()
     {
+        if(isFire)
+        {
+            return;
+        }
+
         if (firstAddedName != "")
         {
+            if (boilingTimer >= alertTimes[3])
+            {
+                Burn();
+            }
+
+
             if (boilingTimer >= currTimeLimit)
             {
                 isboiledDone = true;
@@ -100,6 +117,17 @@ public class PotScript : GrabAbleObjScript
                 Debug.Log("끓이는 중");
             }
         }
+    }
+
+    private void Burn()
+    {
+        fireEffect.SetActive(true);
+
+    }
+
+    public void Extinguish()
+    {
+        isFire = false;
     }
 
     private void ShowDoneUI()
@@ -144,5 +172,13 @@ public class PotScript : GrabAbleObjScript
         addCount = 0;
         isCookedDone = false;
         return true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag =="ExtinguisherPowder")
+        {
+            Extinguish();
+        }
     }
 }
