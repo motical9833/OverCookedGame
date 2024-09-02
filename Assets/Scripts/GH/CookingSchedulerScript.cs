@@ -19,7 +19,7 @@ public class CookingSchedulerScript : MonoBehaviour
         order = new Dictionary<string, List<string>>();
 
         var orderDataList = CSVLoader.LoadCSV<StageOrderData>(csvFilePath, ConvertToOrderData);
-
+            
         foreach (var data in orderDataList)
         {
             order[data.stageLevel] = data.Orders;

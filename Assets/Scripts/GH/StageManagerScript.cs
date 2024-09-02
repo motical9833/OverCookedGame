@@ -8,6 +8,10 @@ using UnityEngine.SceneManagement;
 public class StageManagerScript : MonoBehaviour
 {
 
+    int gameScore = 0;
+    int orderFailedCount = 0;
+    int tips = 0;
+
     OrderUIControllerScript orderUIControllerScript;
     StageTimerScript stageTimerScript;
     StagePointScript stagePointScript;
@@ -17,8 +21,14 @@ public class StageManagerScript : MonoBehaviour
 
     void Start()
     {
+        stageSaveLoadScript = GameObject.FindGameObjectWithTag("GameManager")?.GetComponent<StageSaveLoadScript>();
         GameObject mainCanvas = GameObject.FindGameObjectWithTag("MainCanvas");
-        stageSaveLoadScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<StageSaveLoadScript>();
+
+        if(!stageSaveLoadScript || mainCanvas)
+        {
+            Debug.Log("스크립트를 찾을 수 없음");
+            return;
+        }
 
         stagePointScript = mainCanvas.transform.GetChild(1).GetComponent<StagePointScript>();
         stageTimerScript = mainCanvas.transform.GetChild(2).GetComponent<StageTimerScript>();
@@ -32,7 +42,7 @@ public class StageManagerScript : MonoBehaviour
     public void GameClear()
     {
         string name = SceneManager.GetActiveScene().name;
-        int score = 80; /*stagePointScript.GetPoint();*/
+        int score = gameScore;
 
         StageInfo info = stageSaveLoadScript.GetPrevStageInfo();
 
@@ -106,5 +116,33 @@ public class StageManagerScript : MonoBehaviour
         orderUIControllerScript.OrderStart();
         stageTimerScript.StartTimer();
         stageTimerScript.EndTimeLimeted += GameClear;
+    }
+
+    public void SetScore(int score)
+    {
+        gameScore = score;
+    }
+
+    public void SetOrderFailedCount(int count)
+    {
+        orderFailedCount = count;
+    }
+
+    public void SetTips(int tip)
+    {
+        tips = tip;
+    }
+
+    public int GetScore()
+    {
+        return gameScore;
+    }
+    public int GetOrderFailedCount()
+    {
+        return orderFailedCount;
+    }
+    public int GetTips()
+    {
+        return tips;
     }
 }

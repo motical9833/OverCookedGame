@@ -10,6 +10,7 @@ public class OrderUIControllerScript : MonoBehaviour
     bool isStart = false;
 
     GameObject orderPanal;
+    
 
     void Start()
     {
