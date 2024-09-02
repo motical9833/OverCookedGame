@@ -69,7 +69,7 @@ public class PlayerCtrlScript : NetworkBehaviour
 
         if (pAnimScript.GetAnimState() == PlayerAnimState.Chop)
         {
-            if(pActionScript.GetChopIsDone())
+            if (pActionScript.GetChopIsDone())
             {
                 pAnimScript.TriggerAnimation(PlayerAnimState.Idle);
                 knife.SetActive(false);

@@ -23,6 +23,8 @@ public class ActionScript : MonoBehaviour
 
     PlayerAnimationScript pAnimScript;
 
+    RecipeOrderControllerScript recipeOrderCtrlScr;
+
     public void InitialSet(BoxCollider _frontCol,GameObject _hand)
     {
         frontCol = _frontCol;
@@ -205,6 +207,15 @@ public class ActionScript : MonoBehaviour
                                     else
                                     {
                                         Debug.Log("음식이 든 식를 제출함");
+                                        if (recipeOrderCtrlScr == null) 
+                                        {
+                                            recipeOrderCtrlScr = GameObject.Find("RecipeOrderController").GetComponent<RecipeOrderControllerScript>();
+                                            if (recipeOrderCtrlScr.CompareWithRecipeName(platedFoodName))
+                                            {
+                                                recipeOrderCtrlScr.RequestMatchRemoveQueue();
+                                                //점수랑 연결
+                                            }
+                                        }
                                     }
                                 }
                                 return false;
@@ -335,9 +346,9 @@ public class ActionScript : MonoBehaviour
         }
     }
     
-    public void Grab(GameObject grabObj) 
+    public void Grab(GameObject _grabObj) 
     {
-        currGrabObj = grabObj;
+        currGrabObj = _grabObj;
         currGrabObj.transform.position = hand.transform.position;
         currGrabObj.transform.SetParent(hand.transform);
         currGrabObj.SendMessage("Grabbed");

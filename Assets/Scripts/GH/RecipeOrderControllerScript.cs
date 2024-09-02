@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class RecipeOrderControllerScript : MonoBehaviour
 {
@@ -166,7 +168,6 @@ public class RecipeOrderControllerScript : MonoBehaviour
         isFull = false;
     }
 
-
     public bool IsFull()
     {
         return isFull;
@@ -194,5 +195,31 @@ public class RecipeOrderControllerScript : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public bool CompareWithRecipeName(string _name)
+    {
+        if(recipeQueue.Count<=0)
+        {
+            return false;
+        }
+
+        if(recipeQueue.Peek().RecipeUIObject.name == _name)
+        {
+            return true;
+        }
+
+        Debug.LogWarning("레시피에 있는 이름과 일치 하지 않습니다.  완성된 음식의 이름과 일치하는지 확인 해 주세요.");
+        return false;
+    }
+
+    public void RequestMatchRemoveQueue()
+    {
+        if (recipeQueue.Count <= 0)
+        {
+            Debug.LogWarning("레시피 큐에 아무것도 들어있지 않은데 삭제를 시도 했습니다.");
+            return;
+        }
+        recipeQueue.Dequeue();
     }
 }
