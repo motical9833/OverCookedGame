@@ -39,6 +39,8 @@ public class ActionScript : MonoBehaviour
         {
             if (currGrabObj.tag == "Extinguisher")
             {
+                var extinguisherScr = currGrabObj.GetComponent<FireExtinguisher>();
+                extinguisherScr.SprayPowder();
                 //extinguishd애니메이션 재생 및 extinguisher에 작동 스크립트 적용
                 return PlayerAnimState.Hold;
             }
@@ -167,7 +169,6 @@ public class ActionScript : MonoBehaviour
                                             }
                                             Debug.Log("재료를 도마에 넣음");
                                             return false;
-
                                     }
                                     //만약 테이블에 올려진것이 Pot이나 Plate라면 true 리턴하고 계속 작성
                                     return false;
@@ -179,20 +180,50 @@ public class ActionScript : MonoBehaviour
                                     return true;
                                 }
                             case "CookingStation":
-                                if (currGrabObj.tag == "Pot")
+                                var cookingStationScr = collider.transform.GetComponent<CookingStationScript>();
+                                if (cookingStationScr.GetRaisedObject() == null)
                                 {
-                                    tableScr = collider.GetComponent<TableScript>();
-                                    tableScr.RaisObject(currGrabObj);
-                                    Release();
-                                    return true;
+                                    if (currGrabObj.tag == "Pot")
+                                    {
+                                        tableScr = collider.GetComponent<TableScript>();
+                                        tableScr.RaisObject(currGrabObj);
+                                        Release();
+                                        return true;
+                                    }
+                                    if (currGrabObj.tag == "Flyingpan")
+                                    {
+                                        tableScr = collider.GetComponent<TableScript>();
+                                        tableScr.RaisObject(currGrabObj);
+                                        Release();
+                                        return true;
+                                    }
                                 }
-                                if (currGrabObj.tag == "Flyingpan")
+                                else
                                 {
-                                    tableScr = collider.GetComponent<TableScript>();
-                                    tableScr.RaisObject(currGrabObj);
-                                    Release();
-                                    return true;
+                                    if (cookingStationScr.GetRaisedObject().tag == "Pot")
+                                    {
+                                        if (currGrabObj.tag == "Ingredient")
+                                        {
+                                            var ingredientScr = currGrabObj.GetComponent<IngredientScript>();
+                                            var potScr = cookingStationScr.GetRaisedObject().GetComponent<PotScript>();
+
+                                            if (ingredientScr.GetIsChopped())
+                                            {
+                                                if (potScr.PutIngredient(ingredientScr.GetOriginName()))
+                                                {
+                                                    Release();
+                                                    ingredientScr.gameObject.SetActive(false);
+                                                    return true;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Debug.Log("썰리지 않은 재료를 투입하려고자 함");
+                                            }
+                                        }
+                                    }
                                 }
+                               
                                 return false;
                             case "PlateStation":
                                 if (currGrabObj.tag == "Plate")
@@ -283,6 +314,11 @@ public class ActionScript : MonoBehaviour
                                         Grab(currGrabObj);
                                         tableScr.GetTopRaisedScr().Release();
                                         return true;
+                                    case "Extinguisher":
+                                        currGrabObj = tableScr.GetTopRaisedObj();
+                                        Grab(currGrabObj);
+                                        tableScr.GetTopRaisedScr().Release();
+                                        break;
                                 }
                                 return false;
                             }
