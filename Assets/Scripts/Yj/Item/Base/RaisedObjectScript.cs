@@ -14,6 +14,7 @@ public class RaisedObjectScript : MonoBehaviour
                                             transform.position.y + 0.005f,
                                             transform.position.z);
         raisedObj.transform.position = raisedObjPos;
+        raisedObj.transform.rotation =  Quaternion.identity;
     }
 
     public GameObject GetRaisedObject()
