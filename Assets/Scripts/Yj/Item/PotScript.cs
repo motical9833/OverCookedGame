@@ -18,6 +18,10 @@ public class PotScript : GrabAbleObjScript
     private float boilingDoneTime = 5.0f;
     private float boilingTimer = 0.0f;
 
+    private float burningTimer = 0.0f;
+
+
+
     bool isboiledDone = false; // 재료 삶기가 끝났음
     bool isCookedDone = false; // 같은 재료 셋을 넣어 삶는것이 끝났음
 
@@ -92,22 +96,22 @@ public class PotScript : GrabAbleObjScript
 
         if (firstAddedName != "")
         {
-            if (boilingTimer >= alertTimes[3])
-            {
-                Burn();
-            }
-
-
+         
             if (boilingTimer >= currTimeLimit)
             {
                 isboiledDone = true;
                 if (addCount >= 3)
                 {
                     addCount = 3;
-                    isCookedDone = true;
+                    isCookedDone = true;    
                 }
                 potUICtrlScr.HideBoilingGuage();
                 ShowAlertUI();
+                burningTimer += Time.deltaTime;
+                if (burningTimer >= alertTimes[3])
+                {
+                    Burn();
+                }
             }
             else
             {
@@ -122,11 +126,11 @@ public class PotScript : GrabAbleObjScript
     private void Burn()
     {
         fireEffect.SetActive(true);
-
     }
 
     public void Extinguish()
     {
+        burningTimer = 0.0f;
         isFire = false;
     }
 
