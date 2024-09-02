@@ -18,6 +18,7 @@ TagManager:
   - CookingStation
   - AudioManager
   - PlateStation
+  - Extinguisher
   layers:
   - Default
   - TransparentFX
