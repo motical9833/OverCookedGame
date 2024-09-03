@@ -3,7 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - MainCanvas
+  - StageManager
+  - Mask
+  - Plate
+  - Table
+  - CuttingBoard
+  - PlateStation
+  - CookingStation
+  - IngredientBox
+  - Pot
+  - GameManager
+  - AudioManager
+  - Ingredient
   layers:
   - Default
   - TransparentFX

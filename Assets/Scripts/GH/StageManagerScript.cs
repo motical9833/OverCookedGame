@@ -7,19 +7,21 @@ using UnityEngine.SceneManagement;
 
 public class StageManagerScript : MonoBehaviour
 {
-    OrderUIControllerScript orderUIControllerScript;
-    StageTimerScript stageTimerScript;
-    StagePointScript stagePointScript;
-    StageStartScript stageStartScript;
+    public OrderUIControllerScript orderUIControllerScript;
+    public StageTimerScript stageTimerScript;
+    public StagePointScript stagePointScript;
+    public StageStartScript stageStartScript;
 
-    StageSaveLoadScript stageSaveLoadScript;
+    public StageSaveLoadScript stageSaveLoadScript;
+
+    public GameObject mainCanvas;
 
     void Start()
     {
         stageSaveLoadScript = GameObject.FindGameObjectWithTag("GameManager")?.GetComponent<StageSaveLoadScript>();
-        GameObject mainCanvas = GameObject.FindGameObjectWithTag("MainCanvas");
+        mainCanvas = GameObject.FindGameObjectWithTag("MainCanvas").gameObject;
 
-        if(!stageSaveLoadScript || mainCanvas)
+        if(!stageSaveLoadScript || !mainCanvas)
         {
             Debug.Log("스크립트를 찾을 수 없음");
             return;

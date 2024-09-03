@@ -14,7 +14,7 @@ public class StageSelectSceneControllerScript : MonoBehaviour
 
     public void SceneLoad(Scene scene, LoadSceneMode mode)
     {
-        mapObject = GameObject.FindWithTag("MapObject");
+        mapObject = GameObject.FindGameObjectWithTag("MapObject");
 
         if (mapObject == null)
         {
