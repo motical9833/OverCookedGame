@@ -7,11 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class StageManagerScript : MonoBehaviour
 {
-
-    int gameScore = 0;
-    int orderFailedCount = 0;
-    int tips = 0;
-
     OrderUIControllerScript orderUIControllerScript;
     StageTimerScript stageTimerScript;
     StagePointScript stagePointScript;
@@ -42,7 +37,7 @@ public class StageManagerScript : MonoBehaviour
     public void GameClear()
     {
         string name = SceneManager.GetActiveScene().name;
-        int score = gameScore;
+        int score = this.GetComponent<StageSummaryControllerScript>().GetOrderDelivered() * 20;
 
         StageInfo info = stageSaveLoadScript.GetPrevStageInfo();
 
@@ -116,33 +111,5 @@ public class StageManagerScript : MonoBehaviour
         orderUIControllerScript.OrderStart();
         stageTimerScript.StartTimer();
         stageTimerScript.EndTimeLimeted += GameClear;
-    }
-
-    public void SetScore(int score)
-    {
-        gameScore = score;
-    }
-
-    public void SetOrderFailedCount(int count)
-    {
-        orderFailedCount = count;
-    }
-
-    public void SetTips(int tip)
-    {
-        tips = tip;
-    }
-
-    public int GetScore()
-    {
-        return gameScore;
-    }
-    public int GetOrderFailedCount()
-    {
-        return orderFailedCount;
-    }
-    public int GetTips()
-    {
-        return tips;
     }
 }
