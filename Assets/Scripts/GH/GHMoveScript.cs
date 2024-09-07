@@ -12,26 +12,50 @@ public class GHMoveScript : MonoBehaviour
     public float rotSpeed = 5.0f;
     Vector3 move;
     bool isMove = true;
+    ParticleSystem mParticleSystem;
 
-    // Start is called before the first frame update
     void Start()
     {
+        mParticleSystem = this.transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
 
+        if(!mParticleSystem)
+        {
+            Debug.Log("파티클 시스템을 가져오지 못했습니다.");
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isMove)
             return;
 
-        this.transform.Translate(0.0f, 0.0f, Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
+        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal");
 
-        float rotationAmount = Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
+        bool isInput = vertical == 0 && horizontal == 0;
 
-        Quaternion rotation = Quaternion.Euler(0.0f, rotationAmount, 0.0f);
+        if(mParticleSystem)
+        {
+            if (isInput && mParticleSystem.isPlaying)
+            {
+                mParticleSystem.Stop();
+            }
+            else if(!isInput && !mParticleSystem.isPlaying)
+            {
+                mParticleSystem.Play();
+            }
+        }
 
-        this.transform.rotation *= rotation;
+
+        if(vertical != 0)
+        {
+            this.transform.Translate(0.0f, 0.0f, vertical * moveSpeed * Time.deltaTime);
+        }
+
+        if (horizontal != 0)
+        {
+            transform.Rotate(Vector3.up * horizontal * rotSpeed * Time.deltaTime);
+        }
     }
 
 
