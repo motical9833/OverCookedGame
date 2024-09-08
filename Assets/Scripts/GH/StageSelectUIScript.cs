@@ -33,7 +33,9 @@ public class StageSelectUIScript : MonoBehaviour
 
         myStateUI.SetActive(true);
         myStateUI.transform.GetChild(1).GetComponent<Image>().sprite = img;
-        myStateUI.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = stageName;
+
+        string name = stageName.Replace("_", " ");
+        myStateUI.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = name;
 
 
         for (int i = 0; i < startTexts.Length; i++)

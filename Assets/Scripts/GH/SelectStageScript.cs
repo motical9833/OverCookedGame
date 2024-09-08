@@ -64,7 +64,7 @@ public class SelectStageScript : MonoBehaviour
             isSelectStage = false;
         }
     }
-
+        
     private void StartStage()
     {
         if(isSelectStage && Input.GetKeyDown(KeyCode.Space) && stageObject != null)
