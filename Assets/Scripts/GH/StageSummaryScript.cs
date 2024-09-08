@@ -13,6 +13,9 @@ public class StageSummaryScript : MonoBehaviour
     public TextMeshProUGUI[] changeableTexts;
     public Image[] starImgs;
     public GameObject maskObject;
+    StageManagerScript stageManagerScript;
+
+    float timer;
 
     private void Start()
     {
@@ -27,10 +30,24 @@ public class StageSummaryScript : MonoBehaviour
             starImgs[i] = this.transform.GetChild(3).GetChild(i).gameObject.GetComponent<Image>();
         }
 
-        gameManager = GameObject.FindWithTag("GameManager");
-        audioManager = GameObject.FindWithTag("AudioManager");
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager");
+        stageManagerScript = GameObject.FindGameObjectWithTag("StageManager").GetComponent<StageManagerScript>();
 
         this.gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        timer += Time.deltaTime;
+
+        if(timer > 5.0f)
+        {
+            if(Input.anyKeyDown)
+            {
+                stageManagerScript.GameClear();
+            }
+        }
     }
 
     public void SetSummaryTextUI(int orderDelivered, int tip, int failedCount)
@@ -77,18 +94,6 @@ public class StageSummaryScript : MonoBehaviour
 
     private IEnumerator LerpAlphaToMax(Image[] image, float duration,int score,int[] goal)
     {
-/*        Color color = image.color;
-        float elapsedTime = 0.0f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsedTime / duration);
-            color.a = Mathf.Lerp(0, 1, t);
-            image.color = color;
-            yield return null;
-        }*/
-
         for (int i = 0; i < image.Length; i++)
         {
             if(score > goal[i])

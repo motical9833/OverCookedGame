@@ -47,7 +47,6 @@ public class StageSummaryControllerScript : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.K))
         {
-            //sprite = mainCanvas.GetComponent<CaptureScreenToSpriteScript>().CaptureScreen();
             OpenUISummaryData();
         }
     }

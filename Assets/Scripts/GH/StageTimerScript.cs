@@ -7,18 +7,20 @@ using UnityEngine;
 
 public class StageTimerScript : MonoBehaviour
 {
-    float stageTimeLimit = 300.0f;
+    float stageTimeLimit = 5.0f;
     float timeupTime = 5.0f;
     TextMeshProUGUI textMeshGUI = null;
     bool isStart = false;
     bool isTimeUP = false;
-
     public event Action EndTimeLimeted;
+
+    StageSummaryControllerScript stageSummaryControllerScript;
 
     void Start()
     {
         textMeshGUI = this.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         textMeshGUI.text = (stageTimeLimit / 60.0f).ToString() + ":" + (stageTimeLimit % 60.0f).ToString();
+        stageSummaryControllerScript = GameObject.FindGameObjectWithTag("StageManager").GetComponent<StageSummaryControllerScript>();
     }
 
     void Update()
@@ -40,20 +42,38 @@ public class StageTimerScript : MonoBehaviour
 
     IEnumerator TimeUPUICoroutine()
     {
-        GameObject audioManager = GameObject.FindWithTag("AudioManager");
-        if (!audioManager)
+        BGMScript bgmScript = GameObject.FindWithTag("AudioManager").GetComponent<BGMScript>();
+        if (!bgmScript)
         {
-            Debug.Log("오디오 매니저가 존재하지 않음!");
+            Debug.Log("bgmScript가 존재하지 않음!");
         }
         GameObject timeUpPanal = this.transform.GetChild(2).gameObject;
         timeUpPanal.SetActive(true);
         timeUpPanal.GetComponent<TimeUPUIScript>().TimeUP();
-       
 
-        audioManager.GetComponent<BGMScript>().StartBGM("TimesUpSting",false);
+
+        bgmScript.StartBGM("TimesUpSting",false);
 
         yield return new WaitForSeconds(timeupTime);
-        EndTimeLimeted();
+
+        OpenSummary(bgmScript);
+
+        //EndTimeLimeted();
+    }
+
+    private void OpenSummary(BGMScript script)
+    {
+
+        if(!stageSummaryControllerScript)
+        {
+            Debug.Log("스크립트를 찾을 수 없음");
+            return;
+        }
+
+        stageSummaryControllerScript.OpenUISummaryData();
+        script.StartBGM("LevelVictorySound",false);
+        this.gameObject.SetActive(false);
+
     }
 
     public void StartTimer()

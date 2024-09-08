@@ -52,6 +52,11 @@ public class StageManagerScript : MonoBehaviour
 
         stagePointScript.ResetPoint();
 
+        SceneLoadEvent();
+    }
+
+    private void SceneLoadEvent()
+    {
         SceneManager.LoadSceneAsync("StageSelectScene");
 
         SceneManager.sceneLoaded += SaveClearDataAndLoadScene;
@@ -112,6 +117,6 @@ public class StageManagerScript : MonoBehaviour
 
         orderUIControllerScript.OrderStart();
         stageTimerScript.StartTimer();
-        stageTimerScript.EndTimeLimeted += GameClear;
+        //stageTimerScript.EndTimeLimeted += GameClear;
     }
 }
