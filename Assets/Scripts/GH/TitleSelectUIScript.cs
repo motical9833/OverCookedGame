@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -71,6 +72,7 @@ public class TitleSelectUIScript : MonoBehaviour
             switch (state)
             {
                 case State.CAMPAIGN:
+                    //StartCoroutine(SelectUIEvent("StageSelectScene"));
                     LoadScene("StageSelectScene");
                     break;
                 case State.VERSUS:
@@ -91,8 +93,20 @@ public class TitleSelectUIScript : MonoBehaviour
         }
     }
 
+    //LoadScene에서 씬전환할 때 오디오 셀렉트 사운드가 들리지 않게 되면 사용해야함
+    //추후 확인 후 변경 or 코드 제거
+    private IEnumerator SelectUIEvent(string sceneName)
+    {
+        this.GetComponent<AudioSource>().Play();
+
+        yield return new WaitForSeconds(0.1f);
+
+        LoadScene(sceneName);
+    }
+
     private void LoadScene(string sceneName)
     {
+        this.GetComponent<AudioSource>().Play();
         coolTIme = 0;
         isSelectMenu = false;
         ResetUIArrow();

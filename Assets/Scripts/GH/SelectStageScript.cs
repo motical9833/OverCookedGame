@@ -38,16 +38,16 @@ public class SelectStageScript : MonoBehaviour
         stageObject = null;
     }
 
-    private void StageSelect(Sprite img, StageInfo stageData)
+    private void StageSelect(Sprite img,string stageName , StageInfo stageData)
     {
-        stageSelectUIScript.SelectStage(img, stageData);
+        stageSelectUIScript.SelectStage(img, stageName, stageData);
     }
 
     private void SelectStage()
     {
         if (!isSelectStage && Input.GetKeyDown(KeyCode.Space) && stageObject != null)
         {
-            StageSelect(stageObject.GetComponent<Stage>().GetStageImg(), stageObject.GetComponent<Stage>().GetStageInfo());
+            StageSelect(stageObject.GetComponent<Stage>().GetStageImg(),stageObject.name ,stageObject.GetComponent<Stage>().GetStageInfo());
             this.transform.parent.GetComponent<GHMoveScript>().IsMove(false);
             isSelectStage = true;
 

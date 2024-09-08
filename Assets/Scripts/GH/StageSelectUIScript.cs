@@ -26,13 +26,15 @@ public class StageSelectUIScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    public void SelectStage(Sprite img, StageInfo stageData)
+    public void SelectStage(Sprite img,string stageName , StageInfo stageData)
     {
         if (isSelect)
             return;
 
         myStateUI.SetActive(true);
         myStateUI.transform.GetChild(1).GetComponent<Image>().sprite = img;
+        myStateUI.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = stageName;
+
 
         for (int i = 0; i < startTexts.Length; i++)
         {
