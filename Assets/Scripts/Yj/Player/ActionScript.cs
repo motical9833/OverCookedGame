@@ -83,9 +83,6 @@ public class ActionScript : MonoBehaviour
                                         currCuttingBoard.GetComponent<CuttingBoardScript>().AddCutter();
                                         isChop = true;
                                         return PlayerAnimState.Chop;
-                                        //상태를 Chopping으로 돌려주기
-                                        //음식물에 Chop 넣어주기
-                                        //chop
                                     }
                                 }
                             }
