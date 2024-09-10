@@ -1203,11 +1203,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   addedImages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4630981624901387276}
+  - {fileID: 1251143420714341031}
+  - {fileID: 3956386133258463004}
+  - {fileID: 1383652674543214528}
+  - {fileID: 6035708645764101745}
   boilingGuage: {fileID: 6821763551232240482}
   finishImage: {fileID: 5408657397614340551}
   burnWarningUIImage: {fileID: 4270301364237989095}
