@@ -316,7 +316,7 @@ public class ActionScript : MonoBehaviour
                                         currGrabObj = tableScr.GetTopRaisedObj();
                                         Grab(currGrabObj);
                                         tableScr.GetTopRaisedScr().Release();
-                                        break;
+                                        return false;
                                 }
                                 return false;
                             }
