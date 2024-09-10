@@ -35,20 +35,7 @@ public class ActionScript : MonoBehaviour
   
     public PlayerAnimState CtrlAction()
     {
-        if (isGrab)
-        {
-            if (currGrabObj.tag == "Extinguisher")
-            {
-                var extinguisherScr = currGrabObj.GetComponent<FireExtinguisher>();
-                extinguisherScr.SprayPowder(true);
-                //extinguishd애니메이션 재생 및 extinguisher에 작동 스크립트 적용
-                return PlayerAnimState.Hold;
-            }
-            else
-            {
-                return PlayerAnimState.None;
-            }
-        }
+       
 
         Bounds fColBound = frontCol.bounds;
         Collider[] hitColliders = Physics.OverlapBox(fColBound.center, fColBound.extents, Quaternion.identity);
@@ -92,6 +79,20 @@ public class ActionScript : MonoBehaviour
             }
         }
         return PlayerAnimState.None;
+    }
+
+
+    public void CtrilHoldAction()
+    {
+        if (isGrab)
+        {
+            if (currGrabObj.tag == "Extinguisher")
+            {
+                var extinguisherScr = currGrabObj.GetComponent<FireExtinguisher>();
+                extinguisherScr.SprayPowder(true);
+                //extinguishd애니메이션 재생 및 extinguisher에 작동 스크립트 적용
+            }
+        }
     }
 
     public bool BarAction()
