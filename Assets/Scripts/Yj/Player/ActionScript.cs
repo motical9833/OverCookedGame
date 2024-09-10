@@ -35,20 +35,7 @@ public class ActionScript : MonoBehaviour
   
     public PlayerAnimState CtrlAction()
     {
-        if (isGrab)
-        {
-            if (currGrabObj.tag == "Extinguisher")
-            {
-                var extinguisherScr = currGrabObj.GetComponent<FireExtinguisher>();
-                extinguisherScr.SprayPowder();
-                //extinguishd애니메이션 재생 및 extinguisher에 작동 스크립트 적용
-                return PlayerAnimState.Hold;
-            }
-            else
-            {
-                return PlayerAnimState.None;
-            }
-        }
+       
 
         Bounds fColBound = frontCol.bounds;
         Collider[] hitColliders = Physics.OverlapBox(fColBound.center, fColBound.extents, Quaternion.identity);
@@ -83,9 +70,6 @@ public class ActionScript : MonoBehaviour
                                         currCuttingBoard.GetComponent<CuttingBoardScript>().AddCutter();
                                         isChop = true;
                                         return PlayerAnimState.Chop;
-                                        //상태를 Chopping으로 돌려주기
-                                        //음식물에 Chop 넣어주기
-                                        //chop
                                     }
                                 }
                             }
@@ -95,6 +79,20 @@ public class ActionScript : MonoBehaviour
             }
         }
         return PlayerAnimState.None;
+    }
+
+
+    public void CtrilHoldAction()
+    {
+        if (isGrab)
+        {
+            if (currGrabObj.tag == "Extinguisher")
+            {
+                var extinguisherScr = currGrabObj.GetComponent<FireExtinguisher>();
+                extinguisherScr.SprayPowder(true);
+                //extinguishd애니메이션 재생 및 extinguisher에 작동 스크립트 적용
+            }
+        }
     }
 
     public bool BarAction()
@@ -318,7 +316,7 @@ public class ActionScript : MonoBehaviour
                                         currGrabObj = tableScr.GetTopRaisedObj();
                                         Grab(currGrabObj);
                                         tableScr.GetTopRaisedScr().Release();
-                                        break;
+                                        return false;
                                 }
                                 return false;
                             }

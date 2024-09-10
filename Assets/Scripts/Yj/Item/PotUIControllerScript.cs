@@ -30,7 +30,7 @@ public class PotUIControllerScript : MonoBehaviour
         }
 
         burnWarningUIImage.gameObject.SetActive(false);
-
+        boilingGuage.gameObject.SetActive(false);
     }
 
     public void ShowAddedImage(int addedAmount ,string addedName)

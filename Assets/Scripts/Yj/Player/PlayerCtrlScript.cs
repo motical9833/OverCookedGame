@@ -95,6 +95,12 @@ public class PlayerCtrlScript : NetworkBehaviour
                 knife.SetActive(true);
             }
         }
+        else if(Input.GetKey(KeyCode.LeftControl))
+        {
+            pActionScript.CtrilHoldAction();
+        }
+
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if( pActionScript.BarAction() == true)
@@ -126,6 +132,11 @@ public class PlayerCtrlScript : NetworkBehaviour
                     pGrabState = GrabState.Release;
                 }
             }
+        }
+
+        if(Input.GetKeyUp(KeyCode.LeftAlt))
+        {
+            StartCoroutine(moveScript.Dash());
         }
     }
 
