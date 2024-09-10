@@ -27,6 +27,9 @@ public class PotScript : GrabAbleObjScript
 
     bool isFire = false; // 불타는중
 
+    float extinguishGuage;
+    float extinguishPower; // ex 3초만에 소화
+
     private PotUIControllerScript potUICtrlScr;
 
     private string firstAddedName = "";
@@ -96,7 +99,6 @@ public class PotScript : GrabAbleObjScript
 
         if (firstAddedName != "")
         {
-         
             if (boilingTimer >= currTimeLimit)
             {
                 isboiledDone = true;
@@ -130,8 +132,13 @@ public class PotScript : GrabAbleObjScript
 
     public void Extinguish()
     {
-        burningTimer = 0.0f;
-        isFire = false;
+        extinguishGuage += (100.0f / extinguishPower);
+        if (extinguishGuage >= 100.0f)
+        {
+            extinguishGuage = 0.0f;
+            burningTimer = 0.0f;
+            isFire = false;
+        }
     }
 
     private void ShowDoneUI()
