@@ -127,6 +127,11 @@ public class PlayerCtrlScript : NetworkBehaviour
                 }
             }
         }
+
+        if(Input.GetKeyUp(KeyCode.LeftAlt))
+        {
+            StartCoroutine(moveScript.Dash());
+        }
     }
 
     void FixedUpdate()
