@@ -40,7 +40,7 @@ public class ActionScript : MonoBehaviour
             if (currGrabObj.tag == "Extinguisher")
             {
                 var extinguisherScr = currGrabObj.GetComponent<FireExtinguisher>();
-                extinguisherScr.SprayPowder();
+                extinguisherScr.SprayPowder(true);
                 //extinguishd애니메이션 재생 및 extinguisher에 작동 스크립트 적용
                 return PlayerAnimState.Hold;
             }

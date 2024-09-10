@@ -4877,7 +4877,7 @@ GameObject:
   - component: {fileID: 7722430397598718242}
   m_Layer: 0
   m_Name: FireExtinguisher
-  m_TagString: Untagged
+  m_TagString: Extinguisher
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
