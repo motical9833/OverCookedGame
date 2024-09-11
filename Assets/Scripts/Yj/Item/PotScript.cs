@@ -101,12 +101,18 @@ public class PotScript : GrabAbleObjScript
         {
             if (boilingTimer >= currTimeLimit)
             {
+                if(!isboiledDone)
+                {
+                    potUICtrlScr.CookFinish();
+                }
                 isboiledDone = true;
+
                 if (addCount >= 3)
                 {
                     addCount = 3;
-                    isCookedDone = true;    
+                    isCookedDone = true;
                 }
+
                 potUICtrlScr.HideBoilingGuage();
                 ShowAlertUI();
                 burningTimer += Time.deltaTime;

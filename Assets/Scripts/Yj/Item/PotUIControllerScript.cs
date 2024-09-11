@@ -13,6 +13,9 @@ public class PotUIControllerScript : MonoBehaviour
     public Slider boilingGuage;
 
     public Image finishImage;
+    public float finishUIApearTime;
+    private bool isFinishUIProgress;
+
 
     private bool isImageOn = false;
 
@@ -31,6 +34,10 @@ public class PotUIControllerScript : MonoBehaviour
 
         burnWarningUIImage.gameObject.SetActive(false);
         boilingGuage.gameObject.SetActive(false);
+
+        Color fColor = finishImage.color;
+        fColor.a = 0;
+        finishImage.color = fColor;
     }
 
     public void ShowAddedImage(int addedAmount ,string addedName)
@@ -82,12 +89,25 @@ public class PotUIControllerScript : MonoBehaviour
 
     public void SetMax(float value) { boilingGuage.maxValue = value; }
 
-    public void ShowFinishUI()
+
+    public void CookFinish() { isFinishUIProgress = true; ShowFinishUI(); }
+
+    public void Update()
     {
+        if (isFinishUIProgress)
+        {
+            ShowFinishUI();
+        }
+    }
+
+    private void ShowFinishUI()
+    {
+        finishImage.gameObject.SetActive(true);
         Color fColor = finishImage.color;
         if (!isImageOn)
         {
-            fColor.a += 0.5f;
+            fColor.a += (1.0f / finishUIApearTime) * Time.deltaTime;
+
             if (fColor.a >= 1.0f)
             {
                 fColor.a = 1.0f;
@@ -96,8 +116,16 @@ public class PotUIControllerScript : MonoBehaviour
         }
         if (isImageOn)
         {
-            fColor.a -= 0.5f;
+            fColor.a -= (1.0f / finishUIApearTime) * Time.deltaTime;
+            if (fColor.a <= 0.0f)
+            {
+                fColor.a = 0.0f;
+                isImageOn = false;
+                isFinishUIProgress = false;
+            }
         }
+
+        finishImage.color = fColor;
     }
 
     public void ShowBoilingGuage(float _value)
