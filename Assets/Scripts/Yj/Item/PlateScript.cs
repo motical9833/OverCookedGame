@@ -6,7 +6,7 @@ public class PlateScript : GrabAbleObjScript
 {
     bool isDirty;
 
-    private string plateFoodName;
+    public string plateFoodName;
 
     void Start()
     {
@@ -15,7 +15,7 @@ public class PlateScript : GrabAbleObjScript
 
     public void PlateSoup(string soupIngredient)
     {
-        plateFoodName = soupIngredient + "Soup";
+        plateFoodName = "Soup_" + soupIngredient;
     }
 
     public string GetPlateFoodName()

@@ -236,15 +236,18 @@ public class ActionScript : MonoBehaviour
                                     else
                                     {
                                         Debug.Log("음식이 든 식를 제출함");
-                                        if (recipeOrderCtrlScr == null) 
+                                        recipeOrderCtrlScr = GameObject.FindGameObjectWithTag("MainCanvas").transform.GetChild(0).GetComponent<RecipeOrderControllerScript>();
+                                        recipeOrderCtrlScr.ServeFood(platedFoodName);
+/*                                        if (recipeOrderCtrlScr != null) 
                                         {
-                                            recipeOrderCtrlScr = GameObject.Find("RecipeOrderController").GetComponent<RecipeOrderControllerScript>();
+                                            recipeOrderCtrlScr = GameObject.FindGameObjectWithTag("MainCanvas").transform.GetChild(0).GetComponent<RecipeOrderControllerScript>();
+                                            recipeOrderCtrlScr.ServeFood(platedFoodName);
                                             if (recipeOrderCtrlScr.CompareWithRecipeName(platedFoodName))
                                             {
-                                                recipeOrderCtrlScr.RequestMatchRemoveQueue();
+                                                //recipeOrderCtrlScr.RequestMatchRemoveQueue();
                                                 //점수랑 연결
                                             }
-                                        }
+                                        }*/
                                     }
                                 }
                                 return false;

@@ -22,8 +22,8 @@ public class PotScript : GrabAbleObjScript
 
 
 
-    bool isboiledDone = false; // 재료 삶기가 끝났음
-    bool isCookedDone = false; // 같은 재료 셋을 넣어 삶는것이 끝났음
+    public bool isboiledDone = false; // 재료 삶기가 끝났음
+    public bool isCookedDone = false; // 같은 재료 셋을 넣어 삶는것이 끝났음
 
     bool isFire = false; // 불타는중
 
@@ -32,7 +32,7 @@ public class PotScript : GrabAbleObjScript
 
     private PotUIControllerScript potUICtrlScr;
 
-    private string firstAddedName = "";
+    public string firstAddedName = "";
 
     public GameObject fireEffect;
 

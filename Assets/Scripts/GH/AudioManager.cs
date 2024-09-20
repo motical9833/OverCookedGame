@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        AudioClip[] clips = Resources.LoadAll<AudioClip>("Sound");
+        AudioClip[] clips = Resources.LoadAll<AudioClip>("Sound/Audio");
 
         for (int i = 0; i < clips.Length; i++)
         {

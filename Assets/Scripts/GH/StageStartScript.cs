@@ -6,7 +6,7 @@ public class StageStartScript : MonoBehaviour
 {
     public GameObject[] readyGoUIObjects = new GameObject[2];
 
-    void Start()
+    void Awake()
     {
         for (int i = 0; i < readyGoUIObjects.Length; i++)
         {

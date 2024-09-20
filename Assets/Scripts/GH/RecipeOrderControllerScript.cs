@@ -79,7 +79,6 @@ public class RecipeOrderControllerScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.B))
         {
             ServeFood("Soup_Onion");
-            OrderUIRelocation();
         }
     }
 
@@ -166,6 +165,9 @@ public class RecipeOrderControllerScript : MonoBehaviour
 
         orderCnt--;
         isFull = false;
+
+        Debug.Log("Á¡¼ö 10Á¡ È¹µæ!!");
+        OrderUIRelocation();
     }
 
     public bool IsFull()
